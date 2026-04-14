@@ -2,92 +2,627 @@
 import Layout from '../layouts/Base.astro';
 ---
 
-<Layout title="Sean Kani">
-  <main class="hero">
-    <h1>Sean Kani</h1>
-    <p class="tagline">Builder of things.</p>
+<Layout title="Sean Kani — Builder of things">
+  <!-- Background orbs in project colors -->
+  <div class="bg-glow" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
 
-    <section class="projects">
-      <h2>Projects</h2>
-      <div class="project-grid">
-        <a class="project-card" href="https://gridon.life" target="_blank">
-          <h3>The Grid</h3>
-          <p>Personal productivity OS — life dashboard, journal, tasks, habits, finance, and more.</p>
+  <div class="noise" aria-hidden="true"></div>
+  <div class="spotlight" aria-hidden="true"></div>
+
+  <main>
+    <!-- ═══════ HERO ═══════ -->
+    <section class="hero">
+      <h1>
+        <span class="line"><span class="word" style="--i:0">Sean</span></span>
+        <span class="line"><span class="word" style="--i:1">Kani</span></span>
+      </h1>
+      <div class="color-line" aria-hidden="true"></div>
+      <p class="tagline anim-fade" style="--d:0.65s">Builder of things.</p>
+      <a href="#work" class="cta anim-fade" style="--d:1s">
+        View work
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+      </a>
+    </section>
+
+    <!-- ═══════ WORK ═══════ -->
+    <section id="work" class="work">
+      <h2 class="label" data-reveal>Selected Work</h2>
+
+      <div class="projects">
+        <a href="https://gridon.life" target="_blank" rel="noopener" class="project" data-reveal style="--accent: 139, 92, 246">
+          <span class="project-num">01</span>
+          <div class="project-info">
+            <h3>The Grid</h3>
+            <p>An all-in-one life operating system. Journal, tasks, habits, finance, health — everything connected, nothing lost.</p>
+            <span class="project-meta">Productivity · Full-Stack · SaaS</span>
+          </div>
+          <svg class="project-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+        </a>
+
+        <a href="https://advertra.ca" target="_blank" rel="noopener" class="project" data-reveal style="--accent: 245, 158, 11">
+          <span class="project-num">02</span>
+          <div class="project-info">
+            <h3>Advertra</h3>
+            <p>Building the Client Storm Tracker for a home-service lead gen company. Real-time pipeline visibility for contractors.</p>
+            <span class="project-meta">Dev Work · Lead Gen · Beta</span>
+          </div>
+          <svg class="project-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+        </a>
+
+        <a href="https://cantmute.me" target="_blank" rel="noopener" class="project" data-reveal style="--accent: 244, 63, 94">
+          <span class="project-num">03</span>
+          <div class="project-info">
+            <h3>Can't Mute Me</h3>
+            <p>Music portfolio — beats, production, and everything sound. The creative side.</p>
+            <span class="project-meta">Music · Portfolio · Creative</span>
+          </div>
+          <svg class="project-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
         </a>
       </div>
     </section>
+
+    <!-- ═══════ FOOTER ═══════ -->
+    <footer class="footer" data-reveal>
+      <p class="footer-headline">Let's build something.</p>
+      <nav class="footer-nav">
+        <a href="https://www.instagram.com/seankani" target="_blank" rel="noopener">Instagram</a>
+        <a href="mailto:info@seankani.com">Email</a>
+      </nav>
+      <small>&copy; 2026 Sean Kani</small>
+    </footer>
   </main>
 </Layout>
 
 <style>
+  /* ═══════════════════════════════
+     BACKGROUND
+     ═══════════════════════════════ */
+  .bg-glow {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(120px);
+    will-change: transform;
+  }
+
+  /* Purple — The Grid */
+  .orb-1 {
+    width: 650px;
+    height: 650px;
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.15), transparent 70%);
+    top: -15%;
+    right: -10%;
+    animation: drift-1 22s ease-in-out infinite;
+  }
+
+  /* Amber — Advertra */
+  .orb-2 {
+    width: 550px;
+    height: 550px;
+    background: radial-gradient(circle, rgba(245, 158, 11, 0.1), transparent 70%);
+    bottom: 10%;
+    left: -8%;
+    animation: drift-2 28s ease-in-out infinite;
+  }
+
+  /* Rose — Can't Mute Me */
+  .orb-3 {
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(244, 63, 94, 0.1), transparent 70%);
+    top: 50%;
+    left: 50%;
+    animation: drift-3 25s ease-in-out infinite;
+  }
+
+  @keyframes drift-1 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33%      { transform: translate(-60px, 40px) scale(1.05); }
+    66%      { transform: translate(40px, -30px) scale(0.95); }
+  }
+
+  @keyframes drift-2 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33%      { transform: translate(50px, -40px) scale(1.05); }
+    66%      { transform: translate(-40px, 50px) scale(0.95); }
+  }
+
+  @keyframes drift-3 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33%      { transform: translate(-40px, -50px) scale(1.08); }
+    66%      { transform: translate(50px, 30px) scale(0.92); }
+  }
+
+  .noise {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 200px 200px;
+  }
+
+  /* Mouse-follow spotlight */
+  .spotlight {
+    position: fixed;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  /* ═══════════════════════════════
+     MAIN
+     ═══════════════════════════════ */
+  main {
+    position: relative;
+    z-index: 3;
+  }
+
+  /* ═══════════════════════════════
+     HERO
+     ═══════════════════════════════ */
   .hero {
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 4rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 2rem;
+    text-align: center;
   }
 
   h1 {
-    font-size: 3rem;
-    font-weight: 700;
-    margin: 0;
-    letter-spacing: -0.02em;
-  }
-
-  .tagline {
-    font-size: 1.25rem;
-    color: #888;
-    margin: 0.5rem 0 3rem;
-  }
-
-  h2 {
-    font-size: 1rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: #666;
+    font-size: clamp(3.5rem, 12vw, 9rem);
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: -0.04em;
     margin-bottom: 1.5rem;
   }
 
-  .project-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1.25rem;
+  .line {
+    display: block;
+    overflow: hidden;
   }
 
-  .project-card {
-    display: block;
-    padding: 1.5rem;
-    border: 1px solid #222;
-    border-radius: 12px;
-    background: #0a0a0a;
+  .word {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(105%);
+    animation: word-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-delay: calc(var(--i) * 0.12s + 0.2s);
+  }
+
+  @keyframes word-up {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Gradient line cycling through project colors */
+  .color-line {
+    width: 48px;
+    height: 2px;
+    margin: 0 auto 1.5rem;
+    border-radius: 2px;
+    background: linear-gradient(
+      90deg,
+      rgb(139, 92, 246),
+      rgb(245, 158, 11),
+      rgb(244, 63, 94),
+      rgb(139, 92, 246)
+    );
+    background-size: 300% 100%;
+    opacity: 0;
+    transform: scaleX(0);
+    animation:
+      line-reveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.45s forwards,
+      gradient-shift 4s ease-in-out 1.2s infinite;
+  }
+
+  @keyframes line-reveal {
+    to {
+      opacity: 1;
+      transform: scaleX(1);
+    }
+  }
+
+  @keyframes gradient-shift {
+    0%, 100% { background-position: 0% 50%; }
+    50%      { background-position: 100% 50%; }
+  }
+
+  .tagline {
+    font-size: clamp(1rem, 2.5vw, 1.35rem);
+    font-weight: 400;
+    color: #777;
+    margin-bottom: 2.5rem;
+    font-variant-ligatures: none;
+  }
+
+  .anim-fade {
+    opacity: 0;
+    transform: translateY(18px);
+    animation: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-delay: var(--d);
+  }
+
+  @keyframes fade-up {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.65rem 1.6rem;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 100px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #aaa;
+    text-decoration: none;
+    transition: border-color 0.3s, color 0.3s, transform 0.15s ease-out;
+    will-change: transform;
+  }
+
+  .cta:hover {
+    border-color: rgba(255, 255, 255, 0.35);
+    color: #fff;
+  }
+
+  .cta svg {
+    transition: transform 0.3s;
+  }
+
+  .cta:hover svg {
+    transform: translateY(2px);
+  }
+
+  /* ═══════════════════════════════
+     WORK
+     ═══════════════════════════════ */
+  .work {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem 2rem 8rem;
+  }
+
+  .label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: #555;
+    margin-bottom: 3rem;
+    text-align: center;
+  }
+
+  /* ═══════════════════════════════
+     PROJECTS
+     ═══════════════════════════════ */
+  .projects {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .project {
+    display: grid;
+    grid-template-columns: 56px 1fr 40px;
+    align-items: start;
+    gap: 2rem;
+    padding: 3rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
     text-decoration: none;
     color: inherit;
-    transition: border-color 0.2s, transform 0.2s;
+    position: relative;
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .project-card:hover {
-    border-color: #555;
-    transform: translateY(-2px);
+  .project:last-child {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
   }
 
-  .project-card h3 {
-    font-size: 1.25rem;
-    margin: 0 0 0.5rem;
+  /* Accent line on the left */
+  .project::before {
+    content: '';
+    position: absolute;
+    left: -2rem;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: rgba(var(--accent), 0);
+    border-radius: 2px;
+    transition: background 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .project-card p {
+  .project:hover::before {
+    background: rgba(var(--accent), 0.6);
+  }
+
+  /* Subtle glow behind project on hover */
+  .project::after {
+    content: '';
+    position: absolute;
+    inset: -1rem -2rem;
+    border-radius: 16px;
+    background: radial-gradient(ellipse at left, rgba(var(--accent), 0.04), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.5s;
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .project:hover::after {
+    opacity: 1;
+  }
+
+  .project:hover {
+    padding-left: 1rem;
+  }
+
+  .project-num {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: rgba(var(--accent), 0.4);
+    padding-top: 0.5rem;
+    font-variant-numeric: tabular-nums;
+    transition: color 0.4s;
+  }
+
+  .project:hover .project-num {
+    color: rgba(var(--accent), 0.9);
+  }
+
+  .project-info h3 {
+    font-size: clamp(1.75rem, 4vw, 2.75rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin-bottom: 0.85rem;
+    transition: color 0.4s;
+  }
+
+  .project:hover .project-info h3 {
+    color: rgb(var(--accent));
+  }
+
+  .project-info p {
+    font-size: 1rem;
+    line-height: 1.65;
+    color: #777;
+    margin-bottom: 1rem;
+    max-width: 520px;
+  }
+
+  .project-meta {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #444;
+    letter-spacing: 0.04em;
+    transition: color 0.3s;
+  }
+
+  .project:hover .project-meta {
+    color: #666;
+  }
+
+  .project-arrow {
+    color: #333;
+    margin-top: 0.5rem;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), color 0.4s;
+  }
+
+  .project:hover .project-arrow {
+    color: rgba(var(--accent), 0.7);
+    transform: translate(5px, -5px);
+  }
+
+  /* ═══════════════════════════════
+     FOOTER
+     ═══════════════════════════════ */
+  .footer {
+    text-align: center;
+    padding: 4rem 1.5rem 3rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .footer-headline {
+    font-size: clamp(1.5rem, 4vw, 2.25rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+  }
+
+  .footer-nav {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .footer-nav a {
     font-size: 0.9rem;
-    color: #999;
-    margin: 0;
-    line-height: 1.5;
+    color: #666;
+    text-decoration: none;
+    position: relative;
+    transition: color 0.3s;
   }
 
-  @media (max-width: 600px) {
-    .hero {
-      padding: 2.5rem 1rem;
+  .footer-nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: #fff;
+    transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .footer-nav a:hover {
+    color: #fff;
+  }
+
+  .footer-nav a:hover::after {
+    width: 100%;
+  }
+
+  .footer small {
+    font-size: 0.75rem;
+    color: #333;
+  }
+
+  /* ═══════════════════════════════
+     SCROLL REVEAL
+     ═══════════════════════════════ */
+  [data-reveal] {
+    opacity: 0;
+    transform: translateY(32px);
+    transition:
+      opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  [data-reveal].is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  .project[data-reveal]:nth-child(2) {
+    transition-delay: 0.1s;
+  }
+
+  .project[data-reveal]:nth-child(3) {
+    transition-delay: 0.2s;
+  }
+
+  /* ═══════════════════════════════
+     RESPONSIVE
+     ═══════════════════════════════ */
+  @media (max-width: 680px) {
+    .work {
+      padding: 2rem 1.25rem 5rem;
     }
 
-    h1 {
-      font-size: 2.25rem;
+    .project {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      padding: 2.25rem 0;
+      position: relative;
+    }
+
+    .project:hover {
+      padding-left: 0.5rem;
+    }
+
+    .project::before {
+      left: -1.25rem;
+    }
+
+    .project-num {
+      margin-bottom: 0.75rem;
+    }
+
+    .project-arrow {
+      position: absolute;
+      top: 2.25rem;
+      right: 0;
+    }
+
+    .hero {
+      padding: 1.5rem;
     }
   }
 </style>
+
+<script>
+  // ═══════ Scroll reveal ═══════
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+  );
+  document.querySelectorAll('[data-reveal]').forEach((el) => observer.observe(el));
+
+  // ═══════ Desktop-only interactions ═══════
+  const isFine = window.matchMedia('(pointer: fine)').matches;
+
+  if (isFine) {
+    // Mouse-follow spotlight
+    const spotlight = document.querySelector('.spotlight');
+    if (spotlight) {
+      document.addEventListener('mousemove', (e) => {
+        spotlight.style.background =
+          `radial-gradient(600px circle at ${e.clientX}px ${e.clientY}px, rgba(255, 255, 255, 0.03), transparent 40%)`;
+      });
+    }
+
+    // Magnetic CTA button
+    const cta = document.querySelector('.cta');
+    if (cta) {
+      cta.addEventListener('mousemove', (e) => {
+        const rect = cta.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        cta.style.transform = `translate(${x * 0.25}px, ${y * 0.25}px)`;
+      });
+      cta.addEventListener('mouseleave', () => {
+        cta.style.transform = '';
+      });
+    }
+  }
+
+  // ═══════ Text scramble on tagline ═══════
+  function scrambleText(el, finalText, duration) {
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const start = performance.now();
+
+    function update(now) {
+      const progress = Math.min((now - start) / duration, 1);
+      let result = '';
+      for (let i = 0; i < finalText.length; i++) {
+        if (finalText[i] === ' ' || finalText[i] === '.') {
+          result += finalText[i];
+        } else if (i < progress * finalText.length) {
+          result += finalText[i];
+        } else {
+          result += chars[Math.floor(Math.random() * chars.length)];
+        }
+      }
+      el.textContent = result;
+      if (progress < 1) requestAnimationFrame(update);
+    }
+
+    requestAnimationFrame(update);
+  }
+
+  const tagline = document.querySelector('.tagline');
+  if (tagline) {
+    const finalText = 'Builder of things.';
+    setTimeout(() => scrambleText(tagline, finalText, 1200), 650);
+  }
+</script>

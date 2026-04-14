@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:www.gridon.life)",
+      "WebFetch(domain:www.cantmute.me)",
+      "WebFetch(domain:cantmute.me)",
+      "Bash(npm install:*)",
+      "mcp__claude_ai_Vercel__deploy_to_vercel",
+      "Bash(npx vercel:*)",
+      "Bash(vercel --version)",
+      "Bash(vercel deploy:*)",
+      "WebFetch(domain:advertra.ca)"
+    ]
+  }
+}
