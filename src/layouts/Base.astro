@@ -11,15 +11,49 @@ const { title } = Astro.props;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Sean Kani — Builder of things." />
+    <meta name="description" content="Sean Kani — Software engineer, product builder, and music producer. Creator of The Grid, Advertra, and Can't Mute Me." />
+    <meta name="author" content="Sean Kani" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://seankani.com" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
     <!-- Open Graph -->
     <meta property="og:title" content={title} />
-    <meta property="og:description" content="Sean Kani — Builder of things." />
+    <meta property="og:description" content="Software engineer, product builder, and music producer. Creator of The Grid, Advertra, and Can't Mute Me." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://seankani.com" />
+    <meta property="og:site_name" content="Sean Kani" />
     <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content="Software engineer, product builder, and music producer." />
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Person",
+            "name": "Sean Kani",
+            "url": "https://seankani.com",
+            "jobTitle": "Software Engineer",
+            "description": "Software engineer, product builder, and music producer.",
+            "sameAs": [
+              "https://www.instagram.com/seankani",
+              "https://gridon.life",
+              "https://cantmute.me",
+              "https://advertra.ca"
+            ]
+          },
+          {
+            "@type": "WebSite",
+            "name": "Sean Kani",
+            "url": "https://seankani.com",
+            "description": "Portfolio of Sean Kani — software engineer, product builder, and music producer."
+          }
+        ]
+      }
+    </script>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -40,13 +74,31 @@ const { title } = Astro.props;
     box-sizing: border-box;
   }
 
+  :root {
+    --bg: #000; --text: #eee; --text-muted: #777; --text-dim: #555; --text-faint: #444;
+    --card-border: rgba(255,255,255,.07); --card-bg: rgba(255,255,255,.03);
+    --input-bg: rgba(255,255,255,.03); --input-border: rgba(255,255,255,.08);
+    --btn-bg: rgba(255,255,255,.06); --btn-border: rgba(255,255,255,.12);
+    --btn-text: #aaa; --footer-line: rgba(255,255,255,.05);
+    --glow: rgba(255,255,255,.03); --selection: rgba(255,255,255,.12);
+  }
+  :root.light {
+    --bg: #f8f6f2; --text: #1a1a1a; --text-muted: #666; --text-dim: #888; --text-faint: #aaa;
+    --card-border: rgba(0,0,0,.08); --card-bg: rgba(0,0,0,.02);
+    --input-bg: rgba(0,0,0,.03); --input-border: rgba(0,0,0,.1);
+    --btn-bg: rgba(0,0,0,.04); --btn-border: rgba(0,0,0,.12);
+    --btn-text: #555; --footer-line: rgba(0,0,0,.06);
+    --glow: rgba(0,0,0,.02); --selection: rgba(0,0,0,.1);
+  }
+
   html {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-    background: #000;
-    color: #eee;
+    background: var(--bg);
+    color: var(--text);
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    transition: background .6s, color .6s;
   }
 
   body {
@@ -59,6 +111,6 @@ const { title } = Astro.props;
   }
 
   ::selection {
-    background: rgba(255, 255, 255, 0.12);
+    background: var(--selection);
   }
 </style>
