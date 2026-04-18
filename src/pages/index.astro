@@ -329,10 +329,10 @@ import Layout from '../layouts/Base.astro';
       blds.push({ x: dX, y: g - dH, w: dW, h: dH, wins: [], sp: 'dome', ok: true, db: [], dt: 0, rp: 0, rb: false });
       // CN Tower
       const cnX = mob ? W * 0.18 : W * 0.38; // push CN Tower to the left on mobile
-      const tCN = mob ? mH * 1.2 : mH * 1.35;
-      const shH = tCN * .52, supH = tCN * .04, podH = tCN * .06, upH = tCN * .38;
-      const shW = Math.max(6, 8 * s), supW = Math.max(14, 16 * s);
-      const podW = Math.max(22, 28 * s), upW = Math.max(3, 4 * s);
+      const tCN = mob ? mH * 1.5 : mH * 1.6;
+      const shH = tCN * .5, supH = tCN * .07, podH = tCN * .1, upH = tCN * .33;
+      const shW = Math.max(20, 26 * s), supW = Math.max(26, 34 * s);
+      const podW = Math.max(44, 56 * s), upW = Math.max(3, 4 * s);
       blds.push(mkB(cnX - shW / 2, g - shH, shW, shH, 'cn-shaft'));
       blds.push(mkB(cnX - supW / 2, g - shH - supH, supW, supH, 'cn-sup'));
       blds.push(mkB(cnX - podW / 2, g - shH - supH - podH, podW, podH, 'cn-pod'));
@@ -721,17 +721,59 @@ import Layout from '../layouts/Base.astro';
             cnPodOk = true; cnPodX = b.x + b.w / 2 + sx; cnPodY = b.y;
             const t = now * .0003, i0 = ~~t % 3, i1 = (i0 + 1) % 3, bl = t % 1;
             const pr = C[i0][0]+(C[i1][0]-C[i0][0])*bl, pg = C[i0][1]+(C[i1][1]-C[i0][1])*bl, pb = C[i0][2]+(C[i1][2]-C[i0][2])*bl;
-            cx.fillStyle = `rgba(${pr},${pg},${pb},.12)`; cx.fillRect(b.x + sx, b.y, b.w, b.h);
-            cx.shadowColor = `rgba(${pr},${pg},${pb},.7)`; cx.shadowBlur = 30;
-            cx.fillStyle = `rgba(${pr},${pg},${pb},.3)`; cx.fillRect(b.x + sx + 3, b.y + 2, b.w - 6, b.h - 4);
+            const px = b.x + sx, py = b.y, pw = b.w, ph = b.h, cxM = px + pw/2;
+            // Lower flared cone (SkyPod underside — widest at top, narrows into support)
+            cx.fillStyle = `rgba(${pr},${pg},${pb},.1)`;
+            cx.beginPath();
+            cx.moveTo(cxM - pw*.18, py + ph);
+            cx.lineTo(cxM + pw*.18, py + ph);
+            cx.lineTo(px + pw, py + ph*.62);
+            cx.lineTo(px + pw, py + ph*.48);
+            cx.lineTo(px, py + ph*.48);
+            cx.lineTo(px, py + ph*.62);
+            cx.closePath();
+            cx.fill();
+            // Main observation deck — widest, brightest band (Glass Floor / LookOut level)
+            cx.shadowColor = `rgba(${pr},${pg},${pb},.7)`; cx.shadowBlur = 22;
+            cx.fillStyle = `rgba(${pr},${pg},${pb},.32)`;
+            cx.fillRect(px, py + ph*.3, pw, ph*.2);
             cx.shadowBlur = 0;
-            cx.fillStyle = `rgba(${pr},${pg},${pb},.4)`; cx.fillRect(b.x + sx + 2, b.y + b.h * .3, b.w - 4, 2);
+            // Deck window band — bright horizontal dashes
+            cx.fillStyle = 'rgba(255,255,255,.55)';
+            const winCount = Math.max(6, ~~(pw/4));
+            for (let i = 0; i < winCount; i++) {
+              cx.fillRect(px + 1 + i * (pw-2)/winCount, py + ph*.36, (pw-2)/winCount*.6, 1.5);
+            }
+            // Upper 360 Restaurant tier — narrower disc
+            cx.fillStyle = `rgba(${pr},${pg},${pb},.22)`;
+            cx.fillRect(px + pw*.18, py + ph*.08, pw*.64, ph*.22);
+            cx.fillStyle = 'rgba(255,255,255,.35)';
+            cx.fillRect(px + pw*.22, py + ph*.15, pw*.56, 1);
+            // Top dome/cap
+            cx.fillStyle = `rgba(${pr},${pg},${pb},.18)`;
+            cx.beginPath();
+            cx.moveTo(px + pw*.18, py + ph*.08);
+            cx.quadraticCurveTo(cxM, py - ph*.04, px + pw*.82, py + ph*.08);
+            cx.fill();
             continue;
           }
           if (b.sp === 'cn-upper') {
-            cx.fillStyle = 'rgba(180,200,255,.06)'; cx.beginPath();
+            // Antenna/mast — thin tapered needle
+            cx.fillStyle = 'rgba(180,200,255,.07)'; cx.beginPath();
             cx.moveTo(b.x + sx, b.y + b.h); cx.lineTo(b.x + b.w + sx, b.y + b.h);
             cx.lineTo(b.x + b.w * .5 + sx + .3, b.y); cx.lineTo(b.x + b.w * .5 + sx - .3, b.y); cx.fill();
+            // Space Deck — small bump ~35% down the antenna
+            const sdY = b.y + b.h * .35, sdW = b.w * 2.2;
+            const sdCX = b.x + b.w / 2 + sx;
+            cx.fillStyle = 'rgba(200,220,255,.15)';
+            cx.fillRect(sdCX - sdW/2, sdY, sdW, 3);
+            cx.fillStyle = 'rgba(255,255,255,.3)';
+            cx.fillRect(sdCX - sdW/2 + 1, sdY + 1, sdW - 2, 1);
+            // Mast guide rings (subtle horizontal ticks)
+            cx.fillStyle = 'rgba(200,220,255,.1)';
+            for (let ry = b.y + b.h * .55; ry < b.y + b.h * .9; ry += b.h * .12) {
+              cx.fillRect(b.x + sx - .5, ry, b.w + 1, .8);
+            }
             const tipX = b.x + b.w / 2 + sx, tipY = b.y;
             const pulse = .5 + Math.sin(now * .004) * .5;
             cx.beginPath(); cx.arc(tipX, tipY, 3, 0, 6.28);
@@ -743,14 +785,61 @@ import Layout from '../layouts/Base.astro';
             }
             continue;
           }
-          if (b.sp === 'cn-sup') { cx.fillStyle = 'rgba(255,255,255,.055)'; cx.fillRect(b.x + sx, b.y, b.w, b.h); continue; }
+          if (b.sp === 'cn-sup') {
+            // Flared support — narrow at bottom, widens into pod (the tapered neck)
+            cx.fillStyle = 'rgba(255,255,255,.06)';
+            cx.beginPath();
+            cx.moveTo(b.x + sx + b.w*.32, b.y + b.h);
+            cx.lineTo(b.x + sx + b.w*.68, b.y + b.h);
+            cx.lineTo(b.x + sx + b.w, b.y);
+            cx.lineTo(b.x + sx, b.y);
+            cx.closePath();
+            cx.fill();
+            continue;
+          }
           if (b.sp === 'cn-shaft') {
-            cx.fillStyle = 'rgba(255,255,255,.05)'; cx.beginPath();
-            cx.moveTo(b.x + sx - 2, b.y + b.h); cx.lineTo(b.x + b.w + sx + 2, b.y + b.h);
-            cx.lineTo(b.x + b.w + sx, b.y); cx.lineTo(b.x + sx, b.y); cx.fill();
-            for (const win of b.wins) { const fl = .8 + Math.sin(now * .0015 + win.f) * .2;
-              cx.fillStyle = `rgba(${win.r},${win.g},${win.b},${win.a * fl})`;
-              cx.fillRect(b.x + win.rx + sx, b.y + win.ry, win.w, win.h); }
+            // Tapered concrete shaft — much wider at base, narrows significantly going up
+            const baseW = b.w * 1.8, topW = b.w * 0.55;
+            const baseL = b.x + sx + (b.w - baseW)/2, baseR = baseL + baseW;
+            const topL = b.x + sx + (b.w - topW)/2, topR = topL + topW;
+            // Concrete body
+            cx.fillStyle = 'rgba(230,225,215,.09)';
+            cx.beginPath();
+            cx.moveTo(baseL, b.y + b.h);
+            cx.lineTo(baseR, b.y + b.h);
+            cx.lineTo(topR, b.y);
+            cx.lineTo(topL, b.y);
+            cx.closePath();
+            cx.fill();
+            // Center highlight strip (Y-shaft geometry hint — lit side)
+            cx.fillStyle = 'rgba(255,250,240,.06)';
+            cx.beginPath();
+            cx.moveTo(b.x + sx + b.w*.5 - baseW*.08, b.y + b.h);
+            cx.lineTo(b.x + sx + b.w*.5 + baseW*.08, b.y + b.h);
+            cx.lineTo(b.x + sx + b.w*.5 + topW*.08, b.y);
+            cx.lineTo(b.x + sx + b.w*.5 - topW*.08, b.y);
+            cx.closePath();
+            cx.fill();
+            // Subtle vertical edge lines (concrete ribs)
+            cx.strokeStyle = 'rgba(255,255,255,.04)';
+            cx.lineWidth = 1;
+            cx.beginPath();
+            cx.moveTo(b.x + sx + b.w*.5 - baseW*.25, b.y + b.h);
+            cx.lineTo(b.x + sx + b.w*.5 - topW*.25, b.y);
+            cx.moveTo(b.x + sx + b.w*.5 + baseW*.25, b.y + b.h);
+            cx.lineTo(b.x + sx + b.w*.5 + topW*.25, b.y);
+            cx.stroke();
+            // Occasional pinpoint elevator lights (not grid windows)
+            for (const win of b.wins) {
+              if (win.ry < b.h * .15 || win.ry > b.h * .85) continue;
+              if ((win.rx + win.ry) % 18 > 2) continue;
+              const fl = .6 + Math.sin(now * .0015 + win.f) * .3;
+              cx.fillStyle = `rgba(${win.r},${win.g},${win.b},${win.a * fl * .7})`;
+              const taperT = win.ry / b.h;
+              const lineW = baseW + (topW - baseW) * taperT;
+              const lineL = b.x + sx + b.w*.5 - lineW/2;
+              cx.fillRect(lineL + lineW*.5 - 1, b.y + win.ry, 1.5, 1.5);
+            }
             continue;
           }
           // Building body with tint
