@@ -858,13 +858,26 @@ const sectionBg = [
     playerVideo.src = `/films/${f.slug}.mp4`;
     playerVideo.poster = `/films/${f.slug}.jpg`;
     playerVideo.muted = false;
-    playerVideo.load();
-    playerVideo.play().catch(() => {});
     playerTitle.textContent = f.title;
     playerYear.textContent  = f.year;
     player.classList.add('is-open');
-    player.classList.toggle('is-unmuted', !playerVideo.muted);
     document.body.style.overflow = 'hidden';
+
+    // Try playing with sound — browsers will reject autoplay-with-sound
+    // for new visitors. Fall back to muted so the video at least plays,
+    // and the user can click the mute button to unmute.
+    const tryPlay = playerVideo.play();
+    if (tryPlay && typeof tryPlay.then === 'function') {
+      tryPlay
+        .then(() => {
+          player.classList.toggle('is-unmuted', !playerVideo.muted);
+        })
+        .catch(() => {
+          playerVideo.muted = true;
+          player.classList.remove('is-unmuted');
+          playerVideo.play().catch(() => {});
+        });
+    }
   }
   function closePlayer() {
     player.classList.remove('is-open');
