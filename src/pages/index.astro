@@ -484,6 +484,35 @@ const sectionBg = [
     border-radius: 14px;
     box-shadow: 0 12px 40px -16px rgba(0,0,0,.6);
     isolation: isolate; /* so ::after z-index sits behind the bg */
+    transition:
+      transform .5s var(--ease),
+      box-shadow .5s var(--ease),
+      background-color .4s var(--ease),
+      border-color .4s var(--ease);
+  }
+  /* Hover: lift, brighten frost, bloom the arc halo, accelerate the keyword
+     shimmer for a "this thing is alive" moment */
+  .projects-intro:hover {
+    transform: translateY(-4px);
+    background: rgba(8, 6, 12, .18);
+    border-color: rgba(245,241,234,.16);
+    box-shadow: 0 28px 70px -18px rgba(0,0,0,.7);
+  }
+  .projects-intro:hover::after {
+    inset: -20px;
+    border-radius: 28px;
+    filter: blur(30px);
+    opacity: .9;
+  }
+  .projects-intro::after { transition: inset .5s var(--ease), filter .5s var(--ease), opacity .5s var(--ease); }
+  .projects-intro:hover::before {
+    /* Sharpen the border arc on hover */
+    padding: 1.5px;
+    filter: brightness(1.2);
+  }
+  .projects-intro::before { transition: padding .4s var(--ease), filter .4s var(--ease); }
+  .projects-intro:hover .projects-intro-text em {
+    animation-duration: 4s; /* colors flow visibly faster */
   }
   /* Rotating conic-gradient border line — pink → cyan → gold → violet */
   .projects-intro::before {
@@ -1630,27 +1659,36 @@ const sectionBg = [
     scene.add(sceneRoot);
 
     const start = performance.now();
+    // We integrate angle per-frame so slowing the multiplier doesn't snap
+    // back to the formula-derived angle when hover toggles.
+    let outerY = 0, innerY = 0;
+    let prevT = (performance.now() - start) / 1000;
     function tick() {
       requestAnimationFrame(tick);
-      if (!inView) return;
+      if (!inView) { prevT = (performance.now() - start) / 1000; return; }
       const t = (performance.now() - start) / 1000;
-      hoverT += (hoverTarget - hoverT) * 0.10;
+      const dt = t - prevT; prevT = t;
+      hoverT += (hoverTarget - hoverT) * 0.08;
 
-      const rotMul = 1 + hoverT * 1.2;
-      outerCube.rotation.y = t * 0.35 * rotMul;
-      outerCube.rotation.x = Math.sin(t * 0.18) * 0.35;
-      innerCube.rotation.y = -t * 0.55 * rotMul;
-      innerCube.rotation.x = t * 0.42;
-      innerCube.rotation.z = Math.sin(t * 0.3) * 0.2;
+      // Rotation slows to a near-stop on hover (museum-piece feel)
+      const rotMul = 1 - hoverT * 0.92;
+      outerY += 0.35 * rotMul * dt;
+      innerY -= 0.55 * rotMul * dt;
+      outerCube.rotation.y = outerY;
+      outerCube.rotation.x = Math.sin(t * 0.18) * 0.35 * (1 - hoverT * 0.6);
+      innerCube.rotation.y = innerY;
+      innerCube.rotation.x = t * 0.42 * (1 - hoverT * 0.7);
+      innerCube.rotation.z = Math.sin(t * 0.3) * 0.2 * (1 - hoverT * 0.6);
 
-      // Whole cube grows on hover
-      const s = 1 + hoverT * 0.18;
+      // Whole cube grows + comes forward on hover
+      const s = 1 + hoverT * 0.22;
       sceneRoot.scale.set(s, s, s);
 
+      // Halo blooms on hover
       const breath = 0.85 + Math.sin(t * 0.6) * 0.2;
-      const haloScale = 4.4 * breath * (1 + hoverT * 0.25);
+      const haloScale = 4.4 * breath * (1 + hoverT * 0.5);
       halo.scale.set(haloScale, haloScale, 1);
-      (halo.material as THREE.SpriteMaterial).opacity = (0.55 + Math.sin(t * 0.8) * 0.18) * (1 + hoverT * 0.4);
+      (halo.material as THREE.SpriteMaterial).opacity = (0.55 + Math.sin(t * 0.8) * 0.18) * (1 + hoverT * 0.7);
       coreMat.uniforms.u_time.value = t;
       renderer.render(scene, camera);
     }
@@ -1779,26 +1817,33 @@ const sectionBg = [
     scene.add(sceneRoot);
 
     const start = performance.now();
+    // Integrated angles so slowing doesn't snap back
+    let outerY = 0, innerY = 0;
+    let prevT = (performance.now() - start) / 1000;
     function tick() {
       requestAnimationFrame(tick);
-      if (!inView) return;
+      if (!inView) { prevT = (performance.now() - start) / 1000; return; }
       const t = (performance.now() - start) / 1000;
-      hoverT += (hoverTarget - hoverT) * 0.10;
+      const dt = t - prevT; prevT = t;
+      hoverT += (hoverTarget - hoverT) * 0.08;
 
-      const rotMul = 1 + hoverT * 1.2;
-      outerWire.rotation.y = t * 0.35 * rotMul;
-      outerWire.rotation.x = Math.sin(t * 0.18) * 0.35;
-      innerSphere.rotation.y = -t * 0.55 * rotMul;
-      innerSphere.rotation.x = t * 0.42;
-      innerSphere.rotation.z = Math.sin(t * 0.3) * 0.2;
+      // Rotation slows to a near-stop on hover (museum-piece feel)
+      const rotMul = 1 - hoverT * 0.92;
+      outerY += 0.35 * rotMul * dt;
+      innerY -= 0.55 * rotMul * dt;
+      outerWire.rotation.y = outerY;
+      outerWire.rotation.x = Math.sin(t * 0.18) * 0.35 * (1 - hoverT * 0.6);
+      innerSphere.rotation.y = innerY;
+      innerSphere.rotation.x = t * 0.42 * (1 - hoverT * 0.7);
+      innerSphere.rotation.z = Math.sin(t * 0.3) * 0.2 * (1 - hoverT * 0.6);
 
-      const s = 1 + hoverT * 0.18;
+      const s = 1 + hoverT * 0.22;
       sceneRoot.scale.set(s, s, s);
 
       const breath = 0.85 + Math.sin(t * 0.6) * 0.2;
-      const haloScale = 4.4 * breath * (1 + hoverT * 0.25);
+      const haloScale = 4.4 * breath * (1 + hoverT * 0.5);
       halo.scale.set(haloScale, haloScale, 1);
-      (halo.material as THREE.SpriteMaterial).opacity = (0.55 + Math.sin(t * 0.8) * 0.18) * (1 + hoverT * 0.4);
+      (halo.material as THREE.SpriteMaterial).opacity = (0.55 + Math.sin(t * 0.8) * 0.18) * (1 + hoverT * 0.7);
       coreMat.uniforms.u_time.value = t;
       renderer.render(scene, camera);
     }
