@@ -1,3 +1,0 @@
-{
-  "buildCommand": "git config lfs.url https://github.com/clotheshoesandwoes/seankani.com.git/info/lfs && git lfs pull && npm run build"
-}
