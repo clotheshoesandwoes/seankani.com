@@ -184,6 +184,15 @@ const flyConfig: FlyEmblem[] = [
                 </div>
               )}
 
+              {p.visual === 'mycelium' && (
+                <div class="x-overlay x-studio" aria-hidden="true">
+                  <span class="x-site x-site-1">gridon.life</span>
+                  <span class="x-site x-site-2">cantmute.me</span>
+                  <span class="x-site x-site-3">advertra.ca</span>
+                  <span class="x-cursor"></span>
+                </div>
+              )}
+
             </div>
             <div class="pcard-body">
               <h3 class="pcard-name">{p.name}</h3>
@@ -986,6 +995,49 @@ const flyConfig: FlyEmblem[] = [
   .x-cmm .x-chip-eq span:nth-child(2) { background: #ff9a3c; color: #ff9a3c; animation-delay: .15s; }
   .x-cmm .x-chip-eq span:nth-child(3) { background: #ffd560; color: #ffd560; animation-delay: .30s; }
   .x-cmm .x-chip-eq span:nth-child(4) { background: #ff3d8a; color: #ff3d8a; animation-delay: .45s; }
+
+  /* ── STUDIO floating elements — site URLs + typing cursor, mirrors CMM songs ──*/
+  .x-studio .x-site {
+    position: absolute;
+    font-family: var(--mono);
+    font-size: .62rem;
+    color: rgba(245,241,234,.92);
+    letter-spacing: .04em;
+    text-shadow: 0 1px 8px rgba(0,0,0,.85), 0 0 20px rgba(0,0,0,.7);
+    white-space: nowrap;
+    pointer-events: none;
+  }
+  .x-studio .x-site::before {
+    content: '↗';
+    color: #88c997;
+    margin-right: .35rem;
+    text-shadow: 0 0 8px rgba(136, 201, 151, .7);
+    font-weight: 600;
+  }
+  .x-studio .x-site-1 { left:  8%;  bottom: 24%; animation: siteFloat 6.5s ease-in-out infinite 0s; }
+  .x-studio .x-site-2 { left: 46%;  bottom: 12%; animation: siteFloat 7.5s ease-in-out infinite 2.2s; }
+  .x-studio .x-site-3 { right: 6%;  bottom: 30%; animation: siteFloat 7.0s ease-in-out infinite 4.5s; }
+  @keyframes siteFloat {
+    0%, 100% { transform: translateY(0);     opacity: .7; }
+    50%      { transform: translateY(-5px);  opacity: 1;  }
+  }
+
+  /* Blinking typing cursor — suggests "actively building" inside the browser */
+  .x-studio .x-cursor {
+    position: absolute;
+    top: 18%;
+    left: 16%;
+    width: 1.5px;
+    height: 14px;
+    background: #88c997;
+    box-shadow: 0 0 8px rgba(136, 201, 151, .8);
+    animation: caretBlink 1.05s steps(2, end) infinite;
+    pointer-events: none;
+  }
+  @keyframes caretBlink {
+    0%, 49%   { opacity: 1; }
+    50%, 100% { opacity: 0; }
+  }
 
   /* ── STUDIO chips — persistent, professional service framing ──*/
   .x-studio .x-chip {
