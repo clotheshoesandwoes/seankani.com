@@ -191,7 +191,9 @@ const flyConfig: FlyEmblem[] = [
                   <span class="x-site x-site-3">advertra.ca</span>
                   <span class="x-site x-site-4">seankani.com</span>
                   <span class="x-site x-site-5 is-cta">yours next</span>
-                  <span class="x-cursor"></span>
+                  <span class="x-typing">
+                    <span class="x-typing-text" id="studioTypingText"></span><span class="x-typing-caret"></span>
+                  </span>
                 </div>
               )}
 
@@ -1039,17 +1041,28 @@ const flyConfig: FlyEmblem[] = [
     text-shadow: 0 0 10px rgba(255,255,255,.7), 0 0 18px rgba(136, 201, 151, .5);
   }
 
-  /* Blinking typing cursor — suggests "actively building" inside the browser */
-  .x-studio .x-cursor {
+  /* Typewriter — types out a prompt char by char with a blinking caret */
+  .x-studio .x-typing {
     position: absolute;
-    top: 18%;
-    left: 16%;
+    top: 13%;
+    left: 12%;
+    font-family: var(--mono);
+    font-size: .68rem;
+    letter-spacing: .02em;
+    color: #88c997;
+    text-shadow: 0 0 8px rgba(136, 201, 151, .55), 0 1px 6px rgba(0,0,0,.8);
+    white-space: nowrap;
+    pointer-events: none;
+  }
+  .x-studio .x-typing-caret {
+    display: inline-block;
     width: 1.5px;
-    height: 14px;
+    height: 12px;
     background: #88c997;
+    margin-left: 1px;
+    margin-bottom: -2px;
     box-shadow: 0 0 8px rgba(136, 201, 151, .8);
     animation: caretBlink 1.05s steps(2, end) infinite;
-    pointer-events: none;
   }
   @keyframes caretBlink {
     0%, 49%   { opacity: 1; }
@@ -2514,6 +2527,40 @@ const flyConfig: FlyEmblem[] = [
 
   const studioCanvas = document.getElementById('studioCanvas') as HTMLCanvasElement | null;
   if (studioCanvas) setupStudioVisual(studioCanvas);
+
+  // ───────── Studio card typewriter — types out a prompt on loop ─────────
+  (() => {
+    const el = document.getElementById('studioTypingText');
+    if (!el) return;
+    const text = 'make me a website';
+    let i = 0;
+    let dir: 1 | -1 = 1;
+    const step = () => {
+      el.textContent = text.slice(0, i);
+      if (dir === 1) {
+        i++;
+        if (i > text.length) {
+          // Hold the full text on screen, then start deleting
+          dir = -1;
+          setTimeout(step, 3200);
+          return;
+        }
+      } else {
+        i--;
+        if (i < 0) {
+          // Brief empty pause before retyping
+          dir = 1;
+          i = 0;
+          setTimeout(step, 900);
+          return;
+        }
+      }
+      // Natural human rhythm: varied delay while typing, snappier when deleting
+      const delay = dir === 1 ? 85 + Math.random() * 75 : 45;
+      setTimeout(step, delay);
+    };
+    step();
+  })();
 
   // ───────── CMM floating song titles ─────────
   // Cycle through the 14 featured tracks from cantmute.me's homepage
