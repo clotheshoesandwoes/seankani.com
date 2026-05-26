@@ -1,5 +1,7 @@
 ---
 import Layout from '../layouts/Base.astro';
+import fs from 'node:fs';
+import path from 'node:path';
 
 const projects = [
   { name: 'The Grid',      href: 'https://gridon.life', accent: '#3df0ff', desc: 'A personal life manager. Habits, journal, projects, money. One private app, all yours.', visual: 'cube' as const },
@@ -23,6 +25,59 @@ const sectionBg = [
   films[3].slug, // projects (Grid + CMM)
   films[6].slug, // films
   // contact has no video bg — uses its own starfield canvas
+];
+
+// MW2 animated emblems drifting through the contact section starfield.
+// Each emblem moves the way its subject would IRL:
+//   - jets / helos / drones → horizontal flight
+//   - care packages / nuke   → vertical fall (with sway)
+//   - missiles / airstrike   → diagonal strike from sky
+//   - EMP / sentry / radar   → stationary hover with subtle pulse
+type FlyMotion =
+  | 'fly-right' | 'fly-left'
+  | 'fly-right-rot' | 'fly-left-rot'
+  | 'fly-streak-r' | 'fly-streak-l'  // fast horizontal streak (cruise missile / nuke)
+  | 'fly-fall'
+  | 'fly-strike-r' | 'fly-strike-l'
+  | 'fly-helo'       // helicopter slow patrol circle
+  | 'fly-drone'      // drone patrol scan
+  | 'fly-emp'        // EMP electric pulse
+  | 'fly-twinkle'    // star twinkle
+  | 'fly-sentry';    // sentry gun swivel/track
+type FlyEmblem = {
+  file: string;
+  motion: FlyMotion;
+  top?: string;
+  left?: string;
+  dur: number;
+  delay: number;
+  op?: number;
+};
+const flyConfig: FlyEmblem[] = [
+  // SIDE-VIEW horizontal — AC-130 nose faces right in art, scaleX(-1) makes it face left
+  { file: 'AC-130_inventory_icon_MW2.webp',         motion: 'fly-left',     top: '12%', dur: 70, delay: -10, op: .50 },
+  // TOP-DOWN planes — nose points up in art, so rotate 90°/-90° to face flight direction
+  { file: 'Anim-harrier.webp',                      motion: 'fly-right-rot', top: '22%', dur: 55, delay: -25, op: .55 },
+  { file: 'Emblem-Anim-stealth-bomber.webp',        motion: 'fly-left-rot',  top: '46%', dur: 90, delay: -60, op: .45 },
+  // FALL — parachute drops + nuke
+  { file: 'Anim-care-package_emblem.webp',          motion: 'fly-fall',     left: '20%', dur: 28, delay: -10, op: .55 },
+  { file: 'Emblem-Anim-emergency-airdrop.webp',     motion: 'fly-fall',     left: '60%', dur: 32, delay: -22, op: .50 },
+  { file: 'Tactical_Nuke_inventory_icon_MW2.webp',  motion: 'fly-streak-r', top: '34%',  dur:  7, delay: -2, op: .70 },
+  // STRIKE — missiles dive diagonally from sky to ground
+  { file: 'Anim-precision-airstrike.webp',          motion: 'fly-strike-r', left: '15%', dur: 14, delay:  -3, op: .65 },
+  { file: 'Emblem-Anim-predator-missile.webp',      motion: 'fly-strike-l', left: '70%', dur: 12, delay:  -6, op: .65 },
+  // SMART STATIONARY — each moves per its actual subject's behavior
+  // Helicopters all removed per user — Chopper_Gunner, Pave Low, Attack_helicopter_2.
+  // Cream emblem frame on top-down rotor view didn't fit the starfield aesthetic.
+  // Counter-UAV radar also removed (small disc).
+  // Drone: fast patrol scan back and forth
+  { file: 'Emblem-Anim-uav.webp',                   motion: 'fly-drone',    top: '62%', left: '40%', dur:  8, delay: -3, op: .45 },
+  // EMP: rapid electric pulse — scale + opacity burst
+  { file: 'EMP_inventory_icon_MW2.webp',            motion: 'fly-emp',      top: '30%', left: '10%', dur: 1.8, delay:  0, op: .45 },
+  // NVG Star: intermittent twinkle
+  { file: 'NVG_Star_emblem_MW2.webp',               motion: 'fly-twinkle',  top: '88%', left: '15%', dur:  4, delay: -1, op: .40 },
+  // Sentry gun: scans left-right swivel
+  { file: 'Sentry_gun_2.webp',                      motion: 'fly-sentry',   top: '38%', left: '92%', dur:  7, delay: -3, op: .40 },
 ];
 ---
 
@@ -51,6 +106,7 @@ const sectionBg = [
         <p class="hero-tag">
           I built <a href="https://gridon.life" target="_blank" rel="noopener noreferrer">The Grid</a>, a personal life management app.
           I also make music. Check it out on my interactive portfolio, <a href="https://cantmute.me" target="_blank" rel="noopener noreferrer">Can't Mute Me</a>.
+          And if you like this site, <a href="/studio/">I'll build you one too</a>.
         </p>
       </div>
     </section>
@@ -147,7 +203,7 @@ const sectionBg = [
         <h2 class="films-title">Edits.</h2>
         <div class="films-grid">
           {films.map((v, i) => (
-            <button class="film-tile" data-film-idx={i} aria-label={v.title}>
+            <button class={`film-tile ${i === 0 ? 'is-featured' : ''}`} data-film-idx={i} aria-label={v.title}>
               <video class="film-tile-vid" src={`/films/${v.slug}.mp4`} poster={`/films/${v.slug}.jpg`} muted loop playsinline preload="metadata"></video>
               <span class="film-tile-meta">
                 <span class="film-tile-num">{String(i + 1).padStart(2, '0')}</span>
@@ -163,9 +219,22 @@ const sectionBg = [
       </div>
     </section>
 
-    <!-- CONTACT — particle starfield bg + fluid-shimmer email -->
+    <!-- CONTACT — particle starfield bg + drifting emblems + fluid-shimmer email -->
     <section class="stage stage-contact" data-stage="4">
       <canvas class="contact-stars" id="contactStars" aria-hidden="true"></canvas>
+      {flyConfig.length > 0 && (
+        <div class="contact-flybys" aria-hidden="true">
+          {flyConfig.map(e => (
+            <img
+              class={`contact-flyby ${e.motion}`}
+              src={`/mw2/${e.file}`}
+              alt=""
+              loading="lazy"
+              style={`${e.top ? `top: ${e.top};` : ''}${e.left ? `left: ${e.left};` : ''}--op: ${e.op ?? .45}; animation-duration: ${e.dur}s; animation-delay: ${e.delay}s;`}
+            />
+          ))}
+        </div>
+      )}
       <div class="stage-inner stage-inner-center">
         <p class="contact-prompt">Open to anything interesting.</p>
         <a href="mailto:info@seankani.com" class="contact-mail">
@@ -1176,13 +1245,13 @@ const sectionBg = [
   }
   .player-video {
     position: absolute;
-    /* Inset so the video sits like a "cinema screen" with margin around */
+    /* Inset so the video sits like a "cinema screen" with margin around.
+       <video> is a replaced element — width:auto uses intrinsic dims and
+       ignores right/bottom, so we must compute width/height explicitly. */
     top:    clamp(2rem, 5vh, 5rem);
     left:   clamp(2rem, 5vw, 6rem);
-    right:  clamp(2rem, 5vw, 6rem);
-    bottom: clamp(6rem, 14vh, 9rem); /* extra room at bottom for the shell */
-    width:  auto;
-    height: auto;
+    width:  calc(100% - 2 * clamp(2rem, 5vw, 6rem));
+    height: calc(100% - clamp(2rem, 5vh, 5rem) - clamp(6rem, 14vh, 9rem));
     object-fit: contain;
     background: #000;
     border-radius: 10px;
@@ -1290,11 +1359,6 @@ const sectionBg = [
     font-family: var(--mono); font-size: .58rem; letter-spacing: .22em;
     color: var(--bone-mid); text-transform: uppercase;
   }
-  @media (max-width: 600px) {
-    .player-row { grid-template-columns: auto 1fr; }
-    .player-meta { display: none; }
-  }
-
   .player-time {
     font-family: var(--mono); font-size: .68rem;
     color: var(--bone-dim); font-variant-numeric: tabular-nums;
@@ -1324,6 +1388,248 @@ const sectionBg = [
   .ic-sound { display: none; }
   .player.is-unmuted .ic-muted { display: none; }
   .player.is-unmuted .ic-sound { display: block; }
+
+  /* ════════ FEATURED FILM TILE — Edit 7 spans full width ════════ */
+  .film-tile.is-featured {
+    grid-column: 1 / -1;
+    aspect-ratio: 21 / 9;
+  }
+  .film-tile.is-featured .film-tile-title {
+    font-size: 1.4rem;
+  }
+  .film-tile.is-featured .film-tile-num,
+  .film-tile.is-featured .film-tile-year {
+    font-size: .65rem;
+  }
+  .film-tile.is-featured .film-tile-play {
+    width: 88px;
+    height: 88px;
+  }
+  @media (min-width: 900px) {
+    .film-tile.is-featured { aspect-ratio: 24 / 9; }
+  }
+
+  /* ════════ CONTACT FLYBYS — emblems move how they would IRL ════════ */
+  .contact-flybys {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .contact-flyby {
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    opacity: 0;
+    image-rendering: -webkit-optimize-contrast;
+    filter: drop-shadow(0 0 6px rgba(255, 255, 255, .15));
+    will-change: transform, opacity;
+  }
+
+  /* ── HORIZONTAL: jets, helos, drones cross the screen ── */
+  @keyframes flyAcrossRight {
+    0%   { transform: translate3d(-15vw, 0, 0); opacity: 0; }
+    10%  { opacity: var(--op, .45); }
+    50%  { transform: translate3d(50vw, -8px, 0); }
+    90%  { opacity: var(--op, .45); }
+    100% { transform: translate3d(115vw, 0, 0); opacity: 0; }
+  }
+  @keyframes flyAcrossLeft {
+    0%   { transform: translate3d(115vw, 0, 0) scaleX(-1); opacity: 0; }
+    10%  { opacity: var(--op, .45); }
+    50%  { transform: translate3d(50vw, 6px, 0) scaleX(-1); }
+    90%  { opacity: var(--op, .45); }
+    100% { transform: translate3d(-15vw, 0, 0) scaleX(-1); opacity: 0; }
+  }
+  .fly-right { left: 0; animation: flyAcrossRight linear infinite; }
+  .fly-left  { left: 0; animation: flyAcrossLeft  linear infinite; }
+
+  /* ── HORIZONTAL with rotation: top-down planes (nose-up art) facing direction of travel ── */
+  @keyframes flyAcrossRightRot {
+    0%   { transform: translate3d(-15vw, 0, 0) rotate(90deg); opacity: 0; }
+    10%  { opacity: var(--op, .45); }
+    50%  { transform: translate3d(50vw, -6px, 0) rotate(90deg); }
+    90%  { opacity: var(--op, .45); }
+    100% { transform: translate3d(115vw, 0, 0) rotate(90deg); opacity: 0; }
+  }
+  @keyframes flyAcrossLeftRot {
+    0%   { transform: translate3d(115vw, 0, 0) rotate(-90deg); opacity: 0; }
+    10%  { opacity: var(--op, .45); }
+    50%  { transform: translate3d(50vw, 6px, 0) rotate(-90deg); }
+    90%  { opacity: var(--op, .45); }
+    100% { transform: translate3d(-15vw, 0, 0) rotate(-90deg); opacity: 0; }
+  }
+  .fly-right-rot { left: 0; animation: flyAcrossRightRot linear infinite; }
+  .fly-left-rot  { left: 0; animation: flyAcrossLeftRot  linear infinite; }
+
+  /* ── STREAK: fast horizontal — cruise missile / nuke blazing across at altitude ── */
+  @keyframes streakRight {
+    0%   { transform: translate3d(-20vw, 0, 0); opacity: 0; }
+    12%  { opacity: var(--op, .7); }
+    88%  { opacity: var(--op, .7); }
+    100% { transform: translate3d(120vw, 0, 0); opacity: 0; }
+  }
+  @keyframes streakLeft {
+    0%   { transform: translate3d(120vw, 0, 0) scaleX(-1); opacity: 0; }
+    12%  { opacity: var(--op, .7); }
+    88%  { opacity: var(--op, .7); }
+    100% { transform: translate3d(-20vw, 0, 0) scaleX(-1); opacity: 0; }
+  }
+  .fly-streak-r { left: 0; animation: streakRight linear infinite; }
+  .fly-streak-l { left: 0; animation: streakLeft  linear infinite; }
+
+  /* ── FALL: care packages, airdrops — slow descent with sway ── */
+  @keyframes fallDown {
+    0%   { transform: translate3d(-12px, -15vh, 0) rotate(-2deg); opacity: 0; }
+    10%  { opacity: var(--op, .5); }
+    50%  { transform: translate3d(12px, 50vh, 0) rotate(2deg); }
+    90%  { opacity: var(--op, .5); }
+    100% { transform: translate3d(-12px, 115vh, 0) rotate(-2deg); opacity: 0; }
+  }
+  .fly-fall { top: 0; animation: fallDown ease-in-out infinite; }
+
+  /* ── STRIKE: missiles / airstrike — fast diagonal from sky to ground ── */
+  @keyframes strikeDownRight {
+    0%   { transform: translate3d(-5vw, -25vh, 0) rotate(135deg); opacity: 0; }
+    25%  { opacity: var(--op, .65); }
+    75%  { opacity: var(--op, .65); }
+    100% { transform: translate3d(55vw, 120vh, 0) rotate(135deg); opacity: 0; }
+  }
+  @keyframes strikeDownLeft {
+    0%   { transform: translate3d(5vw, -25vh, 0) rotate(-135deg); opacity: 0; }
+    25%  { opacity: var(--op, .65); }
+    75%  { opacity: var(--op, .65); }
+    100% { transform: translate3d(-55vw, 120vh, 0) rotate(-135deg); opacity: 0; }
+  }
+  .fly-strike-r { top: 0; animation: strikeDownRight cubic-bezier(.4, .1, .8, 1) infinite; }
+  .fly-strike-l { top: 0; animation: strikeDownLeft  cubic-bezier(.4, .1, .8, 1) infinite; }
+
+  /* ── HELICOPTER PATROL: tight circular hover, like holding position in wind ── */
+  @keyframes heloPatrol {
+    0%   { transform: translate3d(0, 0, 0); opacity: var(--op, .4); }
+    25%  { transform: translate3d(6px, -4px, 0); }
+    50%  { transform: translate3d(0, -8px, 0); opacity: calc(var(--op, .4) * 1.1); }
+    75%  { transform: translate3d(-6px, -4px, 0); }
+    100% { transform: translate3d(0, 0, 0); opacity: var(--op, .4); }
+  }
+  .fly-helo { animation: heloPatrol ease-in-out infinite; }
+
+  /* ── DRONE PATROL: slow back-and-forth scan ── */
+  @keyframes dronePatrol {
+    0%, 100% { transform: translate3d(-22px, 0, 0); opacity: var(--op, .35); }
+    49%      { transform: translate3d(22px, -3px, 0) scaleX(1); }
+    50%      { transform: translate3d(22px, -3px, 0) scaleX(-1); }
+    99%      { transform: translate3d(-22px, 0, 0) scaleX(-1); }
+  }
+  .fly-drone { animation: dronePatrol ease-in-out infinite; }
+
+  /* ── EMP PULSE: fast electric expansion + fade ── */
+  @keyframes empPulse {
+    0%   { transform: scale(.8); opacity: calc(var(--op, .45) * .6); }
+    35%  { transform: scale(1.2); opacity: calc(var(--op, .45) * 1.6); }
+    70%  { transform: scale(1); opacity: var(--op, .45); }
+    100% { transform: scale(.8); opacity: calc(var(--op, .45) * .6); }
+  }
+  .fly-emp { animation: empPulse ease-out infinite; }
+
+  /* ── TWINKLE: irregular star flash ── */
+  @keyframes twinkle {
+    0%, 35%, 75%, 100% { opacity: var(--op, .35); transform: scale(1); }
+    45%                { opacity: calc(var(--op, .35) * 2.4); transform: scale(1.15); }
+    55%                { opacity: var(--op, .35); transform: scale(1); }
+    65%                { opacity: calc(var(--op, .35) * 1.6); transform: scale(1.08); }
+  }
+  .fly-twinkle { animation: twinkle ease-in-out infinite; }
+
+  /* ── SENTRY SWIVEL: turret tracks left-right looking for targets ── */
+  @keyframes sentrySwivel {
+    0%, 100% { transform: rotate(-22deg); opacity: var(--op, .4); }
+    48%      { transform: rotate(22deg); }
+    52%      { transform: rotate(22deg); }
+  }
+  .fly-sentry { animation: sentrySwivel ease-in-out infinite; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .contact-flyby { animation: none; opacity: 0; }
+  }
+  @media (max-width: 600px) {
+    .contact-flyby { width: 18px; height: 18px; }
+  }
+
+  /* ──── Mobile (≤768px) — placed last so it wins the cascade ──── */
+  @media (max-width: 768px) {
+    .player-video {
+      top: .5rem;
+      left: .5rem;
+      width: calc(100% - 1rem);
+      height: calc(100% - .5rem - 5rem);
+      border-radius: 6px;
+    }
+    .player-shell {
+      left: .4rem;
+      right: .4rem;
+      bottom: .4rem;
+      padding: 0 .5rem .4rem;
+      border-radius: 12px;
+    }
+    .player-close {
+      top: .5rem;
+      right: .5rem;
+      width: 44px;
+      height: 44px;
+    }
+    .player-btn {
+      width: 44px;
+      height: 44px;
+    }
+    .player-btn-play {
+      width: 48px;
+      height: 48px;
+    }
+    .player-track { height: 4px; }
+    .player-thumb {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+      width: 16px;
+      height: 16px;
+    }
+    .player-timeline { height: 24px; }
+    .player-row { grid-template-columns: 1fr auto; gap: .5rem; }
+    .player-meta { display: none; }
+    .player-time { display: none; }
+  }
+
+  /* ──── Mobile landscape — minimize chrome to maximize video ──── */
+  @media (orientation: landscape) and (max-height: 500px) {
+    .player-video {
+      top: .25rem;
+      left: .25rem;
+      width: calc(100% - .5rem);
+      height: calc(100% - .25rem - 3.5rem);
+    }
+    .player-shell {
+      left: .3rem;
+      right: .3rem;
+      bottom: .3rem;
+      padding: 0 .4rem .25rem;
+    }
+    .player-btn {
+      width: 38px;
+      height: 38px;
+    }
+    .player-btn-play {
+      width: 42px;
+      height: 42px;
+    }
+    .player-close {
+      width: 38px;
+      height: 38px;
+      top: .35rem;
+      right: .35rem;
+    }
+    .player-timeline { height: 18px; }
+  }
 </style>
 
 <script>
@@ -1332,6 +1638,7 @@ const sectionBg = [
   // ───────── BG video stack: only the active section's video plays + fades in ─────────
   const bgVideos = Array.from(document.querySelectorAll<HTMLVideoElement>('.bg-video'));
   const stages = Array.from(document.querySelectorAll<HTMLElement>('.stage'));
+
 
   function setActiveBg(idx: number) {
     bgVideos.forEach((v, i) => {
@@ -1485,10 +1792,44 @@ const sectionBg = [
     playerVideo.muted = !playerVideo.muted;
     player.classList.toggle('is-unmuted', !playerVideo.muted);
   });
+  function enterFullscreen() {
+    const v = playerVideo as any;
+    const p = player as any;
+    const d = document as any;
+    if (d.fullscreenElement || d.webkitFullscreenElement) return;
+    // iOS Safari only allows fullscreen on <video>, not arbitrary elements.
+    // Native iOS fullscreen also unlocks landscape rotation, which we want.
+    if (typeof v.webkitEnterFullscreen === 'function' && !d.fullscreenEnabled) {
+      try { v.webkitEnterFullscreen(); return; } catch {}
+    }
+    const req = p.requestFullscreen || p.webkitRequestFullscreen;
+    if (req) req.call(p).catch(() => {
+      if (typeof v.webkitEnterFullscreen === 'function') {
+        try { v.webkitEnterFullscreen(); } catch {}
+      }
+    });
+  }
+  function exitFullscreen() {
+    const d = document as any;
+    if (d.exitFullscreen) d.exitFullscreen().catch(() => {});
+    else if (d.webkitExitFullscreen) d.webkitExitFullscreen();
+  }
   playerFs?.addEventListener('click', () => {
-    const docAny = document as any, playerAny = player as any;
-    if (docAny.fullscreenElement) docAny.exitFullscreen?.();
-    else playerAny.requestFullscreen?.();
+    const d = document as any;
+    if (d.fullscreenElement || d.webkitFullscreenElement) exitFullscreen();
+    else enterFullscreen();
+  });
+  // Double-tap/click the video to toggle fullscreen
+  let lastTap = 0;
+  playerVideo?.addEventListener('click', (e) => {
+    const now = Date.now();
+    if (now - lastTap < 300) {
+      e.preventDefault();
+      const d = document as any;
+      if (d.fullscreenElement || d.webkitFullscreenElement) exitFullscreen();
+      else enterFullscreen();
+    }
+    lastTap = now;
   });
 
   // Click video to toggle play/pause
