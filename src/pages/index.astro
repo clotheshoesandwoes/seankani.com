@@ -468,26 +468,48 @@ const flyConfig: FlyEmblem[] = [
   }
 
   /* ABOUT */
+  /* Whole title gets a soft fluid shimmer using the 3 project accents
+     (sage / warm orange / cyan) — same family as SEAN KANI but a
+     different palette, at lower strength so the em words still pop more. */
   .about-title {
     font-family: var(--display); font-weight: 700;
     font-size: clamp(3rem, 8.5vw, 7.5rem);
     line-height: .92; letter-spacing: -.04em;
-    color: var(--bone);
     margin: 0;
     filter: drop-shadow(0 4px 40px rgba(0,0,0,.55));
+    background:
+      radial-gradient(ellipse 80% 100% at 25% 35%, rgba(136, 201, 151, .80) 0%, transparent 60%),
+      radial-gradient(ellipse 80% 100% at 75% 65%, rgba(255, 154,  60, .70) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 100% at 50%  0%, rgba( 61, 240, 255, .55) 0%, transparent 65%),
+      linear-gradient(135deg, #fff 0%, var(--bone) 100%);
+    background-size: 280% 280%, 280% 280%, 280% 280%, 100% 100%;
+    background-position: 0% 0%, 100% 100%, 50% 50%, 0% 0%;
+    -webkit-background-clip: text;
+            background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    animation: aboutTitleShimmer 14s ease-in-out infinite;
   }
-  /* Keywords get the fluid shimmer — same visual family as SEAN KANI
-     and the projects intro. The non-em parts stay plain bone-white. */
+  @keyframes aboutTitleShimmer {
+    0%, 100% { background-position:   0%   0%, 100% 100%,  50%   0%, 0% 0%; }
+    25%      { background-position:  70%  40%,  20%  60%,  90%  10%, 0% 0%; }
+    50%      { background-position: 100%  90%,   0%  10%,  20%  80%, 0% 0%; }
+    75%      { background-position:  30%  70%,  80%  30%,  60%  50%, 0% 0%; }
+  }
+  /* Em words override with a HIGHER-strength shimmer using the same
+     accent palette plus a magenta highlight — more saturated, slower
+     cycle so they breathe distinctly from the title's drift. */
   .about-title em {
     font-style: normal;
     font-weight: 800;
     background:
-      radial-gradient(ellipse 60% 100% at 20% 30%, rgba(255, 110, 200, .95) 0%, transparent 60%),
-      radial-gradient(ellipse 60% 100% at 80% 70%, rgba( 90, 200, 255, .90) 0%, transparent 60%),
-      radial-gradient(ellipse 70% 80% at 50% 100%, rgba(255, 215, 110, .85) 0%, transparent 65%),
+      radial-gradient(ellipse 60% 100% at 20% 30%, rgba(136, 201, 151, 1.0) 0%, transparent 55%),
+      radial-gradient(ellipse 60% 100% at 80% 70%, rgba(255, 154,  60, .95) 0%, transparent 55%),
+      radial-gradient(ellipse 70% 80% at 50% 100%, rgba( 61, 240, 255, .90) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 60% at 50%  0%, rgba(255,  61, 138, .75) 0%, transparent 55%),
       linear-gradient(135deg, #fff 0%, var(--bone) 100%);
-    background-size: 240% 240%, 240% 240%, 240% 240%, 100% 100%;
-    background-position: 0% 0%, 100% 100%, 50% 50%, 0% 0%;
+    background-size: 240% 240%, 240% 240%, 240% 240%, 200% 200%, 100% 100%;
+    background-position: 0% 0%, 100% 100%, 50% 50%, 50% 0%, 0% 0%;
     -webkit-background-clip: text;
             background-clip: text;
     color: transparent;
@@ -496,9 +518,9 @@ const flyConfig: FlyEmblem[] = [
   }
   .about-title em + em { animation-delay: 1.6s; }
   @keyframes aboutShimmer {
-    0%, 100% { background-position:   0%   0%, 100% 100%,  50%  50%, 0% 0%; }
-    33%      { background-position:  60%  70%,  30%  20%,  80%  10%, 0% 0%; }
-    66%      { background-position:  80%  20%,  10%  80%,  20%  90%, 0% 0%; }
+    0%, 100% { background-position:   0%   0%, 100% 100%,  50%  50%,  50%   0%, 0% 0%; }
+    33%      { background-position:  60%  70%,  30%  20%,  80%  10%,  20%  60%, 0% 0%; }
+    66%      { background-position:  80%  20%,  10%  80%,  20%  90%,  80%  40%, 0% 0%; }
   }
   .about-sub {
     margin: clamp(1.4rem, 2.4vw, 2rem) 0 0;
