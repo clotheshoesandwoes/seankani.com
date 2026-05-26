@@ -1028,24 +1028,47 @@ const flyConfig: FlyEmblem[] = [
     50%      { transform: translateY(-5px);  opacity: 1;  }
   }
 
-  /* "yours next" CTA — italic, brighter accent so it reads as the invitation */
+  /* "yours next" CTA — italic + scale breath + color cycle + bouncing arrow.
+     Eye-catching so it reads as "hey, buy one too" without being annoying. */
   .x-studio .x-site.is-cta {
     font-style: italic;
-    color: #fff;
-    font-weight: 500;
-    text-shadow: 0 1px 8px rgba(0,0,0,.85), 0 0 14px rgba(136, 201, 151, .45);
+    font-weight: 600;
+    font-size: .66rem;
+    /* Override the .x-site-5 siteFloat animation with one that combines
+       Y-bob + scale breath. Color cycle runs as a separate animation. */
+    animation:
+      ctaBreath 3.6s ease-in-out infinite,
+      ctaColor 4.5s ease-in-out infinite;
   }
   .x-studio .x-site.is-cta::before {
     content: '→';
-    color: #fff;
-    text-shadow: 0 0 10px rgba(255,255,255,.7), 0 0 18px rgba(136, 201, 151, .5);
+    display: inline-block;
+    margin-right: .35rem;
+    color: inherit;
+    text-shadow: 0 0 10px currentColor, 0 1px 4px rgba(0,0,0,.7);
+    animation: ctaArrow 1.3s ease-in-out infinite;
+  }
+  @keyframes ctaBreath {
+    0%, 100% { transform: translateY(0)     scale(1);    opacity: .95; }
+    50%      { transform: translateY(-4px)  scale(1.07); opacity: 1;   }
+  }
+  @keyframes ctaColor {
+    0%   { color: #ffb84d; text-shadow: 0 0 14px rgba(255, 184,  77, .85), 0 1px 6px rgba(0,0,0,.7); }
+    33%  { color: #ff7eb4; text-shadow: 0 0 16px rgba(255, 126, 180, .85), 0 1px 6px rgba(0,0,0,.7); }
+    66%  { color: #88c997; text-shadow: 0 0 16px rgba(136, 201, 151, .90), 0 1px 6px rgba(0,0,0,.7); }
+    100% { color: #ffb84d; text-shadow: 0 0 14px rgba(255, 184,  77, .85), 0 1px 6px rgba(0,0,0,.7); }
+  }
+  @keyframes ctaArrow {
+    0%, 100% { transform: translateX(0); }
+    50%      { transform: translateX(4px); }
   }
 
-  /* Typewriter — types out a prompt char by char with a blinking caret */
+  /* Typewriter — types out a prompt char by char with a blinking caret.
+     Pinned to the very top of the card so it doesn't crash into seankani.com URL */
   .x-studio .x-typing {
     position: absolute;
-    top: 13%;
-    left: 12%;
+    top: 5%;
+    left: 10%;
     font-family: var(--mono);
     font-size: .68rem;
     letter-spacing: .02em;
