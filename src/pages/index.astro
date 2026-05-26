@@ -6,6 +6,7 @@ import path from 'node:path';
 const projects = [
   { name: 'The Grid',      href: 'https://gridon.life', accent: '#3df0ff', desc: 'A personal life manager. Habits, journal, projects, money. One private app, all yours.', visual: 'cube' as const },
   { name: "Can't Mute Me", href: 'https://cantmute.me', accent: '#ff5a3c', desc: 'Where I host all my music.', visual: 'eq' as const },
+  { name: 'Kani Studio',   href: '/studio/',            accent: '#88c997', desc: 'Hand-coded websites for small businesses. One at a time, by me.', visual: 'mycelium' as const },
 ];
 
 const films = [
@@ -127,10 +128,8 @@ const flyConfig: FlyEmblem[] = [
     <section class="stage stage-projects" data-stage="2">
       <header class="projects-intro">
         <p class="projects-intro-text">
-          My first two are both <em>UI/UX</em> experiments. One is a
-          <em>personal life manager</em>. The other is an interactive
-          home for the <em>music I make</em>, where every song gets its
-          own moment instead of disappearing into a feed.
+          I've been building <em>websites and apps</em> all of <em>2026</em>.
+          I'm <em>confident in my services</em> and taking on clients.
         </p>
       </header>
       <div class="projects-pair">
@@ -138,8 +137,9 @@ const flyConfig: FlyEmblem[] = [
           <a class={`pcard pcard-${p.visual}`} href={p.href} target="_blank" rel="noopener noreferrer"
              style={`--accent:${p.accent};`} aria-label={`Visit ${p.name}`}>
             <div class="pcard-visual">
-              {p.visual === 'cube' && <canvas id="gridLogoCanvas"></canvas>}
-              {p.visual === 'eq'   && <canvas id="eqCanvas"></canvas>}
+              {p.visual === 'cube'     && <canvas id="gridLogoCanvas"></canvas>}
+              {p.visual === 'eq'       && <canvas id="eqCanvas"></canvas>}
+              {p.visual === 'mycelium' && <canvas id="myceliumCanvas"></canvas>}
 
               {p.visual === 'cube' && (
                 <div class="x-overlay x-grid" aria-hidden="true">
@@ -180,6 +180,27 @@ const flyConfig: FlyEmblem[] = [
                   </div>
                   <div class="x-chip x-chip-eq">
                     <span></span><span></span><span></span><span></span>
+                  </div>
+                </div>
+              )}
+
+              {p.visual === 'mycelium' && (
+                <div class="x-overlay x-studio" aria-hidden="true">
+                  <div class="x-chip x-chip-open">
+                    <span class="x-open-dot"></span>
+                    <span class="x-open-text">Open</span>
+                  </div>
+                  <div class="x-chip x-chip-browser">
+                    <span class="x-browser-dots">
+                      <span></span><span></span><span></span>
+                    </span>
+                    <span class="x-browser-url">/studio/</span>
+                  </div>
+                  <div class="x-chip x-chip-locale">
+                    <span class="x-locale-text">SAN DIEGO · 2026</span>
+                  </div>
+                  <div class="x-chip x-chip-craft">
+                    <span class="x-craft-text">Hand-coded</span>
                   </div>
                 </div>
               )}
@@ -662,15 +683,19 @@ const flyConfig: FlyEmblem[] = [
   }
   .projects-pair {
     width: 100%;
-    max-width: 980px;
+    max-width: 1280px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: clamp(1rem, 2vw, 1.6rem);
   }
-  @media (max-width: 720px) {
+  @media (max-width: 960px) {
+    .projects-pair { grid-template-columns: 1fr 1fr; max-width: 720px; }
+  }
+  @media (max-width: 600px) {
     .projects-pair { grid-template-columns: 1fr; max-width: 460px; }
   }
+  .stage.is-active .pcard:nth-child(3) { transition-delay: .24s; }
   .pcard {
     min-width: 0;
     max-width: 100%;
@@ -981,6 +1006,75 @@ const flyConfig: FlyEmblem[] = [
   .x-cmm .x-chip-eq span:nth-child(2) { background: #ff9a3c; color: #ff9a3c; animation-delay: .15s; }
   .x-cmm .x-chip-eq span:nth-child(3) { background: #ffd560; color: #ffd560; animation-delay: .30s; }
   .x-cmm .x-chip-eq span:nth-child(4) { background: #ff3d8a; color: #ff3d8a; animation-delay: .45s; }
+
+  /* ── STUDIO chips — persistent, professional service framing ──*/
+  .x-studio .x-chip {
+    opacity: 1;
+    animation: none;
+    border-color: color-mix(in oklab, var(--accent) 32%, rgba(245,241,234,.10));
+  }
+  .x-studio .x-chip::before { display: none; }
+
+  /* "Open for clients" status pill */
+  .x-chip-open {
+    top: .55rem; right: .55rem;
+    font-size: .58rem;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: rgba(245,241,234,.92);
+  }
+  .x-chip-open .x-open-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #4ade80;
+    box-shadow: 0 0 8px #4ade80, 0 0 14px rgba(74,222,128,.55);
+    animation: openPulse 2.2s ease-in-out infinite;
+  }
+  @keyframes openPulse {
+    0%, 100% { opacity: 1;   transform: scale(1); }
+    50%      { opacity: .55; transform: scale(.82); }
+  }
+
+  /* Tiny browser-window mockup */
+  .x-chip-browser {
+    top: .55rem; left: .55rem;
+    padding: .3rem .55rem;
+    font-family: var(--mono);
+    font-size: .56rem;
+    color: rgba(245,241,234,.78);
+  }
+  .x-chip-browser .x-browser-dots {
+    display: inline-flex;
+    gap: 3px;
+    margin-right: .4rem;
+  }
+  .x-chip-browser .x-browser-dots span {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .x-chip-browser .x-browser-dots span:nth-child(1) { background: #ff5f57; }
+  .x-chip-browser .x-browser-dots span:nth-child(2) { background: #febc2e; }
+  .x-chip-browser .x-browser-dots span:nth-child(3) { background: #28c840; }
+
+  /* Bottom-left locale tag */
+  .x-chip-locale {
+    bottom: .55rem; left: .55rem;
+    font-family: var(--mono);
+    font-size: .54rem;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: rgba(245,241,234,.65);
+  }
+
+  /* Bottom-right craft tag */
+  .x-chip-craft {
+    bottom: .55rem; right: .55rem;
+    font-family: var(--display);
+    font-size: .68rem;
+    font-style: italic;
+    color: rgba(245,241,234,.85);
+  }
 
   /* Keyframes */
   @keyframes chipShow {
@@ -2193,6 +2287,163 @@ const flyConfig: FlyEmblem[] = [
 
   const eqCanvas = document.getElementById('eqCanvas') as HTMLCanvasElement | null;
   if (eqCanvas) setupEqVisual(eqCanvas);
+
+  // ═════════════════════════════════════════════════════════════════
+  // KANI STUDIO — Mycelium canvas: organic branching growth from the
+  // bottom edge upward, slowly filling the card. Echoes the studio
+  // site's own background animation. Tips occasionally fork; old tips
+  // bloom into a small "flower" dot before dying.
+  // ═════════════════════════════════════════════════════════════════
+  function setupStudioVisual(canvas: HTMLCanvasElement) {
+    const ctx = canvas.getContext('2d')!;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    let w = 0, h = 0;
+
+    type Tip = {
+      x: number; y: number;
+      angle: number;
+      age: number; life: number;
+      thickness: number;
+      color: string;
+    };
+    let tips: Tip[] = [];
+
+    const PALETTE = ['#88c997', '#c4d985', '#f0d896', '#a8d4ff', '#c89aff', '#f0a896'];
+    const pickColor = () => PALETTE[Math.floor(Math.random() * PALETTE.length)];
+
+    const setSize = () => {
+      const r = canvas.getBoundingClientRect();
+      w = r.width; h = r.height;
+      canvas.width = w * dpr; canvas.height = h * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.fillStyle = '#0b1310';
+      ctx.fillRect(0, 0, w, h);
+    };
+
+    const reset = () => {
+      ctx.fillStyle = '#0b1310';
+      ctx.fillRect(0, 0, w, h);
+      tips = [];
+      const seeds = 4;
+      for (let i = 0; i < seeds; i++) {
+        tips.push({
+          x: (w * (i + 1)) / (seeds + 1) + (Math.random() - .5) * 40,
+          y: h - 2,
+          angle: -Math.PI / 2 + (Math.random() - .5) * 0.5,
+          age: 0,
+          life: 260 + Math.random() * 220,
+          thickness: 1.4,
+          color: pickColor(),
+        });
+      }
+    };
+
+    let inView = true;
+    let hoverT = 0, hoverTarget = 0;
+
+    let frame = 0;
+    let segments = 0; // counts drawn segments; trigger reset when canvas is dense
+
+    const tick = () => {
+      requestAnimationFrame(tick);
+      if (!inView) return;
+      frame++;
+
+      hoverT += (hoverTarget - hoverT) * 0.08;
+      const speed = 1 + hoverT * 1.6;
+
+      const next: Tip[] = [];
+      for (const tip of tips) {
+        const step = (0.7 + Math.random() * 0.5) * speed;
+        tip.angle += (Math.random() - .5) * 0.28;
+        const nx = tip.x + Math.cos(tip.angle) * step;
+        const ny = tip.y + Math.sin(tip.angle) * step;
+
+        ctx.beginPath();
+        ctx.moveTo(tip.x, tip.y);
+        ctx.lineTo(nx, ny);
+        ctx.strokeStyle = tip.color;
+        ctx.lineWidth = tip.thickness;
+        ctx.globalAlpha = 0.65 + Math.random() * 0.2;
+        ctx.lineCap = 'round';
+        ctx.stroke();
+        segments++;
+
+        tip.x = nx; tip.y = ny;
+        tip.age++;
+        tip.thickness = Math.max(0.45, tip.thickness * 0.997);
+
+        if (nx < -8 || nx > w + 8 || ny < -8 || ny > h + 8) continue;
+
+        // End of life: bloom a flower
+        if (tip.age > tip.life) {
+          ctx.beginPath();
+          ctx.arc(nx, ny, 1.8 + Math.random() * 1.2, 0, Math.PI * 2);
+          ctx.fillStyle = tip.color;
+          ctx.globalAlpha = 0.92;
+          ctx.fill();
+          ctx.beginPath();
+          ctx.arc(nx, ny, 4.5, 0, Math.PI * 2);
+          ctx.globalAlpha = 0.18;
+          ctx.fill();
+          continue;
+        }
+
+        // Fork
+        if (Math.random() < 0.018 * speed) {
+          next.push({
+            x: nx, y: ny,
+            angle: tip.angle + (Math.random() > .5 ? 1 : -1) * (0.4 + Math.random() * 0.5),
+            age: tip.age,
+            life: tip.life,
+            thickness: tip.thickness * 0.85,
+            color: Math.random() < 0.25 ? pickColor() : tip.color,
+          });
+        }
+        next.push(tip);
+      }
+      ctx.globalAlpha = 1;
+      tips = next;
+
+      // Slow fade-to-bg cycle: once the canvas has accumulated a dense
+      // mycelium (~12000 segments ≈ 30-60s of growth), softly wash it
+      // back out over the next ~6 seconds and seed a new generation.
+      if (segments > 12000) {
+        ctx.fillStyle = 'rgba(11, 19, 16, 0.04)';
+        ctx.fillRect(0, 0, w, h);
+        if (segments > 13800) {
+          segments = 0;
+          reset();
+        }
+      }
+
+      // No tips → restart organically
+      if (tips.length === 0 && segments < 12000) reset();
+      // Cap to keep frame cost bounded
+      while (tips.length > 80) tips.shift();
+    };
+
+    setSize();
+    reset();
+    window.addEventListener('resize', setSize);
+
+    const io = new IntersectionObserver(
+      ([entry]) => { inView = entry.isIntersecting; },
+      { threshold: 0.01 },
+    );
+    io.observe(canvas);
+
+    const card = canvas.closest('.pcard');
+    if (card) {
+      card.addEventListener('pointerenter', () => { hoverTarget = 1; });
+      card.addEventListener('pointerleave', () => { hoverTarget = 0; });
+    }
+
+    tick();
+  }
+
+  const myceliumCanvas = document.getElementById('myceliumCanvas') as HTMLCanvasElement | null;
+  if (myceliumCanvas) setupStudioVisual(myceliumCanvas);
 
   // ───────── CMM floating song titles ─────────
   // Cycle through the 14 featured tracks from cantmute.me's homepage
