@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="description" content="DEAD WAX. New and used vinyl in North Park, San Diego. Clean copies, honestly graded, fairly priced. We buy, sell, and trade.">
+<meta name="author" content="Sean Kani">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2314110b'/%3E%3Ccircle cx='16' cy='16' r='12' fill='none' stroke='%23f4ecd9' stroke-width='1'/%3E%3Ccircle cx='16' cy='16' r='8' fill='none' stroke='%23f4ecd9' stroke-width='1'/%3E%3Ccircle cx='16' cy='16' r='3.4' fill='%23c0402c'/%3E%3Ccircle cx='16' cy='16' r='1' fill='%2314110b'/%3E%3C/svg%3E">
+<meta property="og:title" content="DEAD WAX · Records · North Park">
+<meta property="og:description" content="New and used vinyl in North Park, San Diego. Honest grades, fair prices.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://is1-ssl.mzstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;0,900;1,500;1,600;1,700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
+<title>DEAD WAX · Records · North Park, San Diego</title>
+<style>
+  *,*:before,*:after{box-sizing:border-box}
+  *{margin:0;padding:0}
+  html,body{height:100%}
+  html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
+  body{line-height:1.55;overflow-x:hidden;width:100%;max-width:100vw;background:var(--cream)}
+  img,svg{display:block;max-width:100%}
+  input,button,textarea,select{font:inherit;color:inherit;background:none;border:none}
+  p,h1,h2,h3,h4,h5,h6{overflow-wrap:break-word;font-weight:400}
+
+  :root{
+    --cream:#f7f1e3;--cream-2:#efe7d3;--paper:#fffaf0;
+    --ink:#17130c;--ink-2:#3c352a;--muted:#7c7261;--dim:#a99c83;
+    --dark:#16120b;--dark-2:#1e1910;--on-dark:#f4ecd9;--on-dark-2:#c8bfa9;
+    --line:#ddd2b6;--line-dark:rgba(244,236,217,.16);
+    --accent:#c0402c;--accent-deep:#9c3120;--gold:#b89243;
+    --container:1220px;--gutter:clamp(1.1rem,4vw,2.5rem);
+    --display:"Playfair Display",Georgia,"Times New Roman",serif;
+    --body:"Newsreader",Georgia,"Times New Roman",serif;
+    --ease:cubic-bezier(.16,1,.3,1);
+  }
+  html{background:var(--cream);color:var(--ink);font-family:var(--body);font-size:18px;font-weight:400}
+  ::selection{background:var(--ink);color:var(--cream)}
+  a{color:inherit;text-decoration:none}
+  button{cursor:pointer}
+  .wrap{max-width:var(--container);margin:0 auto;padding:0 var(--gutter)}
+  .disp{font-family:var(--display)}
+  .eyebrow{font-family:var(--body);font-size:.72rem;text-transform:uppercase;letter-spacing:.26em;font-weight:500}
+
+  [data-reveal]{opacity:0;transform:translateY(20px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+  [data-reveal].in{opacity:1;transform:none}
+  @media (prefers-reduced-motion: reduce){
+    *,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+    [data-reveal]{opacity:1;transform:none}
+    html{scroll-behavior:auto}
+  }
+
+  /* ─── ANNOUNCEMENT ─── */
+  .announce{background:var(--dark);color:var(--on-dark);text-align:center;font-size:.76rem;letter-spacing:.12em;text-transform:uppercase;padding:.55rem var(--gutter)}
+  .announce b{color:var(--cream);font-weight:600}
+  .announce .sep{color:var(--dim);margin:0 .9rem}
+  @media (max-width:640px){.announce .sep{display:none}.announce span{display:block;line-height:1.8}}
+
+  /* ─── HEADER ─── */
+  .head{background:var(--dark);color:var(--on-dark);border-bottom:1px solid var(--line-dark)}
+  .head__in{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:1rem;padding:1.1rem var(--gutter)}
+  .head__r{display:flex;align-items:center;justify-content:flex-end;gap:1.3rem}
+  .iconbtn{display:inline-flex;align-items:center;gap:.45rem;color:var(--on-dark-2);font-size:.82rem;letter-spacing:.04em;transition:color .2s}
+  .iconbtn:hover{color:var(--cream)}
+  .iconbtn svg{width:19px;height:19px;stroke:currentColor;fill:none;stroke-width:1.5}
+  .cartlink .ct{margin-left:.1rem;font-variant-numeric:tabular-nums}
+  .brand{justify-self:center;text-align:center;display:flex;flex-direction:column;align-items:center;gap:.15rem;color:var(--cream)}
+  .brand__mk{display:flex;align-items:center;gap:.6rem}
+  .brand__mk svg{width:30px;height:30px}
+  .brand__name{font-family:var(--display);font-weight:800;font-size:1.7rem;letter-spacing:.06em;line-height:1}
+  .brand__sub{font-size:.6rem;text-transform:uppercase;letter-spacing:.32em;color:var(--on-dark-2)}
+  @media (max-width:720px){.head__in{grid-template-columns:auto 1fr auto}.head .lbl{display:none}.brand__sub{display:none}}
+
+  /* ─── NAV ─── */
+  .nav{background:var(--dark);color:var(--on-dark);border-bottom:1px solid var(--line-dark);position:sticky;top:0;z-index:40}
+  .nav__in{display:flex;align-items:center;justify-content:center;gap:clamp(.9rem,2.2vw,2rem);padding:.8rem var(--gutter);flex-wrap:wrap}
+  .nav__item{position:relative}
+  .nav__item>a,.nav__item>button{font-family:var(--display);font-size:.96rem;font-weight:500;letter-spacing:.01em;color:var(--on-dark);padding:.2rem 0;display:inline-flex;align-items:center;gap:.3rem;transition:color .2s;border-bottom:1px solid transparent}
+  .nav__item>a:hover,.nav__item>button:hover,.nav__item.open>button{color:var(--cream);border-bottom-color:var(--cream)}
+  .nav__item .chev{font-size:.6rem;transition:transform .25s}
+  .nav__item.open .chev{transform:rotate(180deg)}
+  .nav__sale a,.nav__sale{color:var(--accent)!important}
+  .genre-menu{position:absolute;top:calc(100% + .8rem);left:50%;transform:translateX(-50%) translateY(6px);background:var(--paper);color:var(--ink);border:1px solid var(--line);min-width:240px;padding:.5rem;display:grid;grid-template-columns:1fr 1fr;gap:.1rem;opacity:0;visibility:hidden;transition:opacity .25s,transform .25s;z-index:50;box-shadow:0 30px 60px -20px rgba(0,0,0,.4)}
+  .nav__item.open .genre-menu{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}
+  .genre-menu a{font-family:var(--body);font-size:.92rem;padding:.4rem .7rem;color:var(--ink-2);transition:background .15s,color .15s}
+  .genre-menu a:hover{background:var(--cream-2);color:var(--ink)}
+  @media (max-width:760px){.nav__in{gap:.55rem 1rem;font-size:.85rem}.nav__hide{display:none}.genre-menu{position:fixed;left:var(--gutter);right:var(--gutter);transform:none;min-width:0;width:auto}.nav__item.open .genre-menu{transform:none}}
+
+  /* ─── HERO ─── */
+  .hero{position:relative;min-height:clamp(430px,60vh,620px);display:grid;place-items:center;overflow:hidden;background:var(--dark);isolation:isolate;border-bottom:1px solid var(--line-dark)}
+  .hero__wall{position:absolute;inset:0;z-index:0;display:grid;grid-template-columns:repeat(8,1fr);grid-auto-rows:1fr}
+  @media (max-width:900px){.hero__wall{grid-template-columns:repeat(5,1fr)}}
+  @media (max-width:560px){.hero__wall{grid-template-columns:repeat(4,1fr)}}
+  .hero__cell{position:relative;aspect-ratio:1;overflow:hidden;background:var(--dark-2)}
+  .hero__cell img{width:100%;height:100%;object-fit:cover;filter:saturate(.96)}
+  .hero__scrim{position:absolute;inset:0;z-index:1;background:radial-gradient(120% 100% at 50% 50%,rgba(18,14,8,.62),rgba(12,10,6,.92))}
+  .hero__c{position:relative;z-index:2;text-align:center;color:var(--on-dark);padding:clamp(2.5rem,6vw,4rem) var(--gutter);max-width:760px}
+  .hero__eyebrow{color:var(--cream);opacity:.85;margin-bottom:1.1rem}
+  .hero h1{font-family:var(--display);font-size:clamp(2.4rem,5.6vw,4.2rem);font-weight:800;line-height:1.02;letter-spacing:-.01em;color:#fff;text-wrap:balance}
+  .hero h1 em{font-style:italic;font-weight:600}
+  .hero__sub{font-size:clamp(1.05rem,1.6vw,1.25rem);color:var(--on-dark-2);margin-top:1.1rem;max-width:46ch;margin-inline:auto;line-height:1.5}
+  .hero__cta{display:flex;flex-wrap:wrap;gap:.8rem;justify-content:center;margin-top:1.9rem}
+
+  /* ─── BUTTONS ─── */
+  .btn{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--display);font-size:.92rem;font-weight:600;letter-spacing:.02em;padding:.8rem 1.6rem;transition:background .25s,color .25s,border-color .25s,transform .2s;border:1px solid transparent;cursor:pointer}
+  .btn--solid{background:var(--cream);color:var(--ink)}
+  .btn--solid:hover{background:#fff;transform:translateY(-2px)}
+  .btn--outline{border-color:rgba(244,236,217,.5);color:var(--on-dark)}
+  .btn--outline:hover{border-color:var(--cream);background:rgba(244,236,217,.07);transform:translateY(-2px)}
+  .btn--dark{background:var(--ink);color:var(--cream)}
+  .btn--dark:hover{background:#000;transform:translateY(-2px)}
+  .btn--ink-outline{border-color:var(--ink);color:var(--ink)}
+  .btn--ink-outline:hover{background:var(--ink);color:var(--cream)}
+
+  /* ─── BRAND BAND ─── */
+  .band{background:var(--dark);color:var(--on-dark);text-align:center;padding:clamp(3.2rem,7vw,5.5rem) 0;border-bottom:1px solid var(--line-dark)}
+  .band h2{font-family:var(--display);font-size:clamp(2.2rem,5.5vw,3.6rem);font-weight:800;color:#fff;margin-bottom:1.3rem}
+  .band p{font-size:clamp(1.05rem,1.7vw,1.28rem);color:var(--on-dark-2);max-width:46ch;margin:0 auto .8rem;line-height:1.55}
+  .band p b{color:var(--cream);font-weight:600}
+  .band__rule{width:54px;height:2px;background:var(--accent);margin:1.6rem auto 0}
+
+  /* ─── SECTION HEAD ─── */
+  .sec{padding:clamp(3rem,6vw,5rem) 0}
+  .sec__head{text-align:center;margin-bottom:1.8rem}
+  .sec__head .eyebrow{color:var(--accent-deep)}
+  .sec__head h2{font-family:var(--display);font-size:clamp(2rem,4.5vw,3rem);font-weight:800;margin:.5rem 0 .5rem}
+  .sec__head p{color:var(--muted)}
+
+  /* ─── CATEGORY TILES ─── */
+  .cats{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(.8rem,1.6vw,1.2rem)}
+  @media (max-width:860px){.cats{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:420px){.cats{grid-template-columns:1fr}}
+  .cat{position:relative;border:1px solid var(--line);background:var(--paper);padding:1.5rem 1.3rem;min-height:128px;display:flex;flex-direction:column;justify-content:space-between;transition:transform .25s var(--ease),box-shadow .25s,border-color .25s}
+  .cat:hover{transform:translateY(-4px);box-shadow:0 18px 36px -20px rgba(20,16,8,.4);border-color:var(--ink)}
+  .cat__n{font-family:var(--display);font-weight:700;font-size:1.25rem;line-height:1.1}
+  .cat__d{font-size:.82rem;color:var(--muted);margin-top:.2rem}
+  .cat__arr{align-self:flex-end;font-family:var(--display);font-size:1.1rem;transition:transform .25s}
+  .cat:hover .cat__arr{transform:translateX(4px)}
+  .cat.dark{background:var(--dark);border-color:var(--dark);color:var(--on-dark)}
+  .cat.dark .cat__d{color:var(--on-dark-2)}
+  .cat.dark .cat__n{color:#fff}
+  .cat.sale .cat__n{color:var(--accent)}
+
+  /* ─── SHOP GRID ─── */
+  .filters{display:flex;flex-wrap:wrap;justify-content:center;gap:.3rem 1.4rem;margin:1.6rem 0 2.2rem;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:.9rem 0}
+  @media (max-width:620px){.filters{flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;gap:1.2rem}}
+  .filter{font-family:var(--display);font-size:.94rem;font-weight:500;color:var(--muted);white-space:nowrap;padding:.15rem .1rem;border-bottom:2px solid transparent;transition:color .2s,border-color .2s}
+  .filter:hover{color:var(--ink)}
+  .filter.on{color:var(--ink);border-bottom-color:var(--accent)}
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(1.2rem,2.4vw,2rem) clamp(1rem,2vw,1.6rem)}
+  @media (max-width:960px){.grid{grid-template-columns:repeat(3,1fr)}}
+  @media (max-width:680px){.grid{grid-template-columns:repeat(2,1fr);gap:1.4rem 1rem}}
+  @media (max-width:340px){.grid{grid-template-columns:1fr}}
+  .rec{display:flex;flex-direction:column}
+  .rec.hide{display:none}
+  .rec__cover{position:relative;aspect-ratio:1;overflow:hidden;background:var(--cream-2);border:1px solid var(--line);margin-bottom:.85rem;cursor:pointer}
+  .rec__cover img{width:100%;height:100%;object-fit:cover;transition:transform .5s var(--ease)}
+  .rec:hover .rec__cover img{transform:scale(1.04)}
+  .rec__fallback{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:1rem;color:#fff}
+  .rec__fallback .fa{font-family:var(--display);font-weight:700;font-size:1.1rem;line-height:1.1}
+  .rec__fallback .ft{font-style:italic;font-size:.86rem;opacity:.8;margin-top:.3rem}
+  .rec__qv{position:absolute;left:0;right:0;bottom:0;z-index:3;background:rgba(20,16,8,.82);color:var(--cream);text-align:center;font-family:var(--display);font-size:.8rem;letter-spacing:.08em;padding:.55rem;transform:translateY(100%);transition:transform .3s var(--ease)}
+  .rec__cover:hover .rec__qv{transform:translateY(0)}
+  .rec__tag{position:absolute;top:0;left:0;z-index:2;font-family:var(--body);font-size:.6rem;text-transform:uppercase;letter-spacing:.14em;font-weight:600;background:var(--ink);color:var(--cream);padding:.25rem .55rem}
+  .rec__tag.grail{background:var(--gold);color:var(--ink)}
+  .rec__artist{font-family:var(--display);font-weight:600;font-size:1rem;line-height:1.15;color:var(--ink)}
+  .rec__album{font-style:italic;color:var(--ink-2);font-size:.94rem;line-height:1.2;margin-top:.1rem}
+  .rec__meta{font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-top:.45rem}
+  .rec__price{font-family:var(--display);font-weight:600;font-size:1.08rem;margin-top:.2rem}
+  .rec__add{margin-top:.7rem;width:100%;font-family:var(--display);font-weight:500;font-size:.84rem;letter-spacing:.04em;padding:.6rem;border:1px solid var(--ink);color:var(--ink);transition:background .2s,color .2s}
+  .rec__add:hover{background:var(--ink);color:var(--cream)}
+  .rec__add.in{background:var(--cream-2);color:var(--muted);border-color:var(--line);cursor:default}
+  .shop__more{text-align:center;margin-top:2.6rem}
+
+  /* ─── GRAIL WALL ─── */
+  .grail{background:var(--dark);color:var(--on-dark);border-top:1px solid var(--line-dark);border-bottom:1px solid var(--line-dark)}
+  .grail .sec__head h2{color:#fff}
+  .grail .sec__head .eyebrow{color:var(--gold)}
+  .grail .sec__head p{color:var(--on-dark-2);max-width:50ch;margin:0 auto}
+  .grail__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(1rem,2vw,1.6rem);margin-top:.6rem}
+  @media (max-width:860px){.grail__grid{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:420px){.grail__grid{grid-template-columns:1fr;max-width:300px;margin-inline:auto}}
+  .gcard{text-align:center}
+  .gcard__c{position:relative;aspect-ratio:1;overflow:hidden;border:1px solid rgba(184,146,67,.4);margin-bottom:.8rem;cursor:pointer;box-shadow:0 20px 40px -20px rgba(0,0,0,.7)}
+  .gcard__c img{width:100%;height:100%;object-fit:cover;transition:transform .5s var(--ease)}
+  .gcard:hover .gcard__c img{transform:scale(1.05)}
+  .gcard__seal{position:absolute;top:.6rem;right:.6rem;z-index:2;font-family:var(--body);font-size:.58rem;text-transform:uppercase;letter-spacing:.12em;font-weight:600;background:var(--gold);color:var(--ink);padding:.2rem .5rem}
+  .gcard__a{font-family:var(--display);font-weight:600;color:#fff;font-size:1rem;line-height:1.15}
+  .gcard__t{font-style:italic;color:var(--on-dark-2);font-size:.9rem}
+  .gcard__p{font-family:var(--display);font-weight:600;color:var(--gold);margin-top:.4rem}
+
+  /* ─── REVIEWS CAROUSEL ─── */
+  .reviews{background:var(--cream-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:clamp(3rem,6vw,5rem) 0;text-align:center}
+  .reviews .eyebrow{color:var(--accent-deep)}
+  .reviews h2{font-family:var(--display);font-size:clamp(1.9rem,4.5vw,2.8rem);font-weight:800;margin:.5rem 0 .6rem}
+  .stars{color:var(--ink);letter-spacing:.18em;font-size:1.05rem}
+  .reviews__count{color:var(--muted);font-size:.9rem;margin-top:.4rem}
+  .rev-track-wrap{overflow:hidden;margin-top:2.4rem}
+  .rev-track{display:flex;gap:1.4rem;transition:transform .5s var(--ease)}
+  .rev{flex:0 0 calc((100% - 2.8rem)/3);background:var(--paper);border:1px solid var(--line);padding:1.6rem;text-align:left}
+  @media (max-width:820px){.rev{flex-basis:calc((100% - 1.4rem)/2)}}
+  @media (max-width:560px){.rev{flex-basis:100%}}
+  .rev .st{color:var(--accent);letter-spacing:.14em;font-size:.92rem}
+  .rev h3{font-family:var(--display);font-weight:700;font-size:1.15rem;margin:.7rem 0 .5rem}
+  .rev p{font-size:1.02rem;color:var(--ink-2);line-height:1.5;font-style:italic}
+  .rev .who{font-family:var(--display);font-weight:600;font-size:.86rem;margin-top:1rem;color:var(--ink)}
+  .rev .who span{font-style:normal;font-family:var(--body);color:var(--muted);font-weight:400}
+  .rev-nav{display:flex;justify-content:center;gap:.8rem;margin-top:1.8rem}
+  .rev-nav button{width:42px;height:42px;border:1px solid var(--line);color:var(--ink);font-size:1.1rem;transition:background .2s,color .2s}
+  .rev-nav button:hover{background:var(--ink);color:var(--cream)}
+  .rev-nav button:disabled{opacity:.3;cursor:not-allowed}
+
+  /* ─── SELL ─── */
+  .sell{padding:clamp(3rem,6vw,5rem) 0}
+  .sell__in{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,5vw,4rem);align-items:start}
+  @media (max-width:860px){.sell__in{grid-template-columns:1fr;gap:2.2rem}}
+  .sell .eyebrow{color:var(--accent-deep)}
+  .sell h2{font-family:var(--display);font-size:clamp(2rem,4.5vw,3rem);font-weight:800;margin:.5rem 0 .8rem}
+  .sell h2 em{font-style:italic;font-weight:600}
+  .sell__lede{color:var(--ink-2);font-size:1.08rem;margin-bottom:1.6rem;max-width:44ch}
+  .steps{list-style:none;counter-reset:s}
+  .steps li{display:flex;gap:1rem;padding:1rem 0;border-top:1px solid var(--line)}
+  .steps li:before{counter-increment:s;content:counter(s);font-family:var(--display);font-weight:700;font-size:1.1rem;width:34px;height:34px;flex-shrink:0;border:1px solid var(--ink);border-radius:50%;display:grid;place-items:center}
+  .steps h3{font-family:var(--display);font-weight:600;font-size:1.05rem}
+  .steps p{font-size:.94rem;color:var(--muted)}
+  .sell__fine{font-size:.9rem;color:var(--muted);font-style:italic;margin-top:1.2rem}
+  .sellform{background:var(--ink);color:var(--on-dark);padding:clamp(1.6rem,3vw,2.4rem)}
+  .sellform h3{font-family:var(--display);font-weight:700;color:#fff;font-size:1.3rem;margin-bottom:.3rem}
+  .sellform>p{color:var(--on-dark-2);font-size:.92rem;margin-bottom:1.2rem}
+  .field{margin-bottom:.85rem}
+  .field label{display:block;font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:var(--on-dark-2);margin-bottom:.35rem}
+  .field input,.field textarea,.field select{width:100%;background:var(--dark-2);border:1px solid var(--line-dark);color:var(--cream);padding:.7rem .85rem;font-size:.95rem;transition:border-color .2s}
+  .field input:focus,.field textarea:focus,.field select:focus{outline:none;border-color:var(--gold)}
+  .field textarea{resize:vertical;min-height:74px;font-family:var(--body)}
+  .frow{display:grid;grid-template-columns:1fr 1fr;gap:.85rem}
+  @media (max-width:480px){.frow{grid-template-columns:1fr}}
+  .sellform__btn{width:100%;background:var(--cream);color:var(--ink);font-family:var(--display);font-weight:600;font-size:.95rem;padding:.9rem;margin-top:.4rem;transition:background .2s}
+  .sellform__btn:hover{background:#fff}
+  .sellform__done{text-align:center;padding:1rem 0}
+  .sellform__done .ok{width:54px;height:54px;border-radius:50%;border:1px solid var(--gold);color:var(--gold);display:grid;place-items:center;margin:0 auto 1rem;font-size:1.6rem}
+  .sellform__done h3{margin-bottom:.4rem}
+  .sellform__done p{color:var(--on-dark-2);font-size:.95rem}
+
+  /* ─── CLUB / EVENTS ─── */
+  .club{background:var(--dark);color:var(--on-dark);border-top:1px solid var(--line-dark)}
+  .club__in{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(2rem,5vw,4rem);align-items:start;padding:clamp(3rem,6vw,4.5rem) 0}
+  @media (max-width:860px){.club__in{grid-template-columns:1fr;gap:2.4rem}}
+  .club .eyebrow{color:var(--gold)}
+  .club h2{font-family:var(--display);font-size:clamp(1.9rem,4vw,2.7rem);font-weight:800;color:#fff;margin:.5rem 0 .7rem}
+  .club p{color:var(--on-dark-2);max-width:42ch}
+  .club__perks{list-style:none;margin:1.4rem 0}
+  .club__perks li{display:flex;gap:.7rem;padding:.4rem 0;color:var(--on-dark-2);font-size:.96rem}
+  .club__perks li:before{content:"♪";color:var(--gold)}
+  .club__form{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1.2rem;max-width:420px}
+  .club__form input{flex:1;min-width:200px;background:var(--dark-2);border:1px solid var(--line-dark);color:var(--cream);padding:.8rem 1rem}
+  .club__form input:focus{outline:none;border-color:var(--gold)}
+  .club__note{font-size:.82rem;color:var(--gold);margin-top:.8rem;min-height:1em;opacity:0;transition:opacity .3s}
+  .club__note.show{opacity:1}
+  .whatson h3{font-family:var(--display);font-weight:700;color:#fff;font-size:1.25rem;margin-bottom:1rem}
+  .ev{display:flex;gap:1rem;padding:1rem 0;border-top:1px solid var(--line-dark)}
+  .ev__date{flex-shrink:0;width:54px;text-align:center}
+  .ev__date .d{font-family:var(--display);font-weight:700;font-size:1.5rem;color:var(--gold);line-height:1}
+  .ev__date .m{font-size:.62rem;text-transform:uppercase;letter-spacing:.12em;color:var(--on-dark-2)}
+  .ev__b h4{font-family:var(--display);font-weight:600;color:#fff;font-size:1.02rem}
+  .ev__b p{font-size:.88rem;color:var(--on-dark-2)}
+
+  /* ─── VISIT ─── */
+  .visit__in{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(2rem,5vw,4rem);align-items:start}
+  @media (max-width:820px){.visit__in{grid-template-columns:1fr;gap:2.2rem}}
+  .visit h2{font-family:var(--display);font-size:clamp(2rem,4.5vw,3rem);font-weight:800;margin-bottom:.4rem}
+  .visit h2 em{font-style:italic;font-weight:600}
+  .visit__lede{color:var(--muted);font-size:1.08rem;margin-bottom:1.6rem;max-width:42ch}
+  .hours{list-style:none;border-top:1px solid var(--line)}
+  .hours li{display:flex;justify-content:space-between;gap:1rem;padding:.7rem 0;border-bottom:1px solid var(--line)}
+  .hours li.today{font-weight:600}
+  .hours li.today .day:after{content:" · today";color:var(--accent-deep);font-family:var(--body);font-style:italic;font-weight:400;font-size:.85em}
+  .hours .day{font-family:var(--display);font-weight:500}
+  .hours .time{color:var(--ink-2)}
+  .hours li.today .time{color:var(--accent-deep)}
+  .visit__open{display:inline-flex;align-items:center;gap:.5rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.14em;margin-bottom:1rem}
+  .visit__open .dot{width:8px;height:8px;border-radius:50%;background:#3a7a3a}
+  .visit__open.closed .dot{background:var(--accent)}
+  .visit__info{background:var(--ink);color:var(--on-dark);padding:clamp(1.6rem,3vw,2.4rem)}
+  .visit__info h3{font-family:var(--display);font-weight:700;color:#fff;font-size:1.3rem;margin-bottom:.8rem}
+  .visit__info p{color:var(--on-dark-2);line-height:1.7}
+  .visit__info a{color:var(--cream);border-bottom:1px solid var(--line-dark)}
+  .visit__map{margin-top:1.4rem;aspect-ratio:16/8;position:relative;overflow:hidden;background:#211b11;border:1px solid var(--line-dark)}
+  .visit__map .g{position:absolute;inset:0;background-image:linear-gradient(rgba(244,236,217,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(244,236,217,.07) 1px,transparent 1px);background-size:30px 30px}
+  .visit__map .rd{position:absolute;background:rgba(244,236,217,.13)}
+  .visit__map .rd1{top:54%;left:-5%;right:-5%;height:12px;transform:rotate(-3deg)}
+  .visit__map .rd2{top:-5%;bottom:-5%;left:58%;width:10px;transform:rotate(2deg)}
+  .visit__map .pin{position:absolute;top:48%;left:56%;transform:translate(-50%,-100%);width:26px;height:26px}
+
+  /* ─── FOOTER ─── */
+  footer{background:var(--dark);color:var(--on-dark-2);padding:clamp(3rem,5vw,4rem) 0 6rem}
+  .foot__top{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:2rem}
+  @media (max-width:820px){.foot__top{grid-template-columns:1fr 1fr;gap:2rem 1.5rem}}
+  .foot__brand .brand__name{color:var(--cream);font-size:1.5rem}
+  .foot__brand p{margin-top:.7rem;font-size:.92rem;max-width:30ch;color:var(--on-dark-2)}
+  .foot__col h4{font-family:var(--display);font-weight:600;color:var(--cream);font-size:1rem;margin-bottom:.9rem}
+  .foot__col a,.foot__col p{display:block;font-size:.92rem;padding:.22rem 0;color:var(--on-dark-2)}
+  .foot__col a{transition:color .2s}
+  .foot__col a:hover{color:var(--cream)}
+  .foot__bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem;align-items:center;margin-top:2.6rem;padding-top:1.5rem;border-top:1px solid var(--line-dark)}
+  .foot__bottom p{font-size:.8rem;color:var(--dim)}
+  .foot__bottom a{color:var(--on-dark-2);border-bottom:1px solid var(--line-dark)}
+
+  /* ─── MODAL / OVERLAY (cart, quick-view, search) ─── */
+  .overlay{position:fixed;inset:0;background:rgba(20,16,8,.6);z-index:90;opacity:0;visibility:hidden;transition:opacity .35s,visibility .35s}
+  .overlay.open{opacity:1;visibility:visible}
+  .drawer{position:fixed;top:0;right:0;height:100%;width:min(420px,94vw);background:var(--paper);z-index:100;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .42s var(--ease);box-shadow:-30px 0 70px rgba(20,16,8,.35)}
+  .drawer.open{transform:none}
+  .drawer__head{display:flex;align-items:center;justify-content:space-between;padding:1.3rem var(--gutter);border-bottom:1px solid var(--line)}
+  .drawer__head h3{font-family:var(--display);font-weight:700;font-size:1.25rem;display:flex;align-items:baseline;gap:.5rem}
+  .drawer__head .ct{font-family:var(--body);font-size:.9rem;color:var(--muted)}
+  .drawer__head .x{font-size:1.6rem;line-height:1;color:var(--muted);transition:color .2s}
+  .drawer__head .x:hover{color:var(--ink)}
+  .drawer__items{flex:1;overflow-y:auto;padding:.5rem var(--gutter)}
+  .drawer__empty{text-align:center;color:var(--muted);padding:3rem 1rem;font-style:italic}
+  .citem{display:grid;grid-template-columns:56px 1fr auto;gap:1rem;padding:1rem 0;border-bottom:1px solid var(--line);align-items:center}
+  .citem__c{width:56px;height:56px;object-fit:cover;border:1px solid var(--line);background:var(--cream-2)}
+  .citem__a{font-family:var(--display);font-weight:600;font-size:.95rem;line-height:1.15}
+  .citem__t{font-style:italic;font-size:.85rem;color:var(--muted)}
+  .citem__m{font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--dim);margin-top:.2rem}
+  .citem__r{text-align:right}
+  .citem__p{font-family:var(--display);font-weight:600}
+  .citem__rm{display:block;font-size:.72rem;font-style:italic;color:var(--muted);margin-top:.3rem;transition:color .2s}
+  .citem__rm:hover{color:var(--accent)}
+  .drawer__foot{padding:1.2rem var(--gutter) calc(1.2rem + env(safe-area-inset-bottom));border-top:1px solid var(--line)}
+  .ship{font-size:.82rem;color:var(--ink-2);margin-bottom:.5rem}
+  .ship b{color:var(--accent-deep)}
+  .ship-bar{height:4px;background:var(--cream-2);margin-bottom:1rem;overflow:hidden}
+  .ship-bar i{display:block;height:100%;width:0;background:var(--ink);transition:width .5s var(--ease)}
+  .drawer__sub{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.3rem}
+  .drawer__sub span{font-family:var(--display);font-weight:500}
+  .drawer__sub b{font-family:var(--display);font-size:1.4rem;font-weight:700}
+  .drawer__note{font-size:.8rem;color:var(--muted);font-style:italic;margin-bottom:1rem}
+  .checkout{width:100%;background:var(--ink);color:var(--cream);font-family:var(--display);font-weight:600;font-size:.95rem;letter-spacing:.04em;padding:1rem;transition:background .25s}
+  .checkout:hover{background:#000}
+  .checkout:disabled{opacity:.4;cursor:not-allowed}
+
+  /* quick-view */
+  .qv{position:fixed;top:50%;left:50%;transform:translate(-50%,-46%) scale(.98);width:min(760px,94vw);max-height:92vh;overflow:auto;background:var(--paper);z-index:110;opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s,transform .3s var(--ease);box-shadow:0 40px 100px -30px rgba(20,16,8,.6)}
+  .qv.open{opacity:1;visibility:visible;transform:translate(-50%,-50%) scale(1)}
+  .qv__in{display:grid;grid-template-columns:1fr 1fr}
+  @media (max-width:600px){.qv__in{grid-template-columns:1fr}}
+  .qv__c{position:relative;aspect-ratio:1;background:var(--cream-2);overflow:hidden}
+  .qv__c img{width:100%;height:100%;object-fit:cover}
+  .qv__b{padding:clamp(1.5rem,3vw,2.2rem);position:relative}
+  .qv__x{position:absolute;top:1rem;right:1rem;font-size:1.6rem;line-height:1;color:var(--muted);transition:color .2s}
+  .qv__x:hover{color:var(--ink)}
+  .qv__tag{font-size:.62rem;text-transform:uppercase;letter-spacing:.14em;font-weight:600;color:var(--accent-deep)}
+  .qv__a{font-family:var(--display);font-weight:700;font-size:1.6rem;line-height:1.08;margin-top:.4rem}
+  .qv__t{font-style:italic;font-size:1.15rem;color:var(--ink-2)}
+  .qv__meta{font-size:.8rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:.9rem 0;padding:.7rem 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .qv__press{font-size:.95rem;color:var(--ink-2);line-height:1.55;margin-bottom:.6rem}
+  .qv__note{font-size:.92rem;color:var(--muted);font-style:italic;margin-bottom:1.2rem}
+  .qv__price{font-family:var(--display);font-weight:700;font-size:1.7rem;margin-bottom:1rem}
+  .qv__add{width:100%}
+
+  /* search */
+  .search{position:fixed;top:0;left:0;right:0;background:var(--paper);z-index:110;transform:translateY(-100%);transition:transform .4s var(--ease);box-shadow:0 20px 50px -20px rgba(20,16,8,.4)}
+  .search.open{transform:none}
+  .search__bar{display:flex;align-items:center;gap:1rem;max-width:var(--container);margin:0 auto;padding:1.4rem var(--gutter)}
+  .search__bar svg{width:22px;height:22px;stroke:var(--muted);fill:none;stroke-width:1.5;flex-shrink:0}
+  .search__bar input{flex:1;font-family:var(--display);font-size:clamp(1.2rem,3vw,1.8rem);color:var(--ink);border-bottom:1px solid var(--line);padding:.3rem 0}
+  .search__bar input:focus{outline:none;border-color:var(--ink)}
+  .search__x{font-size:1.5rem;color:var(--muted);transition:color .2s}
+  .search__x:hover{color:var(--ink)}
+  .search__res{max-width:var(--container);margin:0 auto;padding:0 var(--gutter) 1.6rem;max-height:60vh;overflow:auto}
+  .sres{display:grid;grid-template-columns:48px 1fr auto auto;gap:1rem;align-items:center;padding:.7rem 0;border-top:1px solid var(--line)}
+  .sres img{width:48px;height:48px;object-fit:cover;border:1px solid var(--line)}
+  .sres__a{font-family:var(--display);font-weight:600;font-size:.96rem}
+  .sres__t{font-style:italic;color:var(--muted);font-size:.86rem}
+  .sres__p{font-family:var(--display);font-weight:600}
+  .sres__add{font-family:var(--display);font-size:.78rem;border:1px solid var(--ink);padding:.4rem .7rem;transition:background .2s,color .2s}
+  .sres__add:hover{background:var(--ink);color:var(--cream)}
+  .search__empty{padding:1.5rem 0;color:var(--muted);font-style:italic;border-top:1px solid var(--line)}
+
+  /* ─── SPEC + TOAST ─── */
+  .spec-chip{position:fixed;bottom:1rem;left:1rem;background:var(--paper);color:var(--ink-2);padding:.45rem .8rem;font-family:var(--body);font-size:.66rem;text-transform:uppercase;letter-spacing:.13em;display:flex;align-items:center;gap:.5rem;z-index:85;border:1px solid var(--line);box-shadow:0 10px 24px -12px rgba(20,16,8,.3)}
+  .spec-chip .d{width:6px;height:6px;border-radius:50%;background:var(--accent);flex-shrink:0}
+  .spec-chip a{color:var(--accent-deep);border-bottom:1px solid var(--accent);margin-left:.15rem;font-weight:600}
+  @media (max-width:520px){.spec-chip{font-size:.58rem;padding:.36rem .55rem}}
+  .toast{position:fixed;bottom:1.2rem;left:50%;transform:translate(-50%,160%);background:var(--ink);color:var(--cream);font-family:var(--display);font-size:.86rem;padding:.7rem 1.3rem;z-index:130;transition:transform .4s var(--ease)}
+  .toast.show{transform:translate(-50%,0)}
+</style>
+</head>
+<body>
+
+<!-- ANNOUNCEMENT -->
+<div class="announce">
+  <span>Free U.S. media-mail shipping over <b>$25</b></span><span class="sep">·</span><span>New arrivals every Friday</span><span class="sep">·</span><span>We buy collections</span>
+</div>
+
+<!-- HEADER -->
+<header class="head">
+  <div class="head__in">
+    <div class="head__l">
+      <button class="iconbtn" id="searchBtn" aria-label="Search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span class="lbl">Search</span></button>
+    </div>
+    <a href="#top" class="brand">
+      <span class="brand__mk">
+        <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="15" fill="none" stroke="#f4ecd9" stroke-width="1"/><circle cx="16" cy="16" r="10.5" fill="none" stroke="#f4ecd9" stroke-width=".8" opacity=".6"/><circle cx="16" cy="16" r="4" fill="#c0402c"/><circle cx="16" cy="16" r="1.1" fill="#16120b"/></svg>
+        <span class="brand__name">DEAD&nbsp;WAX</span>
+      </span>
+      <span class="brand__sub">Records · North Park</span>
+    </a>
+    <div class="head__r">
+      <a class="iconbtn" href="#" aria-label="Account"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M5 21c0-4 3-6 7-6s7 2 7 6"/></svg><span class="lbl">Account</span></a>
+      <button class="iconbtn cartlink" id="cartBtn" aria-label="Cart"><svg viewBox="0 0 24 24"><path d="M6 7h13l-1.2 10.5a2 2 0 0 1-2 1.8H9.2a2 2 0 0 1-2-1.8L6 7Z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg><span class="lbl">Cart</span><span class="ct">(<span id="cartCount">0</span>)</span></button>
+    </div>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="nav__in">
+    <div class="nav__item" id="genreItem"><button id="genreBtn" aria-expanded="false">Genre <span class="chev">▾</span></button><div class="genre-menu" id="genreMenu"></div></div>
+    <div class="nav__item"><a href="#shop">New Arrivals</a></div>
+    <div class="nav__item nav__hide"><a href="#shop">New Vinyl</a></div>
+    <div class="nav__item"><a href="#shop">Used Vinyl</a></div>
+    <div class="nav__item nav__hide"><a href="#shop">7"s</a></div>
+    <div class="nav__item"><a href="#grail">Grail Wall</a></div>
+    <div class="nav__item nav__sale"><a href="#shop">Sale</a></div>
+    <div class="nav__item nav__hide"><a href="#sell">Sell Your Records</a></div>
+    <div class="nav__item"><a href="#visit">Visit</a></div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="top">
+  <div class="hero__wall" id="wall" aria-hidden="true"></div>
+  <div class="hero__scrim"></div>
+  <div class="hero__c">
+    <p class="eyebrow hero__eyebrow" data-reveal>North Park · San Diego</p>
+    <h1 data-reveal>New &amp; used vinyl,<br><em>done right.</em></h1>
+    <p class="hero__sub" data-reveal>Clean copies, honestly graded, fairly priced. If it's in the bins, we've held it, played it, and stood behind it.</p>
+    <div class="hero__cta" data-reveal>
+      <a href="#shop" class="btn btn--solid">Shop New Arrivals</a>
+      <a href="#grail" class="btn btn--outline">See the Grail Wall</a>
+    </div>
+  </div>
+</header>
+
+<!-- BRAND BAND -->
+<section class="band">
+  <div class="wrap">
+    <h2 data-reveal>A real record shop.</h2>
+    <p data-reveal>We're a brick-and-mortar shop in North Park. We buy, sell, and trade.</p>
+    <p data-reveal>Nothing gets listed until we've looked it over and priced it fair. <b>No junk, no surprises.</b></p>
+    <div class="band__rule" data-reveal></div>
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<section class="sec">
+  <div class="wrap">
+    <div class="sec__head" data-reveal>
+      <p class="eyebrow">Shop the bins</p>
+      <h2>Find your section</h2>
+    </div>
+    <div class="cats" data-reveal>
+      <a class="cat" href="#shop"><span><span class="cat__n">Used Vinyl</span><span class="cat__d">Deep bins, all genres</span></span><span class="cat__arr">→</span></a>
+      <a class="cat" href="#shop"><span><span class="cat__n">New Vinyl</span><span class="cat__d">Fresh pressings &amp; reissues</span></span><span class="cat__arr">→</span></a>
+      <a class="cat dark" href="#grail"><span><span class="cat__n">Grail Wall</span><span class="cat__d">The rare ones, behind the counter</span></span><span class="cat__arr">→</span></a>
+      <a class="cat" href="#shop"><span><span class="cat__n">7" Singles</span><span class="cat__d">45s, soul, punk, oddities</span></span><span class="cat__arr">→</span></a>
+      <a class="cat" href="#shop"><span><span class="cat__n">$10 Bin</span><span class="cat__d">A little digging, big payoff</span></span><span class="cat__arr">→</span></a>
+      <a class="cat" href="#shop"><span><span class="cat__n">Colored Vinyl</span><span class="cat__d">Splatter, clear, picture discs</span></span><span class="cat__arr">→</span></a>
+      <a class="cat" href="#shop"><span><span class="cat__n">CDs &amp; Cassettes</span><span class="cat__d">Yes, we still carry them</span></span><span class="cat__arr">→</span></a>
+      <a class="cat sale" href="#shop"><span><span class="cat__n">Sale</span><span class="cat__d">Marked down this week</span></span><span class="cat__arr">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- SHOP -->
+<section class="sec" id="shop" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec__head" data-reveal>
+      <p class="eyebrow">In the bins</p>
+      <h2>Just in</h2>
+      <p>Fresh to the racks this week. Each one's the only copy we've got.</p>
+    </div>
+    <div class="filters" id="filters" data-reveal></div>
+    <div class="grid" id="grid"></div>
+    <div class="shop__more" data-reveal><a href="#shop" class="btn btn--ink-outline">Shop all records</a></div>
+  </div>
+</section>
+
+<!-- GRAIL WALL -->
+<section class="sec grail" id="grail">
+  <div class="wrap">
+    <div class="sec__head" data-reveal>
+      <p class="eyebrow">Behind the counter</p>
+      <h2>The Grail Wall</h2>
+      <p>The rare ones, the early pressings, the records we had a hard time letting go of. Ask to see them up close.</p>
+    </div>
+    <div class="grail__grid" id="grailGrid" data-reveal></div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews">
+  <div class="wrap">
+    <p class="eyebrow" data-reveal>Word of mouth</p>
+    <h2 data-reveal>Folks seem to like us.</h2>
+    <div class="stars" data-reveal>★★★★★</div>
+    <p class="reviews__count" data-reveal>from 80+ reviews</p>
+    <div class="rev-track-wrap" data-reveal>
+      <div class="rev-track" id="revTrack">
+        <div class="rev"><div class="st">★★★★★</div><h3>Honest grades</h3><p>"They grade the way you'd hope. The VG+ I ordered was cleaner than some 'NM' I've bought elsewhere. Packed perfectly."</p><div class="who">Marcus T. <span>· verified buyer</span></div></div>
+        <div class="rev"><div class="st">★★★★★</div><h3>Found my grail</h3><p>"Been hunting an original pressing for years and they had a clean one. Fair price, no gouging. Made my month."</p><div class="who">Dana R. <span>· verified buyer</span></div></div>
+        <div class="rev"><div class="st">★★★★★</div><h3>My Saturday spot</h3><p>"Deep used bins, friendly people, and they actually know the records. I leave with something good every time."</p><div class="who">Leo M. <span>· local</span></div></div>
+        <div class="rev"><div class="st">★★★★★</div><h3>Sold them my collection</h3><p>"Got a fair cash offer for boxes I'd been sitting on. Easy, no pressure, paid on the spot."</p><div class="who">Priya N. <span>· seller</span></div></div>
+        <div class="rev"><div class="st">★★★★★</div><h3>Shipping was fast</h3><p>"Ordered Friday, on my turntable Monday. Sleeve was protected, record was flat and quiet."</p><div class="who">Sam W. <span>· verified buyer</span></div></div>
+        <div class="rev"><div class="st">★★★★★</div><h3>Real record people</h3><p>"You can tell they care. Pulled three things off the wall I didn't know I needed. This is the spot."</p><div class="who">Theo G. <span>· local</span></div></div>
+      </div>
+    </div>
+    <div class="rev-nav"><button id="revPrev" aria-label="Previous">‹</button><button id="revNext" aria-label="Next">›</button></div>
+  </div>
+</section>
+
+<!-- SELL -->
+<section class="sell" id="sell">
+  <div class="wrap sell__in">
+    <div data-reveal>
+      <p class="eyebrow">Cash or trade</p>
+      <h2>Sell us your <em>records.</em></h2>
+      <p class="sell__lede">We buy collections, big and small. Vinyl from the '60s on, plus CDs and tapes in good shape. A little of everything: rock, jazz, soul, hip-hop, punk, reggae, and more.</p>
+      <ol class="steps">
+        <li><div><h3>Tell us what you've got</h3><p>Rough count, the genres, the condition, and a few photos if you can.</p></div></li>
+        <li><div><h3>We take a look</h3><p>We get back within a day or two with an offer, or a time to come see it in person.</p></div></li>
+        <li><div><h3>Get paid</h3><p>Bring it by and walk out with cash, or more store credit if you'd rather trade up.</p></div></li>
+      </ol>
+      <p class="sell__fine">We're a little selective, so not every collection is a fit. No water-damaged records, please. No hard feelings either way.</p>
+    </div>
+    <div data-reveal>
+      <form class="sellform" id="sellForm" novalidate>
+        <div id="sellFlow">
+          <h3>Tell us about your collection</h3>
+          <p>We'll get back to you within a day or two.</p>
+          <div class="frow">
+            <div class="field"><label for="sName">Name</label><input id="sName" type="text" autocomplete="name" required></div>
+            <div class="field"><label for="sEmail">Email</label><input id="sEmail" type="email" autocomplete="email" required></div>
+          </div>
+          <div class="frow">
+            <div class="field"><label for="sCount">Roughly how many</label>
+              <select id="sCount"><option>Under 50</option><option>50 – 200</option><option>200 – 500</option><option>500+</option></select>
+            </div>
+            <div class="field"><label for="sCond">Overall condition</label>
+              <select id="sCond"><option>Plays great</option><option>Mixed, mostly good</option><option>Rough, but rare</option><option>Not sure</option></select>
+            </div>
+          </div>
+          <div class="field"><label for="sNote">What've you got?</label><textarea id="sNote" placeholder="Genres, a few standout titles, anything special…"></textarea></div>
+          <button class="sellform__btn" type="submit">Send it over</button>
+        </div>
+        <div class="sellform__done" id="sellDone" hidden>
+          <div class="ok">✓</div>
+          <h3 style="color:#fff">Got it, <span id="sellName">friend</span>.</h3>
+          <p>We'll take a look and get back to you within a day or two. This is a demo, so nothing was actually sent.</p>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- WAX CLUB + WHAT'S ON -->
+<section class="club">
+  <div class="wrap club__in">
+    <div data-reveal>
+      <p class="eyebrow">Members get first dibs</p>
+      <h2>Join the Wax Club.</h2>
+      <p>Free to join. The list hears about new arrivals before they hit the floor, and earns a little back on every record.</p>
+      <ul class="club__perks">
+        <li>First look at new arrivals, every Friday</li>
+        <li>A point on every dollar, redeemable in-store</li>
+        <li>Members-only sales and early Record Store Day access</li>
+      </ul>
+      <form class="club__form" id="clubForm" novalidate>
+        <input type="email" id="clubEmail" placeholder="you@email.com" aria-label="Email">
+        <button type="submit" class="btn btn--solid">Join the club</button>
+      </form>
+      <p class="club__note" id="clubNote">You're on the list. Welcome to the Wax Club.</p>
+    </div>
+    <div class="whatson" data-reveal>
+      <h3>What's on</h3>
+      <div class="ev"><div class="ev__date"><div class="d">06</div><div class="m">Jun</div></div><div class="ev__b"><h4>First Fridays listening night</h4><p>A guest selector takes the hi-fi. New arrivals hit the floor at 5.</p></div></div>
+      <div class="ev"><div class="ev__date"><div class="d">15</div><div class="m">Jun</div></div><div class="ev__b"><h4>Crate-digger Sunday</h4><p>Dollar bins out front, trade day at the counter, coffee on us.</p></div></div>
+      <div class="ev"><div class="ev__date"><div class="d">28</div><div class="m">Jun</div></div><div class="ev__b"><h4>Full-album listening</h4><p>One record, start to finish, on the big system. This month, a soul classic.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- VISIT -->
+<section class="sec" id="visit">
+  <div class="wrap visit__in">
+    <div data-reveal>
+      <p class="visit__open" id="openState"><span class="dot"></span><span id="openText">Checking hours…</span></p>
+      <h2>Come flip through the <em>bins.</em></h2>
+      <p class="visit__lede">We're a small shop, so what's online is a slice of what's in the racks. The real digging happens in person.</p>
+      <ul class="hours" id="hours"></ul>
+    </div>
+    <div class="visit__info" data-reveal>
+      <h3>Find us</h3>
+      <p>3024 University Ave<br>North Park, San Diego, CA 92104<br><a href="tel:+16195550139">(619) 555-0139</a><br><a href="mailto:hello@deadwax.example">hello@deadwaxrecords.com</a></p>
+      <p style="margin-top:1.2rem"><b style="color:var(--cream);font-weight:600">Selling a collection?</b><br>Bring it by any open afternoon, or fill out the form above for a quote first.</p>
+      <div class="visit__map" aria-label="Map to the shop">
+        <div class="g"></div><div class="rd rd1"></div><div class="rd rd2"></div>
+        <div class="pin"><svg viewBox="0 0 24 24"><path d="M12 2C8 2 5 5 5 9c0 5 7 13 7 13s7-8 7-13c0-4-3-7-7-7z" fill="#c0402c" stroke="#f4ecd9" stroke-width="1"/><circle cx="12" cy="9" r="2.4" fill="#f4ecd9"/></svg></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot__top">
+      <div class="foot__brand">
+        <span class="brand__name disp" style="font-weight:800;letter-spacing:.05em">DEAD WAX</span>
+        <p>New and used vinyl in North Park, San Diego. We buy, sell, and trade.</p>
+      </div>
+      <div class="foot__col"><h4>Shop</h4><a href="#shop">New arrivals</a><a href="#shop">Used vinyl</a><a href="#grail">Grail Wall</a><a href="#shop">7"s &amp; singles</a><a href="#shop">Sale</a></div>
+      <div class="foot__col"><h4>Help</h4><a href="#" id="footSearch">Search</a><a href="#">Returns</a><a href="#">Shipping</a><a href="#sell">Sell your records</a><a href="#">Loyalty</a></div>
+      <div class="foot__col"><h4>Visit</h4><p>3024 University Ave</p><p>North Park, San Diego</p><a href="tel:+16195550139">(619) 555-0139</a><a href="#">Instagram</a></div>
+    </div>
+    <div class="foot__bottom">
+      <p>© 2026 DEAD WAX · North Park, San Diego</p>
+      <p>Site spec by <a href="/studio/">Kani Studio</a></p>
+    </div>
+  </div>
+</footer>
+
+<!-- SEARCH -->
+<div class="search" id="search" aria-hidden="true">
+  <div class="search__bar">
+    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+    <input type="text" id="searchInput" placeholder="Search artists, albums, genres…" aria-label="Search the shop">
+    <button class="search__x" id="searchClose" aria-label="Close search">×</button>
+  </div>
+  <div class="search__res" id="searchRes"></div>
+</div>
+
+<!-- QUICK VIEW -->
+<div class="qv" id="qv" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="qv__in">
+    <div class="qv__c"><img id="qvImg" src="" alt=""></div>
+    <div class="qv__b">
+      <button class="qv__x" id="qvClose" aria-label="Close">×</button>
+      <div class="qv__tag" id="qvTag"></div>
+      <div class="qv__a" id="qvArtist"></div>
+      <div class="qv__t" id="qvAlbum"></div>
+      <div class="qv__meta" id="qvMeta"></div>
+      <p class="qv__press" id="qvPress"></p>
+      <p class="qv__note" id="qvNote"></p>
+      <div class="qv__price" id="qvPrice"></div>
+      <button class="btn btn--dark qv__add" id="qvAdd">Add to cart</button>
+    </div>
+  </div>
+</div>
+
+<!-- CART -->
+<div class="overlay" id="overlay"></div>
+<aside class="drawer" id="drawer" aria-label="Cart" aria-hidden="true">
+  <div class="drawer__head"><h3>Cart <span class="ct" id="drawerCount">0 items</span></h3><button class="x" id="drawerClose" aria-label="Close cart">×</button></div>
+  <div class="drawer__items" id="drawerItems"></div>
+  <div class="drawer__foot">
+    <p class="ship" id="shipMsg">Add <b>$25</b> for free U.S. shipping</p>
+    <div class="ship-bar"><i id="shipBar"></i></div>
+    <div class="drawer__sub"><span>Subtotal</span><b id="subtotal">$0</b></div>
+    <p class="drawer__note">Used records are one of a kind. Yours is held while it's in your cart.</p>
+    <button class="checkout" id="checkout" disabled>Check out</button>
+  </div>
+</aside>
+
+<div class="toast" id="toast"></div>
+
+<aside class="spec-chip" aria-label="This is a design spec"><span class="d"></span><span>Spec · <a href="/studio/">Kani Studio</a></span></aside>
+
+<script>
+(function(){
+  "use strict";
+  var A='https://is1-ssl.mzstatic.com/image/thumb/';
+  var ALBUMS=[
+    {id:'a1',artist:'The Beatles',album:'Abbey Road',fmt:'Vinyl LP',cond:'VG+',price:32,genre:'Rock',art:A+'Music211/v4/48/53/43/485343e3-dd6a-0034-faec-f4b6403f8108/13UMGIM63890.rgb.jpg/500x500bb.jpg',press:'Apple/UMe reissue, gatefold, 180g. Standard weight, clean labels.'},
+    {id:'a3',artist:'Pink Floyd',album:'The Wall',fmt:'2×Vinyl LP',cond:'NM',price:38,genre:'Rock',art:A+'Music221/v4/3e/17/ec/3e17ec6d-f980-c64f-19e0-a6fd8bbf0c10/886445635850.jpg/500x500bb.jpg',press:'Double LP, gatefold. Inners intact, both discs flat.'},
+    {id:'a4',artist:'Fleetwood Mac',album:'Rumours',fmt:'Vinyl LP',cond:'VG+',price:26,genre:'Rock',art:A+'Music124/v4/4d/13/ba/4d13bac3-d3d5-7581-2c74-034219eadf2b/081227970949.jpg/500x500bb.jpg',press:'Warner reissue. Jacket sharp, vinyl quiet.'},
+    {id:'a5',artist:'Miles Davis',album:'Kind of Blue',fmt:'Vinyl LP',cond:'NM',price:34,genre:'Jazz',art:A+'Music/7f/9f/d6/mzi.vtnaewef.jpg/500x500bb.jpg',press:'Columbia/Legacy reissue, mono. Heavy jacket, dead silent.'},
+    {id:'a7',artist:'Stevie Wonder',album:'Songs in the Key of Life',fmt:'2×Vinyl LP',cond:'VG+',price:30,genre:'Soul',art:A+'Music118/v4/eb/1f/12/eb1f12ec-474c-63aa-43af-09282f423b9d/00602537004737.rgb.jpg/500x500bb.jpg',press:'Double LP with the bonus 7". Booklet included.'},
+    {id:'a8',artist:'Marvin Gaye',album:"What's Going On",fmt:'Vinyl LP',cond:'NM',price:28,genre:'Soul',art:A+'Music112/v4/76/36/2d/76362d74-cb7a-8ef9-104e-cde1d858e9a9/20UMGIM95279.rgb.jpg/500x500bb.jpg',press:'Tamla reissue. Gatefold crisp, plays beautifully.'},
+    {id:'a9',artist:'Kendrick Lamar',album:'good kid, m.A.A.d city',fmt:'2×Vinyl LP',cond:'NM',price:33,genre:'Hip-Hop',art:A+'Music112/v4/9a/50/a1/9a50a1d8-01c2-2504-8d99-3f2fc7e5c2ff/12UMGIM52988.rgb.jpg/500x500bb.jpg',press:'Double LP. Sleeves clean, surfaces unplayed-looking.'},
+    {id:'a10',artist:'Nas',album:'Illmatic',fmt:'Vinyl LP',cond:'NM',price:36,genre:'Hip-Hop',art:A+'Music125/v4/b9/eb/cc/b9ebccbc-5ba4-2cdb-5332-b065739abd9a/886444567619.jpg/500x500bb.jpg',press:'Columbia reissue. A clean copy of a corner-store classic.'},
+    {id:'a11',artist:'The Clash',album:'London Calling',fmt:'2×Vinyl LP',cond:'VG+',price:30,genre:'Punk',art:A+'Music115/v4/93/cb/20/93cb201b-154b-7b74-a10b-48fbef9b3281/888880348937.jpg/500x500bb.jpg',press:'Double LP, that iconic sleeve. Light ring wear, plays strong.'},
+    {id:'a12',artist:'David Bowie',album:'The Rise and Fall of Ziggy Stardust',fmt:'Vinyl LP',cond:'VG+',price:29,genre:'Rock',art:A+'Music114/v4/5f/fa/56/5ffa56c2-ea1f-7a17-6bad-192ff9b6476d/825646124206.jpg/500x500bb.jpg',press:'Parlophone remaster. Jacket clean, surfaces quiet.'},
+    {id:'a13',artist:'Bob Marley & The Wailers',album:'Legend',fmt:'Vinyl LP',cond:'NM',price:24,genre:'Reggae',art:A+'Music221/v4/3c/c2/0d/3cc20dcc-8f4e-f060-36dd-7de52a7ec8fe/12UMGIM14712.rgb.jpg/500x500bb.jpg',press:'Tuff Gong/Island reissue. The one everybody needs.'},
+    {id:'a14',artist:'Amy Winehouse',album:'Back to Black',fmt:'Vinyl LP',cond:'NM',price:27,genre:'Soul',art:A+'Music112/v4/cf/3f/09/cf3f0994-980d-d8ed-088d-ae89af256b73/15UMGIM24224.rgb.jpg/500x500bb.jpg',press:'Republic reissue. Sleeve sharp, record clean.'},
+    {id:'a15',artist:'Daft Punk',album:'Discovery',fmt:'2×Vinyl LP',cond:'NM',price:35,genre:'Electronic',art:A+'Music221/v4/fd/4a/77/fd4a77db-0ebc-d043-41a2-f32fa1bb0fb4/dj.qrikkdwj.jpg/500x500bb.jpg',press:'Double LP, gatefold. Both discs near mint.'},
+    {id:'a16',artist:'Radiohead',album:'OK Computer',fmt:'2×Vinyl LP',cond:'VG+',price:31,genre:'Rock',art:A+'Music116/v4/07/60/ba/0760ba0f-148c-b18f-d0ff-169ee96f3af5/634904078164.png/500x500bb.jpg',press:'XL reissue, double LP. Light shelf wear, plays clean.'},
+    {id:'a17',artist:'Steely Dan',album:'Aja',fmt:'Vinyl LP',cond:'VG+',price:26,genre:'Rock',art:A+'Music126/v4/c2/3c/54/c23c5414-20d1-7aea-f0f5-187974c58d65/23UMGIM79990.rgb.jpg/500x500bb.jpg',press:'MCA reissue. An audiophile favorite, surfaces quiet.'},
+    {id:'a18',artist:'Prince & The Revolution',album:'Purple Rain',fmt:'Vinyl LP',cond:'NM',price:30,genre:'Soul',art:A+'Music211/v4/00/17/f2/0017f24f-e580-b77a-71a8-1bc7b75881bf/603497822065.jpg/500x500bb.jpg',press:'Warner reissue with the poster sleeve. Clean throughout.'},
+    {id:'a19',artist:'Talking Heads',album:'Remain in Light',fmt:'Vinyl LP',cond:'VG+',price:32,genre:'Rock',art:A+'Music/87/5f/5b/mzi.zzquknhm.jpg/500x500bb.jpg',press:'Sire reissue. Jacket clean, vinyl plays strong.'},
+    {id:'a20',artist:'Aretha Franklin',album:'I Never Loved a Man',fmt:'Vinyl LP',cond:'VG+',price:28,genre:'Soul',art:A+'Music124/v4/d1/31/ee/d131eec4-614c-d661-b580-3dc32b8547e8/603497896622.jpg/500x500bb.jpg',press:'Atlantic reissue. Light wear, the soul still hits.'},
+    /* GRAIL WALL */
+    {id:'g1',artist:'The Velvet Underground & Nico',album:'The Velvet Underground & Nico',fmt:'Vinyl LP',cond:'VG+',price:120,genre:'Rock',grail:true,art:A+'Music112/v4/92/93/39/9293397f-a707-237e-ec7e-0ca613a67e3c/06UMGIM04143.rgb.jpg/500x500bb.jpg',press:'Banana intact and unpeeled. A genuinely clean copy of a record that rarely turns up this nice.'},
+    {id:'g2',artist:'John Coltrane',album:'Blue Train',fmt:'Vinyl LP',cond:'VG+',price:95,genre:'Jazz',grail:true,art:A+'Music122/v4/6e/1a/13/6e1a134d-8f6f-d90f-b855-ea69436a2e8b/17UM1IM45370.rgb.jpg/500x500bb.jpg',press:'Blue Note, deep groove. Heavy jacket, surfaces play far above grade.'},
+    {id:'g3',artist:'Wu-Tang Clan',album:'Enter the Wu-Tang (36 Chambers)',fmt:'Vinyl LP',cond:'VG+',price:80,genre:'Hip-Hop',grail:true,art:A+'Music221/v4/8c/20/1f/8c201f03-7617-2d8b-3d8d-e0ba2d55041b/196872123784.jpg/500x500bb.jpg',press:'Early press. Hard to find with a jacket this clean. A real one.'},
+    {id:'g4',artist:'Joy Division',album:'Unknown Pleasures',fmt:'Vinyl LP',cond:'VG+',price:75,genre:'Rock',grail:true,art:A+'Music125/v4/13/90/c0/1390c072-4249-3739-7b3d-fd73ee4a5698/825646562831.jpg/500x500bb.jpg',press:'Factory, textured sleeve. The pulsar cover holding up beautifully.'}
+  ];
+  var FBC=['#3a2f23','#243b3a','#3a2330','#2c3320','#332a3f','#1f2d3a','#3a3320','#2a2320'];
+  function byId(id){ for(var i=0;i<ALBUMS.length;i++) if(ALBUMS[i].id===id) return ALBUMS[i]; }
+  function fallback(al,i,small){ return '<div class="rec__fallback" style="background:'+FBC[i%FBC.length]+(small?';font-size:.7rem':'')+'"><div class="fa"'+(small?' style="font-size:.78rem"':'')+'>'+al.artist+'</div>'+(small?'':'<div class="ft">'+al.album+'</div>')+'</div>'; }
+
+  /* ── HERO WALL ── */
+  var wall=document.getElementById('wall');
+  ALBUMS.slice(0,16).forEach(function(al,i){
+    var c=document.createElement('div'); c.className='hero__cell';
+    c.innerHTML='<div class="rec__fallback" style="background:'+FBC[i%FBC.length]+';font-size:.7rem"><div class="fa" style="font-size:.78rem">'+al.artist.split(' ')[0]+'</div></div><img src="'+al.art+'" alt="" loading="eager" onerror="this.remove()">';
+    wall.appendChild(c);
+  });
+
+  /* ── SHOP GRID ── */
+  var grid=document.getElementById('grid');
+  ALBUMS.filter(function(a){return !a.grail;}).forEach(function(al,i){
+    var el=document.createElement('article'); el.className='rec'; el.dataset.genre=al.genre; el.dataset.id=al.id;
+    el.innerHTML=
+      '<div class="rec__cover" data-qv="'+al.id+'">'+
+        (al.cond==='NM'?'<span class="rec__tag">Near Mint</span>':'')+
+        fallback(al,i)+
+        '<img src="'+al.art+'" alt="'+al.artist+', '+al.album+'" loading="lazy" onerror="this.remove()">'+
+        '<span class="rec__qv">Quick view</span>'+
+      '</div>'+
+      '<div class="rec__artist">'+al.artist+'</div>'+
+      '<div class="rec__album">'+al.album+'</div>'+
+      '<div class="rec__meta">'+al.fmt+' · '+al.cond+'</div>'+
+      '<div class="rec__price">$'+al.price+'.00</div>'+
+      '<button class="rec__add" data-id="'+al.id+'">Add to cart</button>';
+    grid.appendChild(el);
+  });
+
+  /* ── GRAIL WALL ── */
+  var grailGrid=document.getElementById('grailGrid');
+  ALBUMS.filter(function(a){return a.grail;}).forEach(function(al,i){
+    var el=document.createElement('article'); el.className='gcard';
+    el.innerHTML='<div class="gcard__c" data-qv="'+al.id+'"><span class="gcard__seal">Grail</span>'+fallback(al,i)+'<img src="'+al.art+'" alt="'+al.artist+', '+al.album+'" loading="lazy" onerror="this.remove()"></div>'+
+      '<div class="gcard__a">'+al.artist+'</div><div class="gcard__t">'+al.album+'</div><div class="gcard__p">$'+al.price+'.00</div>';
+    grailGrid.appendChild(el);
+  });
+
+  /* ── FILTER + GENRE NAV ── */
+  var genres=['All']; ALBUMS.forEach(function(a){ if(!a.grail && genres.indexOf(a.genre)<0) genres.push(a.genre); });
+  var ALL_GENRES=['Blues','Classical','Country','Electronic','Folk','Funk/Soul','Hip-Hop','Jazz','Metal','Pop','Punk','Reggae','Rock','Soul','Soundtracks'];
+  document.getElementById('genreMenu').innerHTML=ALL_GENRES.map(function(g){ return '<a href="#shop" data-g="'+g+'">'+g+'</a>'; }).join('');
+  var filters=document.getElementById('filters');
+  filters.innerHTML=genres.map(function(g,i){ return '<button class="filter'+(i===0?' on':'')+'" data-g="'+(g==='All'?'all':g)+'">'+g+'</button>'; }).join('');
+  function applyFilter(g){
+    filters.querySelectorAll('.filter').forEach(function(b){ b.classList.toggle('on', b.dataset.g===g); });
+    document.querySelectorAll('#grid .rec').forEach(function(r){ r.classList.toggle('hide', g!=='all' && r.dataset.genre!==g); });
+  }
+  filters.addEventListener('click',function(e){ var b=e.target.closest('.filter'); if(b) applyFilter(b.dataset.g); });
+  document.getElementById('genreMenu').addEventListener('click',function(e){ var a=e.target.closest('a'); if(!a)return; var g=a.dataset.g; var has=ALBUMS.some(function(x){return !x.grail&&x.genre===g;}); applyFilter(has?g:'all'); closeGenre(); });
+  var genreItem=document.getElementById('genreItem'),genreBtn=document.getElementById('genreBtn');
+  function openGenre(){ genreItem.classList.add('open'); genreBtn.setAttribute('aria-expanded','true'); }
+  function closeGenre(){ genreItem.classList.remove('open'); genreBtn.setAttribute('aria-expanded','false'); }
+  genreBtn.addEventListener('click',function(e){ e.stopPropagation(); genreItem.classList.contains('open')?closeGenre():openGenre(); });
+  document.addEventListener('click',function(e){ if(!e.target.closest('#genreItem')) closeGenre(); });
+
+  /* ── CART ── */
+  var FREE=25, cart=[];
+  var els={count:document.getElementById('cartCount'),dcount:document.getElementById('drawerCount'),items:document.getElementById('drawerItems'),sub:document.getElementById('subtotal'),checkout:document.getElementById('checkout'),drawer:document.getElementById('drawer'),overlay:document.getElementById('overlay'),toast:document.getElementById('toast'),ship:document.getElementById('shipMsg'),shipBar:document.getElementById('shipBar')};
+  function inCart(id){ return cart.indexOf(id)>=0; }
+  function add(id){ if(inCart(id))return; cart.push(id); render(); toast(byId(id).artist+' added'); openDrawer(); }
+  function remove(id){ cart=cart.filter(function(x){return x!==id;}); render(); }
+  function render(){
+    els.count.textContent=cart.length; els.dcount.textContent=cart.length+(cart.length===1?' item':' items');
+    var sum=0; cart.forEach(function(id){ sum+=byId(id).price; });
+    els.sub.textContent='$'+sum; els.checkout.disabled=cart.length===0;
+    var left=FREE-sum;
+    els.ship.innerHTML = sum===0 ? 'Add <b>$'+FREE+'</b> for free U.S. shipping' : (left>0 ? 'Add <b>$'+left+'</b> for free U.S. shipping' : '<b>You\'ve unlocked free shipping</b>');
+    els.shipBar.style.width=Math.min(100,sum/FREE*100)+'%';
+    document.querySelectorAll('.rec__add,#qvAdd').forEach(function(b){ if(!b.dataset.id)return; var on=inCart(b.dataset.id); b.classList.toggle('in',on); if(b.classList.contains('rec__add')) b.textContent=on?'In your cart':'Add to cart'; });
+    if(!cart.length){ els.items.innerHTML='<div class="drawer__empty">Your cart is empty.<br>Go dig something up.</div>'; return; }
+    els.items.innerHTML=cart.map(function(id){ var al=byId(id);
+      return '<div class="citem"><img class="citem__c" src="'+al.art+'" alt="" onerror="this.style.visibility=\'hidden\'"><div><div class="citem__a">'+al.artist+'</div><div class="citem__t">'+al.album+'</div><div class="citem__m">'+al.fmt+' · '+al.cond+'</div></div><div class="citem__r"><div class="citem__p">$'+al.price+'</div><button class="citem__rm" data-rm="'+id+'">Remove</button></div></div>';
+    }).join('');
+    els.items.querySelectorAll('.citem__rm').forEach(function(b){ b.addEventListener('click',function(){ remove(b.dataset.rm); }); });
+  }
+  var toastT; function toast(m){ els.toast.textContent=m; els.toast.classList.add('show'); clearTimeout(toastT); toastT=setTimeout(function(){els.toast.classList.remove('show');},1600); }
+  function openDrawer(){ els.drawer.classList.add('open'); els.overlay.classList.add('open'); els.drawer.setAttribute('aria-hidden','false'); }
+  function closeDrawer(){ els.drawer.classList.remove('open'); if(!qvOpen&&!searchOpen) els.overlay.classList.remove('open'); els.drawer.setAttribute('aria-hidden','true'); }
+  grid.addEventListener('click',function(e){ var b=e.target.closest('.rec__add'); if(b&&!inCart(b.dataset.id)) add(b.dataset.id); });
+  document.getElementById('cartBtn').addEventListener('click',openDrawer);
+  document.getElementById('drawerClose').addEventListener('click',closeDrawer);
+  els.checkout.addEventListener('click',function(){ toast('Demo checkout, no payment taken'); });
+  render();
+
+  /* ── QUICK VIEW ── */
+  var qv=document.getElementById('qv'), qvOpen=false, qvId=null;
+  function openQV(id){ var al=byId(id); if(!al)return; qvId=id;
+    document.getElementById('qvImg').src=al.art; document.getElementById('qvImg').alt=al.artist+', '+al.album;
+    document.getElementById('qvTag').textContent=al.grail?'Grail Wall':(al.cond==='NM'?'Near Mint':'Used');
+    document.getElementById('qvArtist').textContent=al.artist;
+    document.getElementById('qvAlbum').textContent=al.album;
+    document.getElementById('qvMeta').textContent=al.fmt+'  ·  Condition '+al.cond+'  ·  '+al.genre;
+    document.getElementById('qvPress').textContent=al.press||'';
+    document.getElementById('qvNote').textContent='Graded by hand. Shipped in a proper mailer with the record outside the sleeve.';
+    document.getElementById('qvPrice').textContent='$'+al.price+'.00';
+    var addBtn=document.getElementById('qvAdd'); addBtn.dataset.id=id; var on=inCart(id); addBtn.textContent=on?'In your cart':'Add to cart';
+    qv.classList.add('open'); els.overlay.classList.add('open'); qv.setAttribute('aria-hidden','false'); qvOpen=true;
+  }
+  function closeQV(){ qv.classList.remove('open'); qv.setAttribute('aria-hidden','true'); qvOpen=false; if(!els.drawer.classList.contains('open')&&!searchOpen) els.overlay.classList.remove('open'); }
+  document.body.addEventListener('click',function(e){ var c=e.target.closest('[data-qv]'); if(c) openQV(c.dataset.qv); });
+  document.getElementById('qvClose').addEventListener('click',closeQV);
+  document.getElementById('qvAdd').addEventListener('click',function(){ if(!inCart(this.dataset.id)){ add(this.dataset.id); this.textContent='In your cart'; } });
+
+  /* ── SEARCH ── */
+  var search=document.getElementById('search'), searchInput=document.getElementById('searchInput'), searchRes=document.getElementById('searchRes'), searchOpen=false;
+  function openSearch(){ search.classList.add('open'); els.overlay.classList.add('open'); search.setAttribute('aria-hidden','false'); searchOpen=true; setTimeout(function(){searchInput.focus();},250); runSearch(''); }
+  function closeSearch(){ search.classList.remove('open'); search.setAttribute('aria-hidden','true'); searchOpen=false; if(!qvOpen&&!els.drawer.classList.contains('open')) els.overlay.classList.remove('open'); }
+  function runSearch(q){
+    q=q.trim().toLowerCase();
+    var list = q==='' ? ALBUMS.slice(0,5) : ALBUMS.filter(function(a){ return (a.artist+' '+a.album+' '+a.genre).toLowerCase().indexOf(q)>=0; });
+    if(!list.length){ searchRes.innerHTML='<p class="search__empty">No matches. Try a genre, or come dig in person.</p>'; return; }
+    searchRes.innerHTML=(q===''?'<p class="search__empty" style="border:none;padding-bottom:.5rem">Popular right now</p>':'')+list.map(function(al){
+      return '<div class="sres"><img src="'+al.art+'" alt="" onerror="this.style.visibility=\'hidden\'"><div><div class="sres__a">'+al.artist+'</div><div class="sres__t">'+al.album+'</div></div><div class="sres__p">$'+al.price+'</div><button class="sres__add" data-id="'+al.id+'">Add</button></div>';
+    }).join('');
+    searchRes.querySelectorAll('.sres__add').forEach(function(b){ b.addEventListener('click',function(){ if(!inCart(b.dataset.id)){ add(b.dataset.id); b.textContent='Added'; } }); });
+  }
+  document.getElementById('searchBtn').addEventListener('click',openSearch);
+  document.getElementById('footSearch').addEventListener('click',function(e){ e.preventDefault(); openSearch(); });
+  document.getElementById('searchClose').addEventListener('click',closeSearch);
+  searchInput.addEventListener('input',function(){ runSearch(this.value); });
+
+  /* overlay + esc close whatever's open */
+  els.overlay.addEventListener('click',function(){ if(qvOpen)closeQV(); if(searchOpen)closeSearch(); if(els.drawer.classList.contains('open'))closeDrawer(); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape'){ closeQV(); closeSearch(); closeDrawer(); closeGenre(); } });
+
+  /* ── REVIEWS CAROUSEL ── */
+  (function(){
+    var track=document.getElementById('revTrack'), prev=document.getElementById('revPrev'), next=document.getElementById('revNext');
+    var total=track.children.length, pos=0;
+    function per(){ return window.innerWidth<=560?1:(window.innerWidth<=820?2:3); }
+    function update(){ var p=per(), max=Math.max(0,total-p); if(pos>max)pos=max; var step=100/p; track.style.transform='translateX(-'+(pos*step)+'%)'; prev.disabled=pos<=0; next.disabled=pos>=max; }
+    prev.addEventListener('click',function(){ pos=Math.max(0,pos-1); update(); });
+    next.addEventListener('click',function(){ pos++; update(); });
+    window.addEventListener('resize',update); update();
+  })();
+
+  /* ── SELL FORM ── */
+  document.getElementById('sellForm').addEventListener('submit',function(e){
+    e.preventDefault();
+    var n=document.getElementById('sName').value.trim(), em=document.getElementById('sEmail').value.trim();
+    if(!n){ document.getElementById('sName').focus(); return; }
+    if(!em||em.indexOf('@')<0){ document.getElementById('sEmail').focus(); return; }
+    document.getElementById('sellName').textContent=n.split(' ')[0];
+    document.getElementById('sellFlow').hidden=true; document.getElementById('sellDone').hidden=false;
+  });
+
+  /* ── CLUB / NEWSLETTER ── */
+  document.getElementById('clubForm').addEventListener('submit',function(e){ e.preventDefault(); var em=document.getElementById('clubEmail'); if(!em.value||em.value.indexOf('@')<0){ em.focus(); return; } document.getElementById('clubNote').classList.add('show'); em.value=''; em.blur(); });
+
+  /* ── OPEN-NOW + HOURS ── */
+  var HOURS={0:[12,17],1:null,2:[12,19],3:[12,19],4:[11,20],5:[11,20],6:[11,20]};
+  function fh(h){ var ap=h>=12?'pm':'am',hh=h%12; if(hh===0)hh=12; return hh+ap; }
+  (function(){
+    var now=new Date(),day=now.getDay(),mins=now.getHours()*60+now.getMinutes(),td=HOURS[day];
+    var st=document.getElementById('openState'),tx=document.getElementById('openText'),open=false,msg='';
+    if(td){ var o=td[0]*60,c=td[1]*60; if(mins>=o&&mins<c){open=true;msg='Open now · until '+fh(td[1]);} else if(mins<o){msg='Opens '+fh(td[0])+' today';} else {msg='Closed for the day';} }
+    else { msg='Closed Mondays'; }
+    tx.textContent=msg; st.classList.toggle('closed',!open);
+    var rows=[[[1],'Monday','Closed'],[[2,3],'Tue – Wed','12 – 7pm'],[[4,5],'Thu – Fri','11am – 8pm'],[[6],'Saturday','11am – 8pm'],[[0],'Sunday','12 – 5pm']];
+    var ul=document.getElementById('hours'),html='';
+    rows.forEach(function(r){ var t=r[0].indexOf(day)>=0; html+='<li class="'+(t?'today':'')+'"><span class="day">'+r[1]+'</span><span class="time">'+r[2]+'</span></li>'; });
+    ul.innerHTML=html;
+  })();
+
+  /* ── REVEAL ── */
+  var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} }); },{threshold:.1});
+  document.querySelectorAll('[data-reveal]').forEach(function(el){ io.observe(el); });
+  document.querySelectorAll('.grid,.cats,.grail__grid').forEach(function(g){ Array.prototype.forEach.call(g.children,function(ch,i){ ch.style.transitionDelay=(i%4*0.05)+'s'; }); });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="description" content="One-on-one math tutoring with Maya Reyes, M.S. candidate at UC San Diego. Calculus, linear algebra, statistics and SAT prep, in person at UCSD or online. Free 20-minute intro.">
+<meta name="author" content="Sean Kani">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2317223b'/%3E%3Cpath d='M5 24 Q14 2 27 22' fill='none' stroke='%23f0613e' stroke-width='2.6' stroke-linecap='round'/%3E%3Ccircle cx='16' cy='10' r='2.2' fill='%23fbfaf6'/%3E%3C/svg%3E">
+<meta property="og:title" content="math with maya · Tutoring at UC San Diego">
+<meta property="og:description" content="Calculus, linear algebra and statistics. Finally making sense.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<title>math with maya · Math Tutoring at UC San Diego</title>
+<style>
+  *,*:before,*:after{box-sizing:border-box}
+  *{margin:0;padding:0}
+  html,body{height:100%}
+  html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
+  body{line-height:1.6;overflow-x:hidden;width:100%;max-width:100vw}
+  img,picture,video,canvas,svg{display:block;max-width:100%}
+  input,button,textarea,select{font:inherit;color:inherit;background:none;border:none}
+  p,h1,h2,h3,h4,h5,h6{overflow-wrap:break-word;font-weight:400}
+
+  :root{
+    --paper:#fbfaf6;--paper-2:#f3f1e9;--card:#ffffff;
+    --ink:#17223b;--ink-2:#3b4358;--muted:#6c7286;--dim:#9aa0b0;
+    --line:#e8e4d8;--grid:#e4e7f2;
+    --coral:#ef613d;--coral-deep:#cf4a27;--indigo:#4b54c9;--indigo-soft:#eef0fb;--teal:#1a9aa6;--gold:#c9a23f;
+    --container:1180px;--narrow:760px;--gutter:clamp(1.25rem,4vw,2.5rem);
+    --serif:"Fraunces",Georgia,"Times New Roman",serif;
+    --sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
+    --mono:ui-monospace,"SF Mono","Cascadia Mono",Menlo,monospace;
+    --ease:cubic-bezier(.16,1,.3,1);
+    --shadow:0 1px 2px rgba(23,34,59,.04),0 12px 30px -12px rgba(23,34,59,.12);
+    --shadow-lg:0 2px 4px rgba(23,34,59,.05),0 30px 60px -24px rgba(23,34,59,.28);
+  }
+  html{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:17px}
+  ::selection{background:rgba(239,97,61,.18);color:var(--ink)}
+  a{color:inherit;text-decoration:none}
+  button{cursor:pointer}
+  .wrap{max-width:var(--container);margin:0 auto;padding:0 var(--gutter)}
+  .narrow{max-width:var(--narrow);margin:0 auto;padding:0 var(--gutter)}
+  .serif{font-family:var(--serif)}
+  .tag{font-family:var(--mono);font-size:.72rem;text-transform:uppercase;letter-spacing:.13em;color:var(--coral-deep);font-weight:500}
+
+  [data-reveal]{opacity:0;transform:translateY(22px);transition:opacity .85s var(--ease),transform .85s var(--ease)}
+  [data-reveal].in{opacity:1;transform:none}
+  @media (prefers-reduced-motion: reduce){
+    *,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+    [data-reveal]{opacity:1;transform:none}
+    html{scroll-behavior:auto}
+    .ribbon__track{animation:none!important}
+    .draw{stroke-dashoffset:0!important}
+    .glyph{animation:none!important}
+  }
+
+  /* ─── NAV ─── */
+  .nav{position:sticky;top:0;z-index:60;background:rgba(251,250,246,.8);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid transparent;transition:border-color .3s,background .3s}
+  .nav.scrolled{border-bottom-color:var(--line);background:rgba(251,250,246,.95)}
+  .nav__in{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.9rem var(--gutter)}
+  .brand{display:flex;align-items:center;gap:.6rem;font-family:var(--serif);font-size:1.45rem;font-weight:600;letter-spacing:-.01em;color:var(--ink)}
+  .brand svg{width:30px;height:30px;flex-shrink:0}
+  .brand .pen{stroke-dasharray:46;stroke-dashoffset:46;animation:draw 1.6s var(--ease) .3s forwards}
+  .nav__links{display:flex;gap:1.8rem;align-items:center}
+  .nav__links a{font-size:.92rem;color:var(--ink-2);font-weight:500;transition:color .2s}
+  .nav__links a:hover{color:var(--coral-deep)}
+  .nav__book{font-size:.86rem;font-weight:600;color:#fff;background:var(--ink);padding:.6rem 1.1rem;border-radius:999px;transition:background .25s,transform .2s}
+  .nav__book:hover{background:var(--coral-deep);transform:translateY(-1px)}
+  @media (max-width:820px){.nav__links a:not(.nav__book){display:none}}
+
+  /* ─── HERO ─── */
+  .hero{position:relative;padding:clamp(3rem,7vw,5.5rem) 0 clamp(2.5rem,5vw,4rem);overflow:hidden}
+  .glyphs{position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+  .glyph{position:absolute;font-family:var(--serif);color:var(--indigo);opacity:.07;font-weight:500;will-change:transform}
+  .glyph.g1{top:12%;left:6%;font-size:5rem;animation:float1 14s ease-in-out infinite}
+  .glyph.g2{top:62%;left:2%;font-size:3.5rem;animation:float2 17s ease-in-out infinite}
+  .glyph.g3{top:8%;right:8%;font-size:4rem;color:var(--coral);animation:float2 16s ease-in-out infinite}
+  .glyph.g4{bottom:10%;right:5%;font-size:6rem;animation:float1 20s ease-in-out infinite}
+  .glyph.g5{top:42%;left:48%;font-size:3rem;animation:float2 19s ease-in-out infinite}
+  @keyframes float1{50%{transform:translate(14px,-22px) rotate(6deg)}}
+  @keyframes float2{50%{transform:translate(-16px,18px) rotate(-5deg)}}
+  .hero__in{position:relative;z-index:1;display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(2rem,5vw,4rem);align-items:center}
+  @media (max-width:900px){.hero__in{grid-template-columns:1fr;gap:2.5rem}}
+  .hero__eyebrow{display:inline-flex;align-items:center;gap:.55rem;font-family:var(--mono);font-size:.74rem;text-transform:uppercase;letter-spacing:.14em;color:var(--ink-2);background:var(--card);border:1px solid var(--line);padding:.4rem .8rem;border-radius:999px;margin-bottom:1.5rem;box-shadow:var(--shadow)}
+  .hero__eyebrow b{color:var(--coral-deep);font-weight:600}
+  .hero h1{font-family:var(--serif);font-size:clamp(2.7rem,6.4vw,4.7rem);line-height:1.02;letter-spacing:-.02em;font-weight:500;text-wrap:balance}
+  .hero h1 em{font-style:italic;color:var(--coral);position:relative}
+  .hero h1 em:after{content:"";position:absolute;left:0;right:0;bottom:.06em;height:.09em;background:var(--coral);opacity:.32;border-radius:2px;transform:scaleX(0);transform-origin:left;animation:underline 1s var(--ease) 1s forwards}
+  @keyframes underline{to{transform:scaleX(1)}}
+  .hero__sub{font-size:clamp(1.05rem,1.6vw,1.22rem);color:var(--ink-2);max-width:46ch;margin-top:1.4rem;line-height:1.6}
+  .hero__cta{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:2rem}
+  .btn{display:inline-flex;align-items:center;gap:.55rem;font-weight:600;font-size:.95rem;padding:.85rem 1.45rem;border-radius:12px;transition:transform .2s var(--ease),background .25s,color .25s,border-color .25s,box-shadow .25s}
+  .btn--primary{background:var(--coral);color:#fff;box-shadow:0 8px 20px -8px rgba(239,97,61,.7)}
+  .btn--primary:hover{background:var(--coral-deep);transform:translateY(-2px)}
+  .btn--ghost{border:1px solid var(--line);color:var(--ink);background:var(--card)}
+  .btn--ghost:hover{border-color:var(--ink);transform:translateY(-2px)}
+  .btn .arr{transition:transform .25s}
+  .btn:hover .arr{transform:translateX(3px)}
+  .hero__trust{display:flex;align-items:center;gap:1.4rem;margin-top:2rem;flex-wrap:wrap}
+  .hero__trust .stars{color:var(--gold);letter-spacing:.1em;font-size:1rem}
+  .hero__trust span{font-size:.88rem;color:var(--muted)}
+  .hero__trust b{color:var(--ink);font-weight:600;font-variant-numeric:tabular-nums}
+
+  .plot{position:relative;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:1.1rem;box-shadow:var(--shadow-lg)}
+  .plot__cap{display:flex;justify-content:space-between;align-items:center;margin-bottom:.7rem;padding:0 .2rem}
+  .plot__cap .fx{font-family:var(--mono);font-size:.8rem;color:var(--indigo);font-weight:500;transition:opacity .4s}
+  .plot__cap .dot3{display:flex;gap:.3rem}
+  .plot__cap .dot3 i{width:9px;height:9px;border-radius:50%;background:var(--line)}
+  .plot__cap .dot3 i:first-child{background:#f7b5a4}
+  svg .grid-l{stroke:var(--grid);stroke-width:1}
+  svg .axis-l{stroke:#c3c8d6;stroke-width:1.4}
+  svg .curve{fill:none;stroke:var(--indigo);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+  svg .curve-area{fill:url(#area);opacity:.5}
+  svg .pt{fill:var(--coral)}
+  svg .pt-ring{fill:none;stroke:var(--coral);stroke-width:1.5;opacity:.4}
+  .draw{stroke-dasharray:1400;stroke-dashoffset:1400;animation:draw 2.2s var(--ease) .25s forwards}
+  @keyframes draw{to{stroke-dashoffset:0}}
+
+  /* ─── EQUATION RIBBON ─── */
+  .ribbon{border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;background:var(--paper-2);padding:.9rem 0}
+  .ribbon__track{display:inline-flex;white-space:nowrap;animation:ribbon 40s linear infinite;will-change:transform}
+  .ribbon__track span{font-family:var(--serif);font-style:italic;font-size:1.15rem;color:var(--ink-2);opacity:.6;display:inline-flex;align-items:center}
+  .ribbon__track span:after{content:"·";color:var(--coral);margin:0 1.6rem;font-style:normal}
+  @keyframes ribbon{to{transform:translateX(-50%)}}
+
+  /* ─── SECTION ─── */
+  .sec{padding:clamp(3.5rem,7vw,6rem) 0}
+  .sec--alt{background:var(--paper-2)}
+  .sec__head{max-width:640px;margin-bottom:clamp(2rem,4vw,3rem)}
+  .sec__head.center{margin-inline:auto;text-align:center}
+  .sec h2{font-family:var(--serif);font-size:clamp(2rem,4.5vw,3rem);line-height:1.05;letter-spacing:-.02em;font-weight:500;margin-top:.7rem}
+  .sec h2 em{font-style:italic;color:var(--coral)}
+  .sec__head p{color:var(--ink-2);margin-top:1rem;font-size:1.08rem}
+
+  .subjects{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+  @media (max-width:820px){.subjects{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:520px){.subjects{grid-template-columns:1fr}}
+  .subj{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.5rem;transition:transform .25s var(--ease),box-shadow .25s,border-color .25s}
+  .subj:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:#dcd8c9}
+  .subj__ic{width:42px;height:42px;border-radius:11px;background:var(--indigo-soft);display:grid;place-items:center;margin-bottom:1rem;transition:transform .3s var(--ease)}
+  .subj:hover .subj__ic{transform:rotate(-8deg) scale(1.08)}
+  .subj__ic svg{width:22px;height:22px;stroke:var(--indigo);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+  .subj h3{font-family:var(--serif);font-size:1.3rem;font-weight:600;letter-spacing:-.01em}
+  .subj p{color:var(--muted);font-size:.92rem;margin-top:.4rem;line-height:1.5}
+  .subj__lv{font-family:var(--mono);font-size:.64rem;text-transform:uppercase;letter-spacing:.1em;color:var(--coral-deep);margin-top:.9rem;display:inline-block}
+
+  /* ─── INTERACTIVE LAB ─── */
+  .lab{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(1.5rem,4vw,3rem);align-items:center}
+  @media (max-width:900px){.lab{grid-template-columns:1fr;gap:2rem}}
+  .lab__stage{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:1.2rem;box-shadow:var(--shadow-lg)}
+  #labSvg{touch-action:none;cursor:ew-resize}
+  svg .tangent{stroke:var(--teal);stroke-width:2;stroke-dasharray:5 4;opacity:.9}
+  svg .areaFill{fill:var(--coral);opacity:.14}
+  svg .dragPt{fill:var(--teal);stroke:#fff;stroke-width:2;cursor:grab;filter:drop-shadow(0 2px 4px rgba(26,154,166,.5))}
+  svg .dragHalo{fill:var(--teal);opacity:.16}
+  .lab__readout{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.9rem}
+  .chip{font-family:var(--mono);font-size:.74rem;background:var(--paper-2);border:1px solid var(--line);border-radius:8px;padding:.4rem .7rem;color:var(--ink-2)}
+  .chip b{color:var(--indigo);font-weight:600}
+  .chip.coral b{color:var(--coral-deep)}
+  .chip.teal b{color:var(--teal)}
+  .lab__eq{font-family:var(--mono);font-size:1.05rem;background:var(--ink);color:#f3f4ff;border-radius:12px;padding:.85rem 1rem;text-align:center;letter-spacing:.02em}
+  .lab__eq .v{color:#ffd9cc}
+  .ctrl{margin-top:1.1rem}
+  .ctrl__row{display:flex;align-items:center;gap:1rem;margin:.85rem 0}
+  .ctrl__row label{font-family:var(--mono);font-size:.9rem;width:1.5rem;color:var(--indigo);font-weight:600}
+  .ctrl__row output{font-family:var(--mono);font-size:.85rem;width:3rem;text-align:right;color:var(--ink-2)}
+  input[type=range]{-webkit-appearance:none;appearance:none;flex:1;height:5px;border-radius:99px;background:var(--grid);outline:none}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:var(--coral);cursor:pointer;box-shadow:0 2px 6px rgba(239,97,61,.5);transition:transform .15s}
+  input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.15)}
+  input[type=range]::-moz-range-thumb{width:20px;height:20px;border:none;border-radius:50%;background:var(--coral);cursor:pointer;box-shadow:0 2px 6px rgba(239,97,61,.5)}
+  .lab__tools{display:flex;gap:.5rem;margin-top:.9rem;flex-wrap:wrap}
+  .toolbtn{font-family:var(--mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;border:1px solid var(--line);border-radius:8px;padding:.45rem .8rem;color:var(--ink-2);transition:all .2s;display:inline-flex;align-items:center;gap:.4rem}
+  .toolbtn:hover{border-color:var(--teal);color:var(--teal)}
+  .toolbtn.on{background:var(--teal);color:#fff;border-color:var(--teal)}
+  .toolbtn .sw{width:8px;height:8px;border-radius:2px}
+  .lab__copy h2{margin-bottom:.6rem}
+  .lab__copy p{color:var(--ink-2)}
+  .lab__hint{font-size:.92rem;color:var(--muted);margin-top:1rem;border-left:2px solid var(--coral);padding-left:1rem}
+
+  /* ─── STEPS ─── */
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem;counter-reset:s}
+  @media (max-width:820px){.steps{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:480px){.steps{grid-template-columns:1fr}}
+  .step{position:relative;padding-top:1.5rem}
+  .step:before{counter-increment:s;content:"0" counter(s);font-family:var(--serif);font-style:italic;font-size:1.6rem;color:var(--coral);display:block;margin-bottom:.6rem}
+  .step h3{font-family:var(--serif);font-size:1.25rem;font-weight:600;margin-bottom:.4rem}
+  .step p{color:var(--muted);font-size:.95rem}
+
+  /* ─── RATES ─── */
+  .rates{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;align-items:stretch}
+  @media (max-width:820px){.rates{grid-template-columns:1fr}}
+  .rate{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:1.8rem;display:flex;flex-direction:column;transition:transform .25s var(--ease),box-shadow .25s}
+  .rate:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+  .rate.feature{border-color:var(--coral);box-shadow:0 16px 40px -20px rgba(239,97,61,.45);position:relative}
+  .rate.feature:before{content:"Most popular";position:absolute;top:-.7rem;left:1.8rem;background:var(--coral);color:#fff;font-family:var(--mono);font-size:.6rem;text-transform:uppercase;letter-spacing:.12em;padding:.25rem .6rem;border-radius:999px}
+  .rate__name{font-family:var(--mono);font-size:.74rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .rate__price{font-family:var(--serif);font-size:2.6rem;font-weight:600;letter-spacing:-.02em;margin:.5rem 0 .1rem}
+  .rate__price span{font-family:var(--sans);font-size:.95rem;font-weight:500;color:var(--muted)}
+  .rate__desc{color:var(--ink-2);font-size:.95rem;margin:.4rem 0 1.2rem}
+  .rate ul{list-style:none;margin-bottom:1.5rem;flex:1}
+  .rate li{display:flex;gap:.6rem;align-items:flex-start;padding:.4rem 0;color:var(--ink-2);font-size:.93rem}
+  .rate li:before{content:"";width:18px;height:18px;flex-shrink:0;margin-top:.15rem;border-radius:50%;background:var(--indigo-soft) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234b54c9' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E") center/11px no-repeat}
+
+  /* ─── REVIEWS ─── */
+  .reviews{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+  @media (max-width:820px){.reviews{grid-template-columns:1fr}}
+  .review{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.6rem;transition:transform .25s var(--ease),box-shadow .25s}
+  .review:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+  .review .stars{color:var(--gold);letter-spacing:.1em;margin-bottom:.8rem}
+  .review p{font-family:var(--serif);font-size:1.18rem;line-height:1.45;color:var(--ink);font-style:italic}
+  .review__who{display:flex;align-items:center;gap:.7rem;margin-top:1.2rem}
+  .review__av{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font-weight:600;color:#fff;font-size:.9rem}
+  .review__who b{display:block;font-size:.9rem;font-weight:600}
+  .review__who span{font-size:.8rem;color:var(--muted)}
+
+  /* ─── BOOKING ─── */
+  .book{background:var(--ink);color:#eef0f6;border-radius:24px;overflow:hidden;display:grid;grid-template-columns:.85fr 1.15fr}
+  @media (max-width:860px){.book{grid-template-columns:1fr}}
+  .book__aside{padding:clamp(2rem,4vw,3rem);background:linear-gradient(160deg,#1d2a47,#141d33);position:relative;overflow:hidden}
+  .book__aside:after{content:"∫";position:absolute;right:-1rem;bottom:-2rem;font-family:var(--serif);font-size:12rem;color:rgba(255,184,164,.06);font-style:italic}
+  .book__aside .tag{color:#ffb8a4}
+  .book__aside h2{font-family:var(--serif);font-size:clamp(1.8rem,3.5vw,2.5rem);font-weight:500;line-height:1.05;margin:.6rem 0 1rem;color:#fff;position:relative}
+  .book__aside p{color:#aeb6ca;font-size:.98rem;position:relative}
+  .book__points{margin-top:1.6rem;display:flex;flex-direction:column;gap:.8rem;position:relative}
+  .book__points div{display:flex;gap:.7rem;align-items:center;font-size:.92rem;color:#cdd3e2}
+  .book__points svg{width:18px;height:18px;stroke:#ffb8a4;fill:none;stroke-width:2;flex-shrink:0}
+  .book__main{padding:clamp(1.6rem,3.5vw,2.6rem);background:var(--card);color:var(--ink)}
+  .book__step{margin-bottom:1.4rem}
+  .book__lbl{font-family:var(--mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-bottom:.7rem;display:flex;align-items:center;gap:.5rem}
+  .book__lbl .n{width:18px;height:18px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font-size:.62rem}
+  .days{display:flex;gap:.5rem;overflow-x:auto;padding-bottom:.4rem;scrollbar-width:thin}
+  .day{flex:0 0 auto;min-width:62px;text-align:center;border:1px solid var(--line);border-radius:12px;padding:.6rem .4rem;transition:border-color .2s,background .2s,transform .15s;background:var(--card)}
+  .day:hover:not(:disabled){border-color:var(--coral);transform:translateY(-2px)}
+  .day.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .day:disabled{opacity:.32;cursor:not-allowed}
+  .day .dw{font-size:.66rem;text-transform:uppercase;letter-spacing:.06em;color:inherit;opacity:.7}
+  .day .dn{font-family:var(--serif);font-size:1.3rem;font-weight:600;line-height:1.1}
+  .day .ds{font-size:.6rem;color:var(--coral-deep);font-weight:600;margin-top:.2rem}
+  .day.on .ds{color:#ffb8a4}
+  .slots{display:grid;grid-template-columns:repeat(auto-fill,minmax(80px,1fr));gap:.5rem}
+  .slot{border:1px solid var(--line);border-radius:10px;padding:.55rem;font-family:var(--mono);font-size:.82rem;transition:border-color .2s,background .2s,color .2s,transform .15s;background:var(--card)}
+  .slot:hover:not(:disabled){border-color:var(--coral);transform:translateY(-2px)}
+  .slot.on{background:var(--coral);color:#fff;border-color:var(--coral)}
+  .slot:disabled{opacity:.3;text-decoration:line-through;cursor:not-allowed}
+  .field{margin-bottom:.85rem}
+  .field label{display:block;font-size:.8rem;font-weight:600;color:var(--ink-2);margin-bottom:.35rem}
+  .field input,.field select{width:100%;border:1px solid var(--line);border-radius:10px;padding:.7rem .85rem;background:var(--paper);transition:border-color .2s,box-shadow .2s}
+  .field input:focus,.field select:focus{outline:none;border-color:var(--coral);box-shadow:0 0 0 3px rgba(239,97,61,.12)}
+  .frow{display:grid;grid-template-columns:1fr 1fr;gap:.85rem}
+  @media (max-width:480px){.frow{grid-template-columns:1fr}}
+  .book__submit{width:100%;background:var(--coral);color:#fff;font-weight:600;padding:.95rem;border-radius:12px;margin-top:.4rem;transition:background .25s}
+  .book__submit:hover:not(:disabled){background:var(--coral-deep)}
+  .book__submit:disabled{opacity:.45;cursor:not-allowed}
+  .book__confirm{text-align:center;padding:1.5rem 0}
+  .book__confirm .ok{width:64px;height:64px;border-radius:50%;background:var(--indigo-soft);display:grid;place-items:center;margin:0 auto 1.2rem}
+  .book__confirm .ok svg{width:32px;height:32px;stroke:var(--indigo);fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+  .book__confirm .ok path{stroke-dasharray:30;stroke-dashoffset:30;animation:draw .6s var(--ease) .15s forwards}
+  .book__confirm h3{font-family:var(--serif);font-size:1.8rem;font-weight:600;margin-bottom:.5rem}
+  .book__confirm p{color:var(--ink-2)}
+  .book__confirm .when{font-family:var(--mono);background:var(--paper-2);border:1px solid var(--line);border-radius:10px;padding:.7rem;margin:1.1rem 0;font-size:.9rem}
+  .book__confirm .demo{font-size:.78rem;color:var(--muted);margin-top:1rem}
+  .book__again{margin-top:.4rem;font-size:.85rem;color:var(--coral-deep);font-weight:600;border-bottom:1px solid currentColor;padding-bottom:1px}
+
+  /* ─── FOOTER ─── */
+  footer{border-top:1px solid var(--line);padding:clamp(3rem,5vw,4rem) 0 2.5rem;background:var(--paper-2)}
+  .foot__top{display:flex;flex-wrap:wrap;justify-content:space-between;gap:2rem}
+  .foot__brand{font-family:var(--serif);font-size:1.5rem;font-weight:600;display:flex;align-items:center;gap:.5rem}
+  .foot__brand svg{width:28px;height:28px}
+  .foot__brand+p{color:var(--muted);font-size:.92rem;margin-top:.7rem;max-width:34ch}
+  .foot__links{display:flex;gap:3rem;flex-wrap:wrap}
+  .foot__links h4{font-family:var(--mono);font-size:.66rem;text-transform:uppercase;letter-spacing:.13em;color:var(--muted);margin-bottom:.9rem}
+  .foot__links a{display:block;color:var(--ink-2);font-size:.92rem;padding:.25rem 0;transition:color .2s}
+  .foot__links a:hover{color:var(--coral-deep)}
+  .foot__bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1.6rem;border-top:1px solid var(--line);align-items:center}
+  .foot__bottom p{font-size:.82rem;color:var(--muted)}
+  .foot__bottom a{color:var(--ink);border-bottom:1px solid var(--line);transition:color .2s,border-color .2s}
+  .foot__bottom a:hover{color:var(--coral-deep);border-color:var(--coral)}
+
+  /* ─── SPEC CHIP ─── */
+  .spec-chip{position:fixed;bottom:1rem;left:1rem;background:var(--card);color:var(--ink-2);padding:.5rem .85rem;font-family:var(--mono);font-size:.62rem;text-transform:uppercase;letter-spacing:.1em;display:flex;align-items:center;gap:.5rem;z-index:80;border:1px solid var(--line);border-radius:999px;box-shadow:var(--shadow)}
+  .spec-chip .d{width:6px;height:6px;border-radius:50%;background:var(--coral);flex-shrink:0}
+  .spec-chip a{color:var(--coral-deep);border-bottom:1px solid rgba(239,97,61,.4);margin-left:.15rem;font-weight:600}
+  @media (max-width:520px){.spec-chip{font-size:.55rem;padding:.4rem .6rem}}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="nav__in">
+    <a href="#top" class="brand">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#17223b"/><path class="pen" d="M5 24 Q14 2 27 22" fill="none" stroke="#f0613e" stroke-width="2.6" stroke-linecap="round"/><circle cx="16" cy="10" r="2.2" fill="#fbfaf6"/></svg>
+      math with maya
+    </a>
+    <div class="nav__links">
+      <a href="#subjects">Subjects</a>
+      <a href="#lab">Try it</a>
+      <a href="#how">How it works</a>
+      <a href="#rates">Rates</a>
+      <a href="#book" class="nav__book">Book a session</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="top">
+  <div class="glyphs" aria-hidden="true">
+    <span class="glyph g1">∫</span><span class="glyph g2">π</span><span class="glyph g3">∑</span><span class="glyph g4">√</span><span class="glyph g5">ƒ</span>
+  </div>
+  <div class="wrap hero__in">
+    <div>
+      <span class="hero__eyebrow" data-reveal>Math tutor · <b>UC San Diego</b></span>
+      <h1 data-reveal>Math, finally<br>making <em>sense.</em></h1>
+      <p class="hero__sub" data-reveal>I'm Maya, a master's candidate in applied math at UCSD. I help college students survive calculus, high-schoolers crush the SAT, and anyone who's ever felt behind catch all the way up. One patient hour at a time.</p>
+      <div class="hero__cta" data-reveal>
+        <a href="#book" class="btn btn--primary">Book a free intro <span class="arr">→</span></a>
+        <a href="#subjects" class="btn btn--ghost">See what I teach</a>
+      </div>
+      <div class="hero__trust" data-reveal>
+        <span class="stars">★★★★★</span>
+        <span><b class="cup" data-to="4.9" data-dec="1">0</b> from <b class="cup" data-to="60">0</b>+ students</span>
+        <span><b class="cup" data-to="200">0</b>+ sessions taught</span>
+      </div>
+    </div>
+    <div class="plot" data-reveal>
+      <div class="plot__cap">
+        <span class="fx" id="heroFx">f(x) = sin(x) · e^(−x/6)</span>
+        <span class="dot3"><i></i><i></i><i></i></span>
+      </div>
+      <svg viewBox="0 0 560 380" width="100%" role="img" aria-label="A live plot cycling through mathematical functions">
+        <defs>
+          <linearGradient id="area" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#4b54c9" stop-opacity=".22"/>
+            <stop offset="100%" stop-color="#4b54c9" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <g id="heroGrid"></g>
+        <line class="axis-l" x1="0" y1="190" x2="560" y2="190"/>
+        <line class="axis-l" x1="40" y1="0" x2="40" y2="380"/>
+        <path id="heroArea" class="curve-area"></path>
+        <path id="heroCurve" class="curve"></path>
+        <g id="heroPts"></g>
+      </svg>
+    </div>
+  </div>
+</header>
+
+<!-- RIBBON -->
+<div class="ribbon" aria-hidden="true">
+  <div class="ribbon__track" id="ribbon">
+    <span>e^(iπ) + 1 = 0</span><span>∫ from a to b of f'(x) dx = f(b) − f(a)</span><span>x = (−b ± √(b²−4ac)) / 2a</span><span>aⁿ + bⁿ ≠ cⁿ for n &gt; 2</span><span>lim (1 + 1/n)ⁿ = e</span><span>∑ 1/n² = π²/6</span>
+  </div>
+</div>
+
+<!-- SUBJECTS -->
+<section class="sec" id="subjects">
+  <div class="wrap">
+    <div class="sec__head" data-reveal>
+      <p class="tag">What I teach</p>
+      <h2>From "I'm lost" to <em>"oh, that's it."</em></h2>
+      <p>High school through upper-division university. If it's on your syllabus and it has numbers, there's a good chance I've taught it.</p>
+    </div>
+    <div class="subjects">
+      <div class="subj" data-reveal>
+        <div class="subj__ic"><svg viewBox="0 0 24 24"><path d="M4 20 Q9 4 20 8"/><path d="M4 20h16"/></svg></div>
+        <h3>Calculus I · II · III</h3>
+        <p>Limits, derivatives, integrals, sequences, and the multivariable jump. The class most people come to me for.</p>
+        <span class="subj__lv">Most requested</span>
+      </div>
+      <div class="subj" data-reveal>
+        <div class="subj__ic"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="1"/><path d="M4 10h16M10 4v16"/></svg></div>
+        <h3>Linear Algebra</h3>
+        <p>Matrices, vector spaces, eigenvalues, transformations. We make the abstract stuff actually visual.</p>
+        <span class="subj__lv">University</span>
+      </div>
+      <div class="subj" data-reveal>
+        <div class="subj__ic"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7"/><circle cx="20" cy="6" r="1.5"/></svg></div>
+        <h3>Statistics & Probability</h3>
+        <p>Distributions, hypothesis testing, regression. For psych, business, bio, and data-science majors.</p>
+        <span class="subj__lv">University</span>
+      </div>
+      <div class="subj" data-reveal>
+        <div class="subj__ic"><svg viewBox="0 0 24 24"><path d="M5 19 19 5M7 7h.01M17 17h.01"/><circle cx="8" cy="8" r="2.5"/><circle cx="16" cy="16" r="2.5"/></svg></div>
+        <h3>Differential Equations</h3>
+        <p>First-order, second-order, systems, and the modeling intuition behind why any of it matters.</p>
+        <span class="subj__lv">Upper-division</span>
+      </div>
+      <div class="subj" data-reveal>
+        <div class="subj__ic"><svg viewBox="0 0 24 24"><path d="M12 3v18M3 12h18"/><circle cx="12" cy="12" r="9"/></svg></div>
+        <h3>SAT / ACT Math</h3>
+        <p>Score-focused prep with real timed practice. Most students gain 80–140 points on the math section.</p>
+        <span class="subj__lv">High school</span>
+      </div>
+      <div class="subj" data-reveal>
+        <div class="subj__ic"><svg viewBox="0 0 24 24"><path d="M6 4h9l3 3v13H6z"/><path d="M9 12h6M9 16h6M9 8h3"/></svg></div>
+        <h3>Discrete & Proofs</h3>
+        <p>Logic, sets, induction, combinatorics, and how to write a proof your professor will actually accept.</p>
+        <span class="subj__lv">University</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INTERACTIVE LAB -->
+<section class="sec sec--alt" id="lab">
+  <div class="wrap lab">
+    <div class="lab__stage" data-reveal>
+      <div class="lab__eq" id="eqLine">f(x) = <span class="v">1.0</span>x² + <span class="v">0.0</span>x − <span class="v">3.0</span></div>
+      <svg id="labSvg" viewBox="0 0 560 380" width="100%" role="img" aria-label="Interactive parabola, drag the point to see the tangent line and slope">
+        <defs>
+          <linearGradient id="parabArea" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#ef613d" stop-opacity=".18"/>
+            <stop offset="100%" stop-color="#ef613d" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <g id="labGrid"></g>
+        <line class="axis-l" id="axX"></line>
+        <line class="axis-l" id="axY"></line>
+        <path id="intFill" class="areaFill" style="display:none"></path>
+        <path id="parabAreaPath" style="fill:url(#parabArea);opacity:.6"></path>
+        <path id="parab" class="curve" style="stroke:var(--coral)"></path>
+        <g id="roots"></g>
+        <line id="tangent" class="tangent" style="display:none"></line>
+        <circle id="vertex" r="5" fill="#4b54c9"></circle>
+        <circle id="dragHalo" class="dragHalo" r="14" style="display:none"></circle>
+        <circle id="dragPt" class="dragPt" r="7" style="display:none"></circle>
+      </svg>
+      <div class="lab__readout">
+        <span class="chip">vertex <b id="rVertex">(0, −3)</b></span>
+        <span class="chip coral">roots <b id="rRoots">±1.73</b></span>
+        <span class="chip">discriminant <b id="rDisc">12</b></span>
+      </div>
+      <div class="lab__tools">
+        <button class="toolbtn on" id="tanBtn" type="button"><span class="sw" style="background:var(--teal)"></span>Tangent · slope <b id="rSlope" style="margin-left:.2rem;color:var(--teal)">2.4</b></button>
+        <button class="toolbtn" id="areaBtn" type="button"><span class="sw" style="background:var(--coral)"></span>Area ∫ <b id="rArea" style="margin-left:.2rem;display:none"></b></button>
+      </div>
+      <div class="ctrl">
+        <div class="ctrl__row"><label for="sA">a</label><input type="range" id="sA" min="-2" max="2" step="0.1" value="1"><output id="oA">1.0</output></div>
+        <div class="ctrl__row"><label for="sB">b</label><input type="range" id="sB" min="-6" max="6" step="0.5" value="0"><output id="oB">0.0</output></div>
+        <div class="ctrl__row"><label for="sC">c</label><input type="range" id="sC" min="-6" max="6" step="0.5" value="-3"><output id="oC">−3.0</output></div>
+      </div>
+    </div>
+    <div class="lab__copy" data-reveal>
+      <p class="tag">Try it yourself</p>
+      <h2 class="serif">A lesson, in your <em>hands.</em></h2>
+      <p>This is roughly how a session feels. Drag <b>a</b>, <b>b</b>, <b>c</b> to reshape the parabola, then <b>drag the teal dot along the curve</b> and watch the tangent line tilt. Its steepness <em>is</em> the derivative. Flip on the area button to see the integral fill in.</p>
+      <p class="lab__hint">When the discriminant drops below zero, the curve lifts off the x-axis and the real roots disappear. Watching that happen tends to stick better than memorizing the rule for it.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HOW -->
+<section class="sec" id="how">
+  <div class="wrap">
+    <div class="sec__head" data-reveal>
+      <p class="tag">How it works</p>
+      <h2>No pressure. Just a <em>plan.</em></h2>
+    </div>
+    <div class="steps">
+      <div class="step" data-reveal><h3>Free intro</h3><p>A relaxed 20-minute call. You tell me the class, the professor, the deadline. I tell you honestly if I can help.</p></div>
+      <div class="step" data-reveal><h3>We make a plan</h3><p>I map your syllabus to a session schedule that hits the exam dates, not a vague "let's see how it goes."</p></div>
+      <div class="step" data-reveal><h3>We meet weekly</h3><p>At Geisel Library on campus, a quiet café, or online with a shared whiteboard. Whatever fits your week.</p></div>
+      <div class="step" data-reveal><h3>It clicks</h3><p>You walk into the exam knowing you've already done the hard part. That feeling is the whole point.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- RATES -->
+<section class="sec sec--alt" id="rates">
+  <div class="wrap">
+    <div class="sec__head center" data-reveal>
+      <p class="tag">Rates</p>
+      <h2>Honest pricing for <em>students.</em></h2>
+      <p>The first 20 minutes are always free. Bundles save you money and keep us consistent through the term.</p>
+    </div>
+    <div class="rates">
+      <div class="rate" data-reveal>
+        <span class="rate__name">Single session</span>
+        <div class="rate__price">$55<span> / hour</span></div>
+        <p class="rate__desc">Perfect for a pre-exam cram or a one-time concept that won't click.</p>
+        <ul><li>One 60-minute session</li><li>In person or online</li><li>Notes & worked solutions after</li></ul>
+        <a href="#book" class="btn btn--ghost" style="justify-content:center">Book one</a>
+      </div>
+      <div class="rate feature" data-reveal>
+        <span class="rate__name">5-session pack</span>
+        <div class="rate__price">$49<span> / hour</span></div>
+        <p class="rate__desc">The sweet spot for getting through a tough unit or midterm season.</p>
+        <ul><li>Five 60-minute sessions</li><li>Priority scheduling</li><li>Text support between sessions</li><li>A mapped study plan</li></ul>
+        <a href="#book" class="btn btn--primary" style="justify-content:center">Book the pack</a>
+      </div>
+      <div class="rate" data-reveal>
+        <span class="rate__name">Term partner</span>
+        <div class="rate__price">$45<span> / hour</span></div>
+        <p class="rate__desc">Weekly sessions for the whole term. We stay ahead of the class together.</p>
+        <ul><li>Ten 60-minute sessions</li><li>Locked weekly time slot</li><li>Exam-week check-ins</li><li>Sliding scale available</li></ul>
+        <a href="#book" class="btn btn--ghost" style="justify-content:center">Let's talk</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="sec" id="reviews">
+  <div class="wrap">
+    <div class="sec__head" data-reveal>
+      <p class="tag">Students say</p>
+      <h2>The part I'm <em>proudest</em> of.</h2>
+    </div>
+    <div class="reviews">
+      <div class="review" data-reveal>
+        <div class="stars">★★★★★</div>
+        <p>"I went from a 58 on my first calc midterm to an 89 on the final. Maya never once made me feel dumb for asking."</p>
+        <div class="review__who"><span class="review__av" style="background:#ef613d">J</span><div><b>Jordan M.</b><span>Bio major, UCSD</span></div></div>
+      </div>
+      <div class="review" data-reveal>
+        <div class="stars">★★★★★</div>
+        <p>"My daughter's SAT math jumped 120 points. More than that, she stopped saying she 'wasn't a math person.'"</p>
+        <div class="review__who"><span class="review__av" style="background:#4b54c9">P</span><div><b>Priya R.</b><span>Parent, Carmel Valley</span></div></div>
+      </div>
+      <div class="review" data-reveal>
+        <div class="stars">★★★★★</div>
+        <p>"Linear algebra finally made sense the day she drew the transformation instead of just writing the matrix. Wish I'd found her sooner."</p>
+        <div class="review__who"><span class="review__av" style="background:#1a9aa6">D</span><div><b>Diego S.</b><span>CS major, SDSU</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section class="sec sec--alt" id="book">
+  <div class="wrap">
+    <div class="book" data-reveal>
+      <div class="book__aside">
+        <p class="tag">Book a session</p>
+        <h2>Let's find your hour.</h2>
+        <p>Start with a free 20-minute intro, or jump straight into a full session. Pick a day and time that works and I'll confirm by email.</p>
+        <div class="book__points">
+          <div><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Free 20-minute intro call</div>
+          <div><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>In person at UCSD or online</div>
+          <div><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>No commitment after the intro</div>
+          <div><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Reply within a day, always</div>
+        </div>
+      </div>
+      <div class="book__main">
+        <div id="bookFlow">
+          <div class="book__step">
+            <div class="book__lbl"><span class="n">1</span> Pick a day</div>
+            <div class="days" id="days"></div>
+          </div>
+          <div class="book__step">
+            <div class="book__lbl"><span class="n">2</span> Pick a time <span id="dayName" style="text-transform:none;letter-spacing:0;color:var(--coral-deep);font-weight:600"></span></div>
+            <div class="slots" id="slots"></div>
+          </div>
+          <form class="book__step" id="bookForm" novalidate>
+            <div class="book__lbl"><span class="n">3</span> Your details</div>
+            <div class="frow">
+              <div class="field"><label for="bName">Name</label><input id="bName" type="text" autocomplete="name" placeholder="First name" required></div>
+              <div class="field"><label for="bEmail">Email</label><input id="bEmail" type="email" autocomplete="email" placeholder="you@email.com" required></div>
+            </div>
+            <div class="frow">
+              <div class="field"><label for="bSubj">Subject</label>
+                <select id="bSubj"><option>Calculus I / II / III</option><option>Linear Algebra</option><option>Statistics & Probability</option><option>Differential Equations</option><option>SAT / ACT Math</option><option>Discrete & Proofs</option><option>Not sure yet</option></select>
+              </div>
+              <div class="field"><label for="bMode">Where</label>
+                <select id="bMode"><option>In person at UCSD</option><option>Online via Zoom</option></select>
+              </div>
+            </div>
+            <button type="submit" class="book__submit" id="bookSubmit" disabled>Pick a day and time first</button>
+          </form>
+        </div>
+        <div id="bookDone" hidden>
+          <div class="book__confirm">
+            <div class="ok"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></div>
+            <h3>You're booked, <span id="cName">friend</span>!</h3>
+            <p>I'll send a confirmation and a calendar invite shortly.</p>
+            <div class="when" id="cWhen">Your session</div>
+            <button class="book__again" id="bookAgain" type="button">Book another time</button>
+            <p class="demo">This is a demo booking. No email is actually sent.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot__top">
+      <div>
+        <div class="foot__brand">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#17223b"/><path d="M5 24 Q14 2 27 22" fill="none" stroke="#f0613e" stroke-width="2.6" stroke-linecap="round"/><circle cx="16" cy="10" r="2.2" fill="#fbfaf6"/></svg>
+          math with maya
+        </div>
+        <p>One-on-one math tutoring in San Diego and online. Calculus, linear algebra, statistics & test prep.</p>
+      </div>
+      <div class="foot__links">
+        <div>
+          <h4>Tutoring</h4>
+          <a href="#subjects">Subjects</a><a href="#rates">Rates</a><a href="#book">Book a session</a><a href="#reviews">Reviews</a>
+        </div>
+        <div>
+          <h4>Reach me</h4>
+          <a href="mailto:maya@mathwithmaya.example">maya@mathwithmaya.com</a><a href="tel:+16195550148">(619) 555-0148</a><a href="#">Instagram</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot__bottom">
+      <p>© 2026 Maya Reyes · La Jolla & online · Serving UCSD, SDSU & San Diego high schools</p>
+      <p>Site spec by <a href="/studio/">Kani Studio</a></p>
+    </div>
+  </div>
+</footer>
+
+<aside class="spec-chip" aria-label="This is a design spec">
+  <span class="d"></span><span>Spec · <a href="/studio/">Kani Studio</a></span>
+</aside>
+
+<script>
+(function(){
+  "use strict";
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ── COORDINATE HELPERS ── */
+  var W=560,H=380,XMIN=-6,XMAX=6,YMIN=-8,YMAX=8;
+  function sx(x){ return (x-XMIN)/(XMAX-XMIN)*W; }
+  function sy(y){ return H-(y-YMIN)/(YMAX-YMIN)*H; }
+  function gridLines(gEl){
+    var s='';
+    for(var x=XMIN;x<=XMAX;x++) s+='<line class="grid-l" x1="'+sx(x).toFixed(1)+'" y1="0" x2="'+sx(x).toFixed(1)+'" y2="'+H+'"/>';
+    for(var y=YMIN;y<=YMAX;y++) s+='<line class="grid-l" x1="0" y1="'+sy(y).toFixed(1)+'" x2="'+W+'" y2="'+sy(y).toFixed(1)+'"/>';
+    gEl.innerHTML=s;
+  }
+  function clampY(y){ return Math.max(YMIN-3,Math.min(YMAX+3,y)); }
+
+  /* ── HERO: morphing live grapher ── */
+  (function(){
+    var g=document.getElementById('heroGrid'); if(!g) return;
+    gridLines(g);
+    var curve=document.getElementById('heroCurve'), area=document.getElementById('heroArea');
+    var fxLabel=document.getElementById('heroFx'), ptsG=document.getElementById('heroPts');
+    var FUNCS=[
+      {l:'sin(x) · e^(−x/6)', f:function(x){return Math.sin(x)*Math.exp(-Math.abs(x)/6)*4.6;}},
+      {l:'¼x² − 3',           f:function(x){return 0.25*x*x-3;}},
+      {l:'x³⁄14 − x',         f:function(x){return x*x*x/14-x;}},
+      {l:'3 sin(x)',          f:function(x){return 3*Math.sin(x);}},
+      {l:'4 cos(x)·e^(−x²/20)',f:function(x){return 4*Math.cos(x)*Math.exp(-x*x/20);}}
+    ];
+    var STEP=0.07, XS=[]; for(var x=XMIN;x<=XMAX+0.001;x+=STEP) XS.push(x);
+    var PTX=[-4.6,-1.6,1.6,4.6];
+
+    function pathFor(vals){
+      var d='',a='',started=false;
+      for(var i=0;i<XS.length;i++){ var px=sx(XS[i]).toFixed(1), py=sy(clampY(vals[i])).toFixed(1); d+=(started?'L':'M')+px+' '+py+' '; started=true; }
+      a=d+'L'+sx(XMAX)+' '+sy(0)+' L'+sx(XMIN)+' '+sy(0)+' Z';
+      return {d:d,a:a};
+    }
+    function valsOf(fn){ return XS.map(function(x){return fn(x);}); }
+
+    if(reduce){
+      var v=valsOf(FUNCS[0].f), p=pathFor(v); curve.setAttribute('d',p.d); area.setAttribute('d',p.a);
+      curve.classList.add('draw');
+      return;
+    }
+
+    function render(vals){
+      var p=pathFor(vals); curve.setAttribute('d',p.d); area.setAttribute('d',p.a);
+      var ph='';
+      PTX.forEach(function(xp){ var idx=Math.round((xp-XMIN)/STEP); idx=Math.max(0,Math.min(vals.length-1,idx)); var yv=clampY(vals[idx]); ph+='<circle class="pt-ring" cx="'+sx(xp).toFixed(1)+'" cy="'+sy(yv).toFixed(1)+'" r="8"/><circle class="pt" cx="'+sx(xp).toFixed(1)+'" cy="'+sy(yv).toFixed(1)+'" r="3.5"/>'; });
+      ptsG.innerHTML=ph;
+    }
+    render(valsOf(FUNCS[0].f)); /* static first draw, robust even if rAF is paused (hidden tab) */
+
+    var cur=0, nxt=1, t=0, phase='hold', holdEnd=900, last=performance.now(), running=true, raf=0;
+    var MORPH=1300, HOLD=2100;
+    function ease(u){ return u<.5?2*u*u:1-Math.pow(-2*u+2,2)/2; }
+    function frame(now){
+      if(!running) return;
+      var dt=now-last; last=now;
+      var curV=valsOf(FUNCS[cur].f);
+      var nxtV=valsOf(FUNCS[nxt].f);
+      var mix;
+      if(phase==='hold'){ holdEnd-=dt; mix=0; if(holdEnd<=0){ phase='morph'; t=0; fxLabel.style.opacity='.35'; setTimeout(function(){fxLabel.textContent='f(x) = '+FUNCS[nxt].l; fxLabel.style.opacity='1';},180); } }
+      else { t+=dt/MORPH; if(t>=1){ t=1; phase='hold'; holdEnd=HOLD; cur=nxt; nxt=(nxt+1)%FUNCS.length; } mix=ease(t); }
+      render(curV.map(function(cv,i){ return cv+(nxtV[i]-cv)*mix; }));
+      raf=requestAnimationFrame(frame);
+    }
+    function start(){ if(!running){running=true; last=performance.now(); raf=requestAnimationFrame(frame);} }
+    function stop(){ running=false; cancelAnimationFrame(raf); }
+    document.addEventListener('visibilitychange',function(){ document.hidden?stop():start(); });
+    var io=new IntersectionObserver(function(es){ es.forEach(function(e){ e.isIntersecting?start():stop(); }); },{threshold:0});
+    io.observe(document.querySelector('.plot'));
+    running=false; start();
+  })();
+
+  /* ── INTERACTIVE PARABOLA + TANGENT + AREA ── */
+  (function(){
+    var g=document.getElementById('labGrid'); if(!g) return;
+    gridLines(g);
+    var svg=document.getElementById('labSvg');
+    document.getElementById('axX').setAttribute('x1',0); document.getElementById('axX').setAttribute('x2',W);
+    document.getElementById('axX').setAttribute('y1',sy(0)); document.getElementById('axX').setAttribute('y2',sy(0));
+    document.getElementById('axY').setAttribute('y1',0); document.getElementById('axY').setAttribute('y2',H);
+    document.getElementById('axY').setAttribute('x1',sx(0)); document.getElementById('axY').setAttribute('x2',sx(0));
+
+    var sA=document.getElementById('sA'),sB=document.getElementById('sB'),sC=document.getElementById('sC');
+    var oA=document.getElementById('oA'),oB=document.getElementById('oB'),oC=document.getElementById('oC');
+    var parab=document.getElementById('parab'), parabArea=document.getElementById('parabAreaPath');
+    var vertex=document.getElementById('vertex'), roots=document.getElementById('roots');
+    var eqLine=document.getElementById('eqLine');
+    var rVertex=document.getElementById('rVertex'),rRoots=document.getElementById('rRoots'),rDisc=document.getElementById('rDisc');
+    var tangent=document.getElementById('tangent'), dragPt=document.getElementById('dragPt'), dragHalo=document.getElementById('dragHalo');
+    var tanBtn=document.getElementById('tanBtn'), areaBtn=document.getElementById('areaBtn');
+    var rSlope=document.getElementById('rSlope'), rArea=document.getElementById('rArea'), intFill=document.getElementById('intFill');
+
+    var px=1.2, showTan=true, showArea=false;
+    function fmt(n){ return (n<0?'−':'')+Math.abs(n).toFixed(1); }
+    function f(x){ var a=+sA.value,b=+sB.value,c=+sC.value; return a*x*x+b*x+c; }
+    function fp(x){ return 2*(+sA.value)*x+(+sB.value); }
+
+    function draw(){
+      var a=+sA.value,b=+sB.value,c=+sC.value;
+      oA.textContent=fmt(a); oB.textContent=fmt(b); oC.textContent=fmt(c);
+      eqLine.innerHTML='f(x) = <span class="v">'+fmt(a)+'</span>x² '+(b<0?'− ':'+ ')+'<span class="v">'+Math.abs(b).toFixed(1)+'</span>x '+(c<0?'− ':'+ ')+'<span class="v">'+Math.abs(c).toFixed(1)+'</span>';
+
+      var d='',started=false;
+      for(var x=XMIN;x<=XMAX;x+=0.06){ var y=clampY(a*x*x+b*x+c); d+=(started?'L':'M')+sx(x).toFixed(1)+' '+sy(y).toFixed(1)+' '; started=true; }
+      parab.setAttribute('d',d);
+      parabArea.setAttribute('d', d+'L'+sx(XMAX)+' '+sy(0)+' L'+sx(XMIN)+' '+sy(0)+' Z');
+
+      if(Math.abs(a)<0.05){ vertex.style.display='none'; rVertex.textContent='none (linear)'; }
+      else { vertex.style.display=''; var h=-b/(2*a),k=a*h*h+b*h+c; vertex.setAttribute('cx',sx(h)); vertex.setAttribute('cy',sy(clampY(k))); rVertex.textContent='('+fmt(h)+', '+fmt(k)+')'; }
+
+      var disc=b*b-4*a*c; rDisc.textContent=fmt(disc);
+      var rhtml='', r1=null,r2=null;
+      if(Math.abs(a)<0.05){ if(Math.abs(b)>=0.05){ r1=-c/b; rRoots.textContent=fmt(r1); rhtml='<circle class="pt" cx="'+sx(r1)+'" cy="'+sy(0)+'" r="4.5"/>'; } else rRoots.textContent='none'; }
+      else if(disc>=0){ var sq=Math.sqrt(disc); r1=(-b+sq)/(2*a); r2=(-b-sq)/(2*a); rRoots.textContent=fmt(Math.min(r1,r2))+', '+fmt(Math.max(r1,r2)); rhtml='<circle class="pt" cx="'+sx(r1)+'" cy="'+sy(0)+'" r="4.5"/><circle class="pt" cx="'+sx(r2)+'" cy="'+sy(0)+'" r="4.5"/>'; }
+      else rRoots.textContent='none (complex)';
+      roots.innerHTML=rhtml;
+
+      // tangent at px
+      if(showTan){
+        if(px<XMIN+0.4)px=XMIN+0.4; if(px>XMAX-0.4)px=XMAX-0.4;
+        var y0=a*px*px+b*px+c, m=2*a*px+b;
+        var xL=px-2.6,xR=px+2.6;
+        tangent.style.display=''; dragPt.style.display=''; dragHalo.style.display='';
+        tangent.setAttribute('x1',sx(xL)); tangent.setAttribute('y1',sy(clampY(y0+m*(xL-px))));
+        tangent.setAttribute('x2',sx(xR)); tangent.setAttribute('y2',sy(clampY(y0+m*(xR-px))));
+        dragPt.setAttribute('cx',sx(px)); dragPt.setAttribute('cy',sy(clampY(y0)));
+        dragHalo.setAttribute('cx',sx(px)); dragHalo.setAttribute('cy',sy(clampY(y0)));
+        rSlope.textContent=fmt(m);
+      } else { tangent.style.display='none'; dragPt.style.display='none'; dragHalo.style.display='none'; }
+
+      // area between roots (or default window)
+      if(showArea){
+        var lo,hi;
+        if(r1!==null&&r2!==null){ lo=Math.min(r1,r2); hi=Math.max(r1,r2); } else { lo=-2; hi=2; }
+        if(hi-lo<0.2){ lo=-2; hi=2; }
+        var dd='',st=false;
+        for(var xx=lo;xx<=hi;xx+=0.05){ dd+=(st?'L':'M')+sx(xx).toFixed(1)+' '+sy(clampY(a*xx*xx+b*xx+c)).toFixed(1)+' '; st=true; }
+        dd+='L'+sx(hi)+' '+sy(0)+' L'+sx(lo)+' '+sy(0)+' Z';
+        intFill.setAttribute('d',dd); intFill.style.display='';
+        // numeric integral
+        var n=240,hstep=(hi-lo)/n,s=0; for(var i=0;i<=n;i++){ var w=(i===0||i===n)?0.5:1; s+=w*(a*(lo+i*hstep)*(lo+i*hstep)+b*(lo+i*hstep)+c); } var val=s*hstep;
+        rArea.style.display=''; rArea.textContent='= '+fmt(val);
+      } else { intFill.style.display='none'; rArea.style.display='none'; }
+    }
+    [sA,sB,sC].forEach(function(s){ s.addEventListener('input',draw); });
+
+    // dragging the point
+    function pointerToX(e){ var r=svg.getBoundingClientRect(); var svgX=(e.clientX-r.left)/r.width*W; return XMIN+svgX/W*(XMAX-XMIN); }
+    var dragging=false;
+    function startDrag(e){ if(!showTan)return; dragging=true; px=pointerToX(e); draw(); svg.setPointerCapture&&svg.setPointerCapture(e.pointerId); }
+    svg.addEventListener('pointerdown',function(e){ startDrag(e); });
+    svg.addEventListener('pointermove',function(e){ if(dragging){ px=pointerToX(e); draw(); } });
+    window.addEventListener('pointerup',function(){ dragging=false; });
+
+    tanBtn.addEventListener('click',function(){ showTan=!showTan; tanBtn.classList.toggle('on',showTan); draw(); });
+    areaBtn.addEventListener('click',function(){ showArea=!showArea; areaBtn.classList.toggle('on',showArea); draw(); });
+
+    draw();
+  })();
+
+  /* ── COUNT-UP STATS ── */
+  (function(){
+    var io=new IntersectionObserver(function(entries){ entries.forEach(function(en){ if(en.isIntersecting){ io.unobserve(en.target); en.target.__run&&en.target.__run(); } }); },{threshold:.5});
+    document.querySelectorAll('.cup').forEach(function(el){
+      var to=parseFloat(el.dataset.to), dec=parseInt(el.dataset.dec||'0',10), animated=false;
+      function finalize(){ el.textContent=to.toFixed(dec); }
+      el.__run=function(){
+        if(animated) return; animated=true;
+        if(reduce||document.hidden){ finalize(); return; }
+        var start=performance.now(), dur=1100, done=false;
+        (function step(now){ if(done)return; var t=Math.min(1,(now-start)/dur); el.textContent=(to*(1-Math.pow(1-t,3))).toFixed(dec); if(t<1) requestAnimationFrame(step); else {finalize();done=true;} })(performance.now());
+        setTimeout(function(){ if(!done){ finalize(); done=true; } }, dur+300);
+      };
+      io.observe(el);
+      setTimeout(function(){ if(!animated) finalize(); }, 2500); /* hard guarantee: real value shows even if IO never fires (e.g. background tab) */
+    });
+  })();
+
+  /* ── BOOKING SCHEDULER ── */
+  (function(){
+    var daysEl=document.getElementById('days'), slotsEl=document.getElementById('slots');
+    var dayName=document.getElementById('dayName'), submit=document.getElementById('bookSubmit'), form=document.getElementById('bookForm');
+    var DOW=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'], MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    var ALL=['9:00','10:30','12:00','13:30','15:00','16:30','18:00'];
+    var today=new Date(), days=[];
+    for(var i=1;i<=12;i++){ var d=new Date(today); d.setDate(today.getDate()+i); days.push(d); }
+    var selDay=null, selSlot=null;
+    function seededCount(d){ return 2+((d.getDate()*7+d.getDay()*3)%5); }
+    function slotTaken(d,idx){ return ((d.getDate()+idx*5+d.getMonth())%7)<2; }
+    days.forEach(function(d,idx){
+      var sun=d.getDay()===0, btn=document.createElement('button');
+      btn.type='button'; btn.className='day'; btn.disabled=sun;
+      btn.innerHTML='<div class="dw">'+DOW[d.getDay()]+'</div><div class="dn">'+d.getDate()+'</div>'+(sun?'<div class="ds" style="color:var(--dim)">closed</div>':'<div class="ds">'+seededCount(d)+' open</div>');
+      if(!sun) btn.addEventListener('click',function(){ selectDay(idx,btn,d); });
+      daysEl.appendChild(btn);
+    });
+    function selectDay(idx,btn,d){ selDay=d; selSlot=null; Array.prototype.forEach.call(daysEl.children,function(c){c.classList.remove('on');}); btn.classList.add('on'); dayName.textContent='· '+DOW[d.getDay()]+', '+MON[d.getMonth()]+' '+d.getDate(); renderSlots(d); updateSubmit(); }
+    function renderSlots(d){ slotsEl.innerHTML=''; ALL.forEach(function(t,i){ var taken=slotTaken(d,i),b=document.createElement('button'); b.type='button'; b.className='slot'; b.textContent=t; b.disabled=taken; if(!taken) b.addEventListener('click',function(){ Array.prototype.forEach.call(slotsEl.children,function(c){c.classList.remove('on');}); b.classList.add('on'); selSlot=t; updateSubmit(); }); slotsEl.appendChild(b); }); }
+    function updateSubmit(){ if(selDay&&selSlot){ submit.disabled=false; submit.textContent='Request '+DOW[selDay.getDay()]+' at '+selSlot; } else { submit.disabled=true; submit.textContent=selDay?'Now pick a time':'Pick a day and time first'; } }
+    form.addEventListener('submit',function(e){
+      e.preventDefault();
+      var name=document.getElementById('bName').value.trim(), email=document.getElementById('bEmail').value.trim();
+      if(!name){ document.getElementById('bName').focus(); return; }
+      if(!email||email.indexOf('@')<0){ document.getElementById('bEmail').focus(); return; }
+      if(!selDay||!selSlot) return;
+      document.getElementById('cName').textContent=name.split(' ')[0];
+      document.getElementById('cWhen').textContent=DOW[selDay.getDay()]+', '+MON[selDay.getMonth()]+' '+selDay.getDate()+'  ·  '+selSlot+'  ·  '+document.getElementById('bSubj').value+'  ·  '+document.getElementById('bMode').value;
+      document.getElementById('bookFlow').hidden=true; document.getElementById('bookDone').hidden=false;
+    });
+    document.getElementById('bookAgain').addEventListener('click',function(){ document.getElementById('bookDone').hidden=true; document.getElementById('bookFlow').hidden=false; selSlot=null; Array.prototype.forEach.call(slotsEl.children,function(c){c.classList.remove('on');}); updateSubmit(); });
+  })();
+
+  /* ── NAV + REVEAL ── */
+  var nav=document.getElementById('nav');
+  function onScroll(){ nav.classList.toggle('scrolled',window.scrollY>14); }
+  window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
+  var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} }); },{threshold:.1});
+  document.querySelectorAll('[data-reveal]').forEach(function(el){ io.observe(el); });
+  document.querySelectorAll('.subjects,.reviews,.steps').forEach(function(g){ Array.prototype.forEach.call(g.children,function(ch,i){ ch.style.transitionDelay=(i%3*0.07)+'s'; }); });
+})();
+</script>
+</body>
+</html>
