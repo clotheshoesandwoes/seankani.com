@@ -115,10 +115,9 @@ const flyConfig: FlyEmblem[] = [
     <!-- ABOUT -->
     <section class="stage stage-about" data-stage="1">
       <div class="stage-inner stage-inner-center">
-        <h2 class="about-title">
-          I'm <em>building</em><br/>
-          <em>what I want to see</em><br/>
-          in the world.
+        <h2 class="about-title" aria-label="I'm building what I want to see in the world.">
+          <span class="about-title-label" aria-hidden="true">I'm <em>building</em><br/><em>what I want to see</em><br/>in the world.</span>
+          <canvas class="about-fluid" id="aboutFluid" aria-hidden="true"></canvas>
         </h2>
         <p class="about-sub"><span class="about-sub-arrow">↓</span> starting with these</p>
       </div>
@@ -136,6 +135,7 @@ const flyConfig: FlyEmblem[] = [
         {projects.map((p) => (
           <a class={`pcard pcard-${p.visual}`} href={p.href} target="_blank" rel="noopener noreferrer"
              style={`--accent:${p.accent};`} aria-label={`Visit ${p.name}`}>
+            <span class="pcard-glare" aria-hidden="true"></span>
             <div class="pcard-visual">
               {p.visual === 'cube'     && <canvas id="gridLogoCanvas"></canvas>}
               {p.visual === 'eq'       && <canvas id="eqCanvas"></canvas>}
@@ -214,7 +214,13 @@ const flyConfig: FlyEmblem[] = [
     <!-- FILMS -->
     <section class="stage stage-films" data-stage="3">
       <div class="stage-inner">
-        <h2 class="films-title">Edits.</h2>
+        <div class="films-head">
+          <h2 class="films-title">Edits.</h2>
+          <a class="films-stills" href="/photos" aria-label="Browse photographs">
+            <span>Photographs</span>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </a>
+        </div>
         <div class="films-grid">
           {films.map((v, i) => (
             <button class={`film-tile ${i === 0 ? 'is-featured' : ''}`} data-film-idx={i} aria-label={v.title}>
@@ -259,6 +265,15 @@ const flyConfig: FlyEmblem[] = [
       </div>
     </section>
   </main>
+
+  <!-- SECTION NAV RAIL — scroll-spy dots, click to jump -->
+  <nav class="section-rail" aria-label="Section navigation">
+    <button class="rail-dot" data-rail="0" aria-label="Home"><span class="rail-label">Home</span></button>
+    <button class="rail-dot" data-rail="1" aria-label="About"><span class="rail-label">About</span></button>
+    <button class="rail-dot" data-rail="2" aria-label="Work"><span class="rail-label">Work</span></button>
+    <button class="rail-dot" data-rail="3" aria-label="Edits"><span class="rail-label">Edits</span></button>
+    <button class="rail-dot" data-rail="4" aria-label="Contact"><span class="rail-label">Contact</span></button>
+  </nav>
 
   <!-- FILM PLAYER MODAL -->
   <div class="player" id="player" aria-hidden="true" role="dialog">
@@ -467,16 +482,22 @@ const flyConfig: FlyEmblem[] = [
     border-bottom-color: var(--mag);
   }
 
-  /* ABOUT */
-  /* Whole title gets a soft fluid shimmer using the 3 project accents
-     (sage / warm orange / cyan) — same family as SEAN KANI but a
-     different palette, at lower strength so the em words still pop more. */
+  /* ABOUT — liquid-paint title: same WebGL2 fluid sim as SEAN KANI runs
+     inside the letter shapes. A gradient fallback sits underneath (shown
+     until the canvas mask is built, and if WebGL/reduced-motion is off). */
   .about-title {
+    position: relative;
+    display: inline-block;
     font-family: var(--display); font-weight: 700;
     font-size: clamp(3rem, 8.5vw, 7.5rem);
     line-height: .92; letter-spacing: -.04em;
     margin: 0;
     filter: drop-shadow(0 4px 40px rgba(0,0,0,.55));
+  }
+  /* Gradient fallback / load-state — punchier + faster than the old slow
+     drift, so even without WebGL the title feels alive. */
+  .about-title-label {
+    display: block;
     background:
       radial-gradient(ellipse 80% 100% at 25% 35%, rgba(136, 201, 151, .80) 0%, transparent 60%),
       radial-gradient(ellipse 80% 100% at 75% 65%, rgba(255, 154,  60, .70) 0%, transparent 60%),
@@ -488,7 +509,7 @@ const flyConfig: FlyEmblem[] = [
             background-clip: text;
     color: transparent;
     -webkit-text-fill-color: transparent;
-    animation: aboutTitleShimmer 14s ease-in-out infinite;
+    animation: aboutTitleShimmer 7s ease-in-out infinite;
   }
   @keyframes aboutTitleShimmer {
     0%, 100% { background-position:   0%   0%, 100% 100%,  50%   0%, 0% 0%; }
@@ -496,10 +517,7 @@ const flyConfig: FlyEmblem[] = [
     50%      { background-position: 100%  90%,   0%  10%,  20%  80%, 0% 0%; }
     75%      { background-position:  30%  70%,  80%  30%,  60%  50%, 0% 0%; }
   }
-  /* Em words override with a HIGHER-strength shimmer using the same
-     accent palette plus a magenta highlight — more saturated, slower
-     cycle so they breathe distinctly from the title's drift. */
-  .about-title em {
+  .about-title-label em {
     font-style: normal;
     font-weight: 800;
     background:
@@ -514,14 +532,38 @@ const flyConfig: FlyEmblem[] = [
             background-clip: text;
     color: transparent;
     -webkit-text-fill-color: transparent;
-    animation: aboutShimmer 11s ease-in-out infinite;
+    animation: aboutShimmer 6s ease-in-out infinite;
   }
-  .about-title em + em { animation-delay: 1.6s; }
+  .about-title-label em + em { animation-delay: 1s; }
   @keyframes aboutShimmer {
     0%, 100% { background-position:   0%   0%, 100% 100%,  50%  50%,  50%   0%, 0% 0%; }
     33%      { background-position:  60%  70%,  30%  20%,  80%  10%,  20%  60%, 0% 0%; }
     66%      { background-position:  80%  20%,  10%  80%,  20%  90%,  80%  40%, 0% 0%; }
   }
+  /* Fluid canvas overlays the label, masked to the letter shapes. Hidden
+     until JS builds the text mask (.is-ready); label is then hidden too. */
+  .about-fluid {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    pointer-events: auto;
+    opacity: 0;
+    transition: opacity .6s var(--ease);
+    mask-size: 100% 100%;
+    -webkit-mask-size: 100% 100%;
+    mask-repeat: no-repeat;
+    -webkit-mask-repeat: no-repeat;
+  }
+  .about-fluid.is-ready { opacity: 1; }
+  .about-title.is-painted .about-title-label { visibility: hidden; }
+  @media (prefers-reduced-motion: reduce) {
+    .about-fluid { display: none; }
+  }
+  /* Let the about title size to its content (clean 3-line layout on wide
+     screens) instead of the 920px stage cap; it still wraps on mobile. */
+  .stage-about .stage-inner { max-width: none; }
   .about-sub {
     margin: clamp(1.4rem, 2.4vw, 2rem) 0 0;
     font-family: var(--mono);
@@ -713,6 +755,7 @@ const flyConfig: FlyEmblem[] = [
   }
   .stage.is-active .pcard:nth-child(3) { transition-delay: .24s; }
   .pcard {
+    position: relative;
     min-width: 0;
     max-width: 100%;
     display: flex;
@@ -1264,6 +1307,22 @@ const flyConfig: FlyEmblem[] = [
     color: var(--bone); margin: 0 0 .6rem;
     text-shadow: 0 4px 30px rgba(0,0,0,.55);
   }
+  /* Header row: "Edits." (motion) paired with a link to the stills gallery */
+  .films-head {
+    display: flex; align-items: baseline; justify-content: space-between;
+    gap: .6rem 1.5rem; flex-wrap: wrap;
+  }
+  .films-stills {
+    display: inline-flex; align-items: center; gap: .5rem;
+    font-family: var(--mono); font-size: .7rem;
+    letter-spacing: .24em; text-transform: uppercase;
+    color: var(--bone-dim); text-decoration: none;
+    padding-bottom: .6rem; white-space: nowrap;
+    transition: color .25s var(--ease);
+  }
+  .films-stills svg { transition: transform .3s var(--ease); }
+  .films-stills:hover { color: var(--mag); }
+  .films-stills:hover svg { transform: translateX(4px); }
   .films-sub {
     font-family: var(--mono); font-size: .65rem;
     letter-spacing: .26em; text-transform: uppercase;
@@ -1833,6 +1892,106 @@ const flyConfig: FlyEmblem[] = [
     }
     .player-timeline { height: 18px; }
   }
+
+  /* ════════ SECTION NAV RAIL ════════ */
+  .section-rail {
+    position: fixed;
+    top: 50%;
+    right: clamp(.85rem, 1.8vw, 1.6rem);
+    transform: translateY(-50%);
+    z-index: 50;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: clamp(.7rem, 1.4vh, 1.05rem);
+  }
+  .rail-dot {
+    --d: 9px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: var(--d);
+    height: var(--d);
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .rail-dot::after {
+    content: '';
+    width: var(--d);
+    height: var(--d);
+    border-radius: 50%;
+    border: 1.5px solid rgba(245,241,234,.4);
+    background: transparent;
+    transition: transform .35s var(--ease), background-color .35s var(--ease),
+                border-color .35s var(--ease), box-shadow .35s var(--ease);
+  }
+  .rail-dot:hover::after { border-color: var(--bone); transform: scale(1.18); }
+  .rail-dot.is-active::after {
+    background: var(--mag);
+    border-color: var(--mag);
+    box-shadow: 0 0 12px var(--mag), 0 0 24px color-mix(in oklab, var(--mag) 45%, transparent);
+    transform: scale(1.06);
+  }
+  .rail-label {
+    position: absolute;
+    right: calc(var(--d) + .65rem);
+    top: 50%;
+    transform: translateY(-50%) translateX(6px);
+    font-family: var(--mono);
+    font-size: .58rem;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--bone);
+    white-space: nowrap;
+    padding: .32rem .55rem;
+    border-radius: 7px;
+    background: rgba(8,6,12,.55);
+    backdrop-filter: blur(10px) saturate(140%);
+    -webkit-backdrop-filter: blur(10px) saturate(140%);
+    border: 1px solid rgba(245,241,234,.1);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .3s var(--ease), transform .3s var(--ease);
+  }
+  .rail-dot:hover .rail-label {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+  }
+  .rail-dot:focus-visible::after { border-color: var(--mag); }
+  .rail-dot:focus-visible {
+    outline: 2px solid color-mix(in oklab, var(--mag) 70%, transparent);
+    outline-offset: 4px;
+    border-radius: 50%;
+  }
+  @media (max-width: 720px) { .section-rail { display: none; } }
+
+  /* ════════ PROJECT CARD GLARE (cursor-follow light) ════════ */
+  .pcard-glare {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    border-radius: inherit;
+    pointer-events: none;
+    opacity: 0;
+    background: radial-gradient(220px circle at var(--gx, 50%) var(--gy, 50%),
+                rgba(255,255,255,.18), transparent 60%);
+    mix-blend-mode: screen;
+    transition: opacity .35s var(--ease);
+  }
+  .pcard:hover .pcard-glare { opacity: 1; }
+  @media (hover: none) { .pcard-glare { display: none; } }
+  .pcard:focus-visible {
+    outline: 2px solid color-mix(in oklab, var(--accent) 80%, white);
+    outline-offset: 3px;
+  }
+
+  /* ════════ Branded text selection ════════ */
+  :global(::selection)      { background: var(--mag); color: #fff; text-shadow: none; }
+  :global(::-moz-selection) { background: var(--mag); color: #fff; text-shadow: none; }
 </style>
 
 <script>
@@ -1842,6 +2001,11 @@ const flyConfig: FlyEmblem[] = [
   const bgVideos = Array.from(document.querySelectorAll<HTMLVideoElement>('.bg-video'));
   const stages = Array.from(document.querySelectorAll<HTMLElement>('.stage'));
 
+  // Section nav rail dots — driven by the same scroll sync as the bg videos
+  const railDots = Array.from(document.querySelectorAll<HTMLButtonElement>('.rail-dot'));
+  function setActiveRail(idx: number) {
+    railDots.forEach((d, i) => d.classList.toggle('is-active', i === idx));
+  }
 
   function setActiveBg(idx: number) {
     bgVideos.forEach((v, i) => {
@@ -1870,10 +2034,12 @@ const flyConfig: FlyEmblem[] = [
     if (bestIdx !== lastActive) {
       lastActive = bestIdx;
       setActiveBg(bestIdx);
+      setActiveRail(bestIdx);
     }
   }
   window.addEventListener('scroll', syncStage, { passive: true });
   setActiveBg(0);
+  setActiveRail(0);
 
   // ───────── Stage activation observer (HTML fade-in) ─────────
   const io = new IntersectionObserver((entries) => {
@@ -2983,6 +3149,283 @@ const flyConfig: FlyEmblem[] = [
   if (heroFluidCanvas) setupHeroFluid(heroFluidCanvas);
 
   // ═════════════════════════════════════════════════════════════════
+  // ABOUT FLUID — the same paint sim as the hero, masked into the
+  // "I'm building / what I want to see / in the world." title. Self-
+  // contained copy so the hero stays untouched. Falls back to the
+  // gradient label if WebGL2 / float FBOs aren't available.
+  // ═════════════════════════════════════════════════════════════════
+  function setupAboutFluid(canvas: HTMLCanvasElement) {
+    const gl = canvas.getContext('webgl2', { premultipliedAlpha: false, alpha: true });
+    if (!gl) return;
+    const ext = gl.getExtension('EXT_color_buffer_float');
+    if (!ext) return;
+
+    const title = canvas.closest('.about-title') as HTMLElement | null;
+    const label = title?.querySelector('.about-title-label') as HTMLElement | null;
+    const DPR = Math.min(window.devicePixelRatio, 1.5);
+
+    function compileShader(src: string, type: number) {
+      const s = gl!.createShader(type)!;
+      gl!.shaderSource(s, src);
+      gl!.compileShader(s);
+      if (!gl!.getShaderParameter(s, gl!.COMPILE_STATUS)) console.error('About shader error:', gl!.getShaderInfoLog(s));
+      return s;
+    }
+    function makeProgram(vs: string, fs: string) {
+      const p = gl!.createProgram()!;
+      gl!.attachShader(p, compileShader(vs, gl!.VERTEX_SHADER));
+      gl!.attachShader(p, compileShader(fs, gl!.FRAGMENT_SHADER));
+      gl!.linkProgram(p);
+      return p;
+    }
+    function createFBO(w: number, h: number) {
+      const tex = gl!.createTexture()!;
+      gl!.bindTexture(gl!.TEXTURE_2D, tex);
+      gl!.texImage2D(gl!.TEXTURE_2D, 0, gl!.RGBA16F, w, h, 0, gl!.RGBA, gl!.HALF_FLOAT, null);
+      gl!.texParameteri(gl!.TEXTURE_2D, gl!.TEXTURE_MIN_FILTER, gl!.LINEAR);
+      gl!.texParameteri(gl!.TEXTURE_2D, gl!.TEXTURE_MAG_FILTER, gl!.LINEAR);
+      gl!.texParameteri(gl!.TEXTURE_2D, gl!.TEXTURE_WRAP_S, gl!.CLAMP_TO_EDGE);
+      gl!.texParameteri(gl!.TEXTURE_2D, gl!.TEXTURE_WRAP_T, gl!.CLAMP_TO_EDGE);
+      const fbo = gl!.createFramebuffer()!;
+      gl!.bindFramebuffer(gl!.FRAMEBUFFER, fbo);
+      gl!.framebufferTexture2D(gl!.FRAMEBUFFER, gl!.COLOR_ATTACHMENT0, gl!.TEXTURE_2D, tex, 0);
+      return { tex, fbo, w, h };
+    }
+
+    const quadBuf = gl.createBuffer()!;
+    gl.bindBuffer(gl.ARRAY_BUFFER, quadBuf);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+
+    const VS = `#version 300 es
+      in vec2 a_pos; out vec2 vUv;
+      void main() { vUv = a_pos * 0.5 + 0.5; gl_Position = vec4(a_pos, 0.0, 1.0); }
+    `;
+    const advectionProg = makeProgram(VS, `#version 300 es
+      precision highp float;
+      in vec2 vUv; uniform sampler2D u_color; uniform float u_time; uniform float u_dissipation; out vec4 fragColor;
+      float hash(vec2 p){ return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
+      float noise(vec2 p){ vec2 i=floor(p),f=fract(p); vec2 u=f*f*(3.0-2.0*f);
+        return mix(mix(hash(i),hash(i+vec2(1.0,0.0)),u.x), mix(hash(i+vec2(0.0,1.0)),hash(i+vec2(1.0,1.0)),u.x),u.y); }
+      float fbm(vec2 p){ float v=0.0,a=0.5; for(int i=0;i<4;i++){ v+=a*noise(p); p*=2.04; a*=0.5; } return v; }
+      vec2 curl(vec2 p){ float e=0.01; float a=fbm(p+vec2(0.0,e)),b=fbm(p+vec2(0.0,-e)),c=fbm(p+vec2(e,0.0)),d=fbm(p+vec2(-e,0.0));
+        return vec2(a-b, -(c-d))/(2.0*e); }
+      void main(){
+        vec2 v = curl(vUv * 2.5 + vec2(u_time*0.18, u_time*0.13));
+        v *= 0.0035; vec2 src = vUv - v;
+        vec4 col = texture(u_color, src);
+        col.rgb = mix(col.rgb, vec3(1.0), u_dissipation);
+        fragColor = col;
+      }
+    `);
+    const splatProg = makeProgram(VS, `#version 300 es
+      precision highp float;
+      in vec2 vUv; uniform sampler2D u_color; uniform vec2 u_pos; uniform vec3 u_splatColor; uniform float u_radius; uniform float u_aspect; out vec4 fragColor;
+      void main(){
+        vec4 base = texture(u_color, vUv);
+        vec2 d = vUv - u_pos; d.x *= u_aspect;
+        float falloff = clamp(exp(-dot(d,d)/(u_radius*u_radius)), 0.0, 1.0);
+        fragColor = vec4(mix(base.rgb, u_splatColor, falloff), 1.0);
+      }
+    `);
+    const displayProg = makeProgram(VS, `#version 300 es
+      precision highp float;
+      in vec2 vUv; uniform sampler2D u_color; out vec4 fragColor;
+      void main(){ fragColor = vec4(texture(u_color, vUv).rgb, 1.0); }
+    `);
+
+    let colorA: ReturnType<typeof createFBO>;
+    let colorB: ReturnType<typeof createFBO>;
+    function setupBuffers() {
+      const r = canvas.getBoundingClientRect();
+      const SIM_W = Math.max(64, Math.floor(r.width  * DPR));
+      const SIM_H = Math.max(64, Math.floor(r.height * DPR));
+      canvas.width = SIM_W; canvas.height = SIM_H;
+      colorA = createFBO(SIM_W, SIM_H);
+      colorB = createFBO(SIM_W, SIM_H);
+      [colorA, colorB].forEach(fb => {
+        gl!.bindFramebuffer(gl!.FRAMEBUFFER, fb.fbo);
+        gl!.viewport(0, 0, fb.w, fb.h);
+        gl!.clearColor(1, 1, 1, 1); gl!.clear(gl!.COLOR_BUFFER_BIT);
+      });
+    }
+    setupBuffers();
+
+    // Build the text mask. Each line is word-wrapped (respecting the <em>
+    // word weights) to the title box width; any line still too wide is
+    // scaled down to fit, and lines are spread evenly over the box height.
+    // This tracks however the title actually wraps, so nothing ever clips.
+    function buildAboutMask() {
+      const r = canvas.getBoundingClientRect();
+      if (r.width === 0 || r.height === 0) return;
+      const SCALE = 2;
+      const W = Math.max(64, Math.floor(r.width  * SCALE));
+      const H = Math.max(64, Math.floor(r.height * SCALE));
+      const m = document.createElement('canvas');
+      m.width = W; m.height = H;
+      const ctx = m.getContext('2d')!;
+      const fs = (label ? parseFloat(getComputedStyle(label).fontSize) : (r.height / 3) / 0.92) * SCALE;
+      ctx.fillStyle = '#fff';
+      ctx.textBaseline = 'middle';
+      const setFont = (wt: number, size: number) => {
+        ctx.font = `${wt} ${size}px Inter, system-ui, sans-serif`;
+        try { (ctx as any).letterSpacing = `${-0.04 * size}px`; } catch (e) {}
+      };
+      const wordW = (t: string, wt: number, size: number) => { setFont(wt, size); return ctx.measureText(t).width; };
+
+      // Words with their weight — mirrors "I'm" + em"building" /
+      // em"what I want to see" / "in the world."
+      const paras: [string, number][][] = [
+        [["I'm", 700], ['building', 800]],
+        [['what', 800], ['I', 800], ['want', 800], ['to', 800], ['see', 800]],
+        [['in', 700], ['the', 700], ['world.', 700]],
+      ];
+      // Wrap with a small tolerance so we never wrap MORE than the browser.
+      const wrapW = W * 1.02;
+      const lines: [string, number][][] = [];
+      for (const para of paras) {
+        let cur: [string, number][] = [], curW = 0;
+        for (const [t, wt] of para) {
+          const ww = wordW(t, wt, fs);
+          const sp = cur.length ? wordW(' ', wt, fs) : 0;
+          if (cur.length && curW + sp + ww > wrapW) { lines.push(cur); cur = []; curW = 0; }
+          if (cur.length) curW += wordW(' ', wt, fs);
+          cur.push([t, wt]); curW += ww;
+        }
+        if (cur.length) lines.push(cur);
+      }
+
+      const L = lines.length;
+      const fitW = W * 0.96;
+      let drew = false;
+      lines.forEach((line, i) => {
+        const cy = H * (i + 0.5) / L;
+        let total = 0;
+        line.forEach((seg, j) => { if (j) total += wordW(' ', seg[1], fs); total += wordW(seg[0], seg[1], fs); });
+        const size = total > fitW ? fs * (fitW / total) : fs;
+        let total2 = 0;
+        line.forEach((seg, j) => { if (j) total2 += wordW(' ', seg[1], size); total2 += wordW(seg[0], seg[1], size); });
+        let x = (W - total2) / 2;
+        line.forEach((seg, j) => {
+          if (j) x += wordW(' ', seg[1], size);
+          setFont(seg[1], size);
+          ctx.fillText(seg[0], x, cy);
+          x += wordW(seg[0], seg[1], size);
+          drew = true;
+        });
+      });
+      if (!drew) return;
+      const dataUrl = m.toDataURL();
+      canvas.style.maskImage = `url(${dataUrl})`;
+      (canvas.style as any).webkitMaskImage = `url(${dataUrl})`;
+      canvas.classList.add('is-ready');
+      title?.classList.add('is-painted');
+    }
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(buildAboutMask);
+    else buildAboutMask();
+    let resizeRAF: number | undefined;
+    window.addEventListener('resize', () => {
+      setupBuffers();
+      if (resizeRAF) cancelAnimationFrame(resizeRAF);
+      resizeRAF = requestAnimationFrame(buildAboutMask);
+    });
+
+    function bindQuad(prog: WebGLProgram) {
+      gl!.useProgram(prog);
+      const loc = gl!.getAttribLocation(prog, 'a_pos');
+      gl!.bindBuffer(gl!.ARRAY_BUFFER, quadBuf);
+      gl!.enableVertexAttribArray(loc);
+      gl!.vertexAttribPointer(loc, 2, gl!.FLOAT, false, 0, 0);
+    }
+    function advect(time: number) {
+      bindQuad(advectionProg);
+      gl!.uniform1f(gl!.getUniformLocation(advectionProg, 'u_time'), time);
+      gl!.uniform1f(gl!.getUniformLocation(advectionProg, 'u_dissipation'), 0.006);
+      gl!.activeTexture(gl!.TEXTURE0);
+      gl!.bindTexture(gl!.TEXTURE_2D, colorA.tex);
+      gl!.uniform1i(gl!.getUniformLocation(advectionProg, 'u_color'), 0);
+      gl!.bindFramebuffer(gl!.FRAMEBUFFER, colorB.fbo);
+      gl!.viewport(0, 0, colorB.w, colorB.h);
+      gl!.drawArrays(gl!.TRIANGLE_STRIP, 0, 4);
+      const tmp = colorA; colorA = colorB; colorB = tmp;
+    }
+    function splat(x: number, y: number, color: [number, number, number], radius: number) {
+      bindQuad(splatProg);
+      gl!.uniform2f(gl!.getUniformLocation(splatProg, 'u_pos'), x, y);
+      gl!.uniform3f(gl!.getUniformLocation(splatProg, 'u_splatColor'), color[0], color[1], color[2]);
+      gl!.uniform1f(gl!.getUniformLocation(splatProg, 'u_radius'), radius);
+      gl!.uniform1f(gl!.getUniformLocation(splatProg, 'u_aspect'), canvas.width / canvas.height);
+      gl!.activeTexture(gl!.TEXTURE0);
+      gl!.bindTexture(gl!.TEXTURE_2D, colorA.tex);
+      gl!.uniform1i(gl!.getUniformLocation(splatProg, 'u_color'), 0);
+      gl!.bindFramebuffer(gl!.FRAMEBUFFER, colorB.fbo);
+      gl!.viewport(0, 0, colorB.w, colorB.h);
+      gl!.drawArrays(gl!.TRIANGLE_STRIP, 0, 4);
+      const tmp = colorA; colorA = colorB; colorB = tmp;
+    }
+    function display() {
+      bindQuad(displayProg);
+      gl!.activeTexture(gl!.TEXTURE0);
+      gl!.bindTexture(gl!.TEXTURE_2D, colorA.tex);
+      gl!.uniform1i(gl!.getUniformLocation(displayProg, 'u_color'), 0);
+      gl!.bindFramebuffer(gl!.FRAMEBUFFER, null);
+      gl!.viewport(0, 0, canvas.width, canvas.height);
+      gl!.drawArrays(gl!.TRIANGLE_STRIP, 0, 4);
+    }
+
+    const PALETTE: [number, number, number][] = [
+      [1.00, 0.24, 0.54], [0.16, 0.78, 0.95], [1.00, 0.55, 0.20],
+      [0.70, 0.40, 1.00], [1.00, 0.85, 0.30], [0.30, 0.85, 0.55],
+    ];
+    let paletteIdx = 0;
+    const pickColor = () => { const c = PALETTE[paletteIdx]; paletteIdx = (paletteIdx + 1) % PALETTE.length; return c; };
+
+    let lastPx = 0, lastPy = 0, hasLast = false;
+    canvas.addEventListener('pointermove', (e) => {
+      const r = canvas.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width;
+      const y = 1 - (e.clientY - r.top) / r.height;
+      if (hasLast) {
+        const mag = Math.hypot(x - lastPx, y - lastPy);
+        if (mag > 0.005) splat(x, y, pickColor(), 0.06 + mag * 0.4);
+      } else { splat(x, y, pickColor(), 0.08); }
+      lastPx = x; lastPy = y; hasLast = true;
+    });
+    canvas.addEventListener('pointerleave', () => { hasLast = false; });
+
+    let lastAutoSplat = 0, autoSplatInterval = 900;
+    const autoSplatLoop = () => {
+      const now = performance.now();
+      if (now - lastAutoSplat > autoSplatInterval) {
+        splat(0.05 + Math.random() * 0.9, 0.1 + Math.random() * 0.8, pickColor(), 0.14 + Math.random() * 0.10);
+        lastAutoSplat = now; autoSplatInterval = 600 + Math.random() * 1300;
+      }
+    };
+
+    splat(0.20, 0.65, PALETTE[0], 0.25);
+    splat(0.50, 0.30, PALETTE[1], 0.22);
+    splat(0.80, 0.60, PALETTE[2], 0.22);
+    splat(0.35, 0.20, PALETTE[3], 0.18);
+    splat(0.65, 0.75, PALETTE[4], 0.18);
+
+    let inView = false;
+    const io = new IntersectionObserver(([entry]) => { inView = entry.isIntersecting; }, { threshold: 0.01 });
+    io.observe(canvas);
+
+    function tick() {
+      requestAnimationFrame(tick);
+      if (!inView) return;
+      const time = performance.now() / 1000;
+      autoSplatLoop();
+      advect(time);
+      display();
+    }
+    tick();
+  }
+
+  const aboutFluidCanvas = document.getElementById('aboutFluid') as HTMLCanvasElement | null;
+  if (aboutFluidCanvas && !matchMedia('(prefers-reduced-motion: reduce)').matches) setupAboutFluid(aboutFluidCanvas);
+
+  // ═════════════════════════════════════════════════════════════════
   // CONTACT STARFIELD — calm 2D canvas particle scene. Stars drift
   // slowly downward, twinkle in/out, and softly scatter from the
   // cursor. Closes the page with a quiet "into the void" feel.
@@ -3100,4 +3543,49 @@ const flyConfig: FlyEmblem[] = [
 
   const contactStars = document.getElementById('contactStars') as HTMLCanvasElement | null;
   if (contactStars) setupContactStars(contactStars);
+
+  // ═════════════════════════════════════════════════════════════════
+  // SECTION NAV RAIL — click a dot to smooth-scroll to that section.
+  // The active dot is kept in sync by syncStage() (scroll-driven), so the
+  // dot always tracks the section you're reading.
+  // ═════════════════════════════════════════════════════════════════
+  (() => {
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    railDots.forEach((dot) => {
+      dot.addEventListener('click', () => {
+        const i = Number(dot.dataset.rail);
+        stages[i]?.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+      });
+    });
+  })();
+
+  // ═════════════════════════════════════════════════════════════════
+  // PROJECT CARD TILT — pointer-tracked perspective tilt + cursor glare.
+  // Desktop fine-pointer only; respects reduced-motion. Composes with the
+  // CSS hover lift (we fold translateY(-6px) into the inline transform).
+  // ═════════════════════════════════════════════════════════════════
+  (() => {
+    const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!fine || reduce) return;
+    const MAX = 7; // degrees
+    document.querySelectorAll<HTMLElement>('.pcard').forEach((card) => {
+      card.addEventListener('pointermove', (e) => {
+        const r = card.getBoundingClientRect();
+        const px = (e.clientX - r.left) / r.width;
+        const py = (e.clientY - r.top) / r.height;
+        const ry = (px - 0.5) * 2 * MAX;
+        const rx = (0.5 - py) * 2 * MAX;
+        card.style.transition = 'transform .12s ease-out';
+        card.style.transform =
+          `perspective(900px) rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg) translateY(-6px)`;
+        card.style.setProperty('--gx', (px * 100).toFixed(1) + '%');
+        card.style.setProperty('--gy', (py * 100).toFixed(1) + '%');
+      });
+      card.addEventListener('pointerleave', () => {
+        card.style.transition = '';
+        card.style.transform = '';
+      });
+    });
+  })();
 </script>
